@@ -28,26 +28,19 @@
   </tr>
 </table>
 
----
+--- 
 
-<table width="100%">
-  <tr>
-    <td width="50%" align="center" style="padding: 10px;">
-      <strong>📹 Project Overview</strong><br><br>
-      <video width="100%" height="300" style="background-color: #000; object-fit: contain; border-radius: 8px;" controls>
-        <source src="https://theadimension.com/atria-echotrace/overview.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-      </video>
-    </td>
-    <td width="50%" align="center" style="padding: 10px;">
-      <strong>🧑‍💻 Human-in-the-Loop Interface</strong><br><br>
-      <video width="100%" height="300" style="background-color: #000; object-fit: contain; border-radius: 8px;" controls>
-        <source src="https://theadimension.com/atria-echotrace/hitl_interface.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-      </video>
-    </td>
-  </tr>
-</table>
+Overview Video:
+
+https://github.com/user-attachments/assets/b8b0bfa2-2bf3-4530-bdf7-06d07aff8dfa
+
+---
+HITL Interactive Interface:
+
+https://github.com/user-attachments/assets/ee8b8968-1170-4259-9fb2-13139cc87205
+
+
+---
 
 > ### **A practical Implementation of The Adimension’s and DEITY Principles Framework**
 >
