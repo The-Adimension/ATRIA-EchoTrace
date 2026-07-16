@@ -1,19 +1,68 @@
- 
+ ># **ATRIA—EchoTrace** | The Adimension
+>### **Artifact Transformation & Resources Interoperability in AI**
+>### Medgemma-Driven coordinate-based Contour Tracing localisation in Echocardiography
 
-## **ATRIA | EchoTrace** 
+---
 
-**Artifact Transformation & Resource Interoperability in Artificial Intelligence** 
 
-**| LLM-tuned Data-Driven Echocardiographic Contour Tracing** 
+<table width="100%">
+  <tr>
+    <td width="33.33%" align="center" style="padding: 12px 8px;">
+      <a href="https://colab.research.google.com/drive/1qofahQ8LztTrB_Us9j1Iyz2aYeS2_2rH?usp=sharing">
+        <img alt="Google Colab logo" src="https://www.tensorflow.org/images/colab_logo_32px.png" width="32px"><br>
+        <strong>Experiment on Google Colab</strong>
+      </a>
+    </td>
+    <td width="33.33%" align="center" style="padding: 12px 8px;">
+      <a href="https://github.com/The-Adimension/ATRIA-EchoTrace/blob/main/MedGemma-ATRIA-EchoTrace-Echocardiography%20Heart%20Chamber%20Contour%20Tracing.ipynb">
+        <img alt="GitHub logo" src="https://github.githubassets.com/assets/GitHub-Mark-ea2971cee799.png" width="32px"><br>
+        <strong>Check latest code updates on GitHub </strong>
+      </a>
+    </td>
+    <td width="33.33%" align="center" style="padding: 12px 8px;">
+      <a href="https://huggingface.co/The-Adimension">
+        <img alt="Hugging Face logo" src="https://huggingface.co/front/assets/huggingface_logo-noborder.svg" width="32px"><br>
+        <strong>Explore Adapters on Hugging Face</strong>
+      </a>
+    </td>
+  </tr>
+</table>
 
-## **An Implementation of The Adimension’s and DEITY Principles Framework** 
+---
 
-ATRIA EchoTrace is a flagship demonstration of the ATRIA vision for Artifact Transformation & Resources Interoperability in AI. It fully implements the DEITY Principles Framework (Data • Ethics • Informatics • Technology • You) as detailed in the companion technical document “ATRIOM_MedGemma_DEITY_Framework.docx”. 
+<table width="100%">
+  <tr>
+    <td width="50%" align="center" style="padding: 10px;">
+      <strong>📹 Project Overview</strong><br><br>
+      <video width="100%" height="300" style="background-color: #000; object-fit: contain; border-radius: 8px;" controls>
+        <source src="https://theadimension.com/atria-echotrace/overview.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </td>
+    <td width="50%" align="center" style="padding: 10px;">
+      <strong>🧑‍💻 Human-in-the-Loop Interface</strong><br><br>
+      <video width="100%" height="300" style="background-color: #000; object-fit: contain; border-radius: 8px;" controls>
+        <source src="https://theadimension.com/atria-echotrace/hitl_interface.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </td>
+  </tr>
+</table>
 
-By treating data as a transparent, reusable asset, embedding continuous human oversight as an ethical core, producing interpretable structured outputs, leveraging efficient modern technology, and — most importantly — centering the human user as an active collaborator, ATRIA advances the vision of Adimensional Intelligence: AI that augments rather than supplants clinical expertise in echocardiography. 
+> ### **A practical Implementation of The Adimension’s and DEITY Principles Framework**
+>
+> **ATRIA EchoTrace** is a flagship demonstration of the ATRIA vision for *Artifact Transformation & Resources Interoperability in AI*. It fully implements the **DEITY Principles Framework (Data • Ethics • Informatics • Technology • You)** as detailed in the companion technical document *“ATRIOM_MedGemma_DEITY_Framework.docx”*.
+>
+> By treating data as a transparent, reusable asset, embedding continuous human oversight as an ethical core, producing interpretable structured outputs, leveraging efficient modern technology, and — most importantly — centering the human user as an active collaborator, ATRIA advances the vision of **Adimensional Intelligence**: AI that augments rather than supplants clinical expertise in echocardiography.
 
-Next steps include full video sequence modeling, joint CAMUS + EchoNet training, extension to additional structures, integration of revised polygons into active learning loops, and deployment of the revision interface as a lightweight clinical tool. All code, artifacts, and this discovery sheet are designed for immediate reuse, extension, and community contribution. 
+---
 
+>### **Citations**
+>- **The Adimension & DEITY Principles** Anwer, S. (2026). The Adimension: Bridging human ingenuity and machine intelligence through the DEITY principles framework. _European Heart Journal - Imaging Methods and Practice_ , _4_ (1), qyaf038. https://doi.org/10.1093/ehjimp/qyaf038
+>- **CAMUS Dataset** Leclerc, S., Smistad, E., Pedrosa, J., Østvik, A., Cervenansky, F., Espinosa, F., Espeland, T., Berg, E. A. R., Jodoin, P.-M., Grenier, T., Lartizien, C., Dhooge, J., Løvstakken, L., & Bernard, O. (2019). Deep learning for segmentation using an open large-scale dataset in 2D echocardiography. _IEEE Transactions on Medical Imaging_ , _38_ (9), 2198–2210. https://doi.org/10.1109/tmi.2019.2900516
+>- **EchoNet-Dynamic** Ouyang, D., He, B., Ghorbani, A., Yuan, N., Ebinger, J., Langlotz, C. P., Heidenreich, P. A., Harrington, R. A., Liang, D. H., Ashley, E. A., & Zou, J. Y. (2020). Video-based AI for beat-to-beat assessment of cardiac function. _Nature_ , _580_ (7802), 252–256. https://doi.org/10.1038/s41586-020-2145-8
+> - **Google MedGemma 1.5 Google. (2026).** MedGemma 1.5: Technical reports and model card (google/medgemma-1.54b-it). Hugging Face. https://huggingface.co/google/medgemma-1.5-4b-it
+> - **LoRA: Low-Rank Adaptation** . Hu, E. J., Shen, Y., Wallis, P., Allen-Zhu, Z., Li, Y., Wang, S., Wang, L., & Chen, W. (2021). LoRA: Low-rank adaptation of large language models. arXiv. https://doi.org/10.48550/arXiv.2106.09685
 
 ---
 
@@ -190,14 +239,10 @@ Internal development and validation within the ATRIA cardiac AI research initiat
 - Present at major cardiology imaging and medical AI conferences; pursue publication in relevant journals 
 
 
-## REFERENCES 
+---
 
-- **The Adimension & DEITY Principles** Anwer, S. (2026). The Adimension: Bridging human ingenuity and machine intelligence through the DEITY principles framework. _European Heart Journal - Imaging Methods and Practice_ , _4_ (1), qyaf038. https://doi.org/10.1093/ehjimp/qyaf038 
+> To AïA, your legacy continues to inspire our journey!
 
-- **CAMUS Dataset** Leclerc, S., Smistad, E., Pedrosa, J., Østvik, A., Cervenansky, F., Espinosa, F., Espeland, T., Berg, E. A. R., Jodoin, P.-M., Grenier, T., Lartizien, C., Dhooge, J., Løvstakken, L., & Bernard, O. (2019). Deep learning for segmentation using an open large-scale dataset in 2D echocardiography. _IEEE Transactions on Medical Imaging_ , _38_ (9), 2198–2210. https://doi.org/10.1109/tmi.2019.2900516 
+---
 
-- **EchoNet-Dynamic** Ouyang, D., He, B., Ghorbani, A., Yuan, N., Ebinger, J., Langlotz, C. P., Heidenreich, P. A., Harrington, R. A., Liang, D. H., Ashley, E. A., & Zou, J. Y. (2020). Video-based AI for beat-to-beat assessment of cardiac function. _Nature_ , _580_ (7802), 252–256. https://doi.org/10.1038/s41586-020-2145-8 
-
-- **Google MedGemma 1.5 Google. (2026).** MedGemma 1.5: Technical reports and model card (google/medgemma-1.54b-it). Hugging Face. https://huggingface.co/google/medgemma-1.5-4b-it 
-
-- **LoRA: Low-Rank Adaptation** . Hu, E. J., Shen, Y., Wallis, P., Allen-Zhu, Z., Li, Y., Wang, S., Wang, L., & Chen, W. (2021). LoRA: Low-rank adaptation of large language models. arXiv. https://doi.org/10.48550/arXiv.2106.09685 
+>S. Anwer © The Adimension 2025.
