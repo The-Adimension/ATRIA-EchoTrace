@@ -36,11 +36,11 @@ jobs:
           echo "media files     $(find showcase/media -type f | wc -l)"
           echo "bundle total    $(du -sh showcase | cut -f1)"
 
-      # enablement:true turns Pages on via the workflow's own GITHUB_TOKEN if it is not
-      # already enabled, so no manual Settings step is needed. Idempotent when it is.
+      # Pages is enabled in Settings -> Pages with Source: GitHub Actions, so this only
+      # reads the existing configuration. Do not set enablement:true — the default
+      # GITHUB_TOKEN is not permitted to create a Pages site in this organisation and
+      # the attempt fails with "Resource not accessible by integration".
       - uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5
-        with:
-          enablement: true
 
       # actions/upload-pages-artifact is not usable here: it is a composite action that
       # calls actions/upload-artifact@v4 internally, unpinned, which this organisation's
