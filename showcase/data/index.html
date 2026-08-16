@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Per-frame benchmark data — ATRIA EchoTrace</title>
+<style>
+:root{--ink:#11161d;--body:#2c3542;--muted:#5b6675;--faint:#8a94a3;--line:#e3e7ec;
+ --bg:#fff;--bg2:#f7f9fb;--accent:#0b6bcb;
+ --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;
+ --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--body);font:15px/1.6 var(--sans);
+ padding:38px 24px 72px}
+.wrap{max-width:940px;margin:0 auto}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.back{font:600 11px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+h1{font-size:26px;color:var(--ink);margin:14px 0 6px;letter-spacing:-.01em}
+.lede{color:var(--muted);max-width:70ch;margin:0 0 26px}
+h2{font-size:13px;font-family:var(--mono);letter-spacing:.16em;text-transform:uppercase;
+ color:var(--faint);margin:34px 0 10px;border-bottom:1px solid var(--line);padding-bottom:7px}
+table{width:100%;border-collapse:collapse;font-size:14px}
+td{padding:8px 12px 8px 0;border-bottom:1px solid var(--line);vertical-align:top}
+td.f{white-space:nowrap;font-family:var(--mono);font-size:13px}
+td.s{white-space:nowrap;text-align:right;color:var(--faint);font-family:var(--mono);font-size:12.5px}
+td.n{color:var(--muted);font-size:13.5px}
+footer{margin-top:44px;padding-top:16px;border-top:1px solid var(--line);
+ color:var(--faint);font-size:12.5px}
+</style></head>
+<body><div class="wrap">
+<a class="back" href="../index.html">&larr; ATRIA EchoTrace</a>
+<h1>Per-frame benchmark data</h1>
+<p class="lede">Every number published on the showcase page derives from these files. The evaluation is the official CAMUS test split &mdash; 50 patients, 200 frames, never trained on.</p>
+<h2>Benchmark — 200 held-out frames</h2><table><tr><td class="f"><a href="overlays_manifest.csv">overlays_manifest.csv</a></td><td class="n">Per-frame class, point count, distance and overlay path</td><td class="s">17.5 KB</td></tr><tr><td class="f"><a href="per_frame.csv">per_frame.csv</a></td><td class="n">Per-frame Dice / IoU / MAD / HD95 / NSD against the expert mask</td><td class="s">52.2 KB</td></tr><tr><td class="f"><a href="pointwise.csv">pointwise.csv</a></td><td class="n">Per-frame point-to-curve distance — the primary metric — with in-bounds and self-intersection flags</td><td class="s">23.6 KB</td></tr><tr><td class="f"><a href="scores.json">scores.json</a></td><td class="n">Full scoring output, including per-patient ejection fraction</td><td class="s">135.1 KB</td></tr></table><h2>Released adapters</h2><table><tr><td class="f"><a href="adapter_config_camus.json">adapter_config_camus.json</a></td><td class="n">Released CAMUS LoRA configuration, read from the checkpoint</td><td class="s">1.1 KB</td></tr><tr><td class="f"><a href="adapter_config_echonet.json">adapter_config_echonet.json</a></td><td class="n">Released EchoNet LoRA configuration, read from the checkpoint</td><td class="s">1.1 KB</td></tr><tr><td class="f"><a href="training_metadata_camus.json">training_metadata_camus.json</a></td><td class="n">Recorded CAMUS training summary</td><td class="s">1.2 KB</td></tr><tr><td class="f"><a href="training_metadata_echonet.json">training_metadata_echonet.json</a></td><td class="n">Recorded EchoNet training summary</td><td class="s">1.2 KB</td></tr></table>
+<footer>ATRIA EchoTrace &middot; The Adimension &middot; research use only, not a cleared or
+approved medical device.</footer>
+</div></body></html>
