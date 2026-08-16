@@ -50,10 +50,13 @@ jobs:
       # that actions/deploy-pages consumes.
       - name: Package the Pages artifact
         run: |
-          tar --dereference --hardlink-dereference \
-              --directory showcase \
-              -cf "$RUNNER_TEMP/artifact.tar" .
+          set -euo pipefail
+          # --hardlink-dereference is deliberately omitted: not every tar build accepts
+          # it, and it exits 64 ("unrecognized option") when it does not. The bundle
+          # contains no hardlinks and no symlinks, so --dereference alone is sufficient.
+          tar --dereference --directory showcase -cf "$RUNNER_TEMP/artifact.tar" .
           ls -lh "$RUNNER_TEMP/artifact.tar"
+          echo "entries: $(tar -tf "$RUNNER_TEMP/artifact.tar" | wc -l)"
 
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
