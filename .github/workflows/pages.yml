@@ -42,9 +42,25 @@ jobs:
         with:
           enablement: true
 
-      - uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3
+      # actions/upload-pages-artifact is not usable here: it is a composite action that
+      # calls actions/upload-artifact@v4 internally, unpinned, which this organisation's
+      # "actions must be pinned to a full-length commit SHA" policy rejects — and a
+      # transitive reference cannot be pinned from this file. These two steps do exactly
+      # what it does: tar the directory, then upload it as the "github-pages" artifact
+      # that actions/deploy-pages consumes.
+      - name: Package the Pages artifact
+        run: |
+          tar --dereference --hardlink-dereference \
+              --directory showcase \
+              -cf "$RUNNER_TEMP/artifact.tar" .
+          ls -lh "$RUNNER_TEMP/artifact.tar"
+
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
-          path: showcase
+          name: github-pages
+          path: ${{ runner.temp }}/artifact.tar
+          retention-days: 1
+          if-no-files-found: error
 
       - id: deployment
         uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4
