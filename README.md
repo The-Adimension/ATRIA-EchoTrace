@@ -1,5 +1,14 @@
 # ATRIA EchoTrace
 
+[![Live showcase](https://img.shields.io/badge/showcase-atria.theadimension.com-0b6bcb?style=flat-square)](https://atria.theadimension.com/)
+[![Mirror](https://img.shields.io/badge/mirror-github.io-5b6675?style=flat-square)](https://the-adimension.github.io/ATRIA-EchoTrace/)
+[![CI](https://github.com/The-Adimension/ATRIA-EchoTrace/actions/workflows/ci.yml/badge.svg)](https://github.com/The-Adimension/ATRIA-EchoTrace/actions/workflows/ci.yml)
+[![Deploy](https://github.com/The-Adimension/ATRIA-EchoTrace/actions/workflows/pages.yml/badge.svg)](https://github.com/The-Adimension/ATRIA-EchoTrace/actions/workflows/pages.yml)
+[![License](https://img.shields.io/badge/license-Apache--2.0-1a7f45?style=flat-square)](LICENSE)
+[![Base model](https://img.shields.io/badge/base-MedGemma%201.5%204B-c02b2b?style=flat-square)](https://huggingface.co/google/medgemma-1.5-4b-it)
+[![Colab](https://img.shields.io/badge/notebook-open%20in%20Colab-f9ab00?style=flat-square)](https://colab.research.google.com/github/The-Adimension/ATRIA-EchoTrace/blob/main/ATRIA-EchoTrace_GoogleColab-CompleteNotebook_20260715.ipynb)
+[![Research use only](https://img.shields.io/badge/research%20use%20only-not%20a%20medical%20device-9a6400?style=flat-square)](docs/limitations.md)
+
 **Fine-tuning MedGemma 1.5 4B to trace the heart as editable coordinates, not an opaque mask.**
 
 A cardiologist cannot argue with a segmentation mask. ATRIA EchoTrace adapts
@@ -33,7 +42,15 @@ Known limitations are published rather than buried: **25 of 200 polygons (12.5%)
 two-chamber views are weaker than four-chamber (5.45 vs 4.76 mm), and the worst case is a
 well-formed ventricle traced in the wrong place. See [docs/limitations.md](docs/limitations.md).
 
-**[→ Full showcase, with the interactive editor and all 200 predictions](showcase/index.html)**
+### See it
+
+**[→ atria.theadimension.com](https://atria.theadimension.com/)** — the full showcase: the
+interactive correction editor, all 200 held-out predictions rankable best-to-worst, the six-run
+training record, and three narrated videos.
+
+Also mirrored at **[the-adimension.github.io/ATRIA-EchoTrace](https://the-adimension.github.io/ATRIA-EchoTrace/)**,
+and served from [`showcase/`](showcase/) in this repository — the same static bundle, deployable
+to any host.
 
 ---
 
