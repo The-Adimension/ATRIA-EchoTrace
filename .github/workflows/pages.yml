@@ -1,0 +1,46 @@
+name: Deploy showcase to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "showcase/**"
+      - ".github/workflows/pages.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# One deployment at a time; let an in-flight run finish rather than cancelling it.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Sanity-check the bundle
+        run: |
+          test -f showcase/index.html
+          echo "index.html      $(du -h showcase/index.html | cut -f1)"
+          echo "gallery PNGs    $(find showcase/gallery -name '*.png' | wc -l)"
+          echo "media files     $(find showcase/media -type f | wc -l)"
+          echo "bundle total    $(du -sh showcase | cut -f1)"
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: showcase
+
+      - id: deployment
+        uses: actions/deploy-pages@v4

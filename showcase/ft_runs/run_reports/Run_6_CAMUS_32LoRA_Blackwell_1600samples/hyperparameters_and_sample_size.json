@@ -1,0 +1,32 @@
+{
+  "run_file": "events.out.tfevents.1776410801.613f842a7ad8.13245.0",
+  "title": "Run 6: CAMUS 32-LoRA Blackwell (1,600 samples)",
+  "dataset_name": "CAMUS Dataset (1,600 samples)",
+  "hyperparameters": {
+    "output_dir": "/content/drive/MyDrive/ATRIA-G3/output_CAMUS-32LoRA-blackwell",
+    "learning_rate": 0.0001,
+    "num_train_epochs": 5,
+    "per_device_train_batch_size": 4,
+    "gradient_accumulation_steps": 16,
+    "world_size": 1,
+    "effective_batch_size": 64,
+    "lr_scheduler_type": "linear",
+    "warmup_ratio": null,
+    "weight_decay": 0.0,
+    "max_grad_norm": 0.3,
+    "optimizer": "adamw_torch_fused",
+    "bf16": true,
+    "eval_strategy": "steps"
+  },
+  "sample_size_metrics": {
+    "dataset_sample_size": 1600,
+    "total_sample_exposures": 8000,
+    "total_gradient_steps": 125
+  },
+  "key_results": {
+    "final_train_loss": 0.2528,
+    "min_eval_loss": 0.2586,
+    "peak_eval_token_accuracy": 0.8948,
+    "final_eval_token_accuracy": 0.8948
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "run_file": "events.out.tfevents.1771950289.0b5e3829cdda.1883.0",
+  "title": "Run 3: CAMUS Dataset (Extended 8 Epochs, LR 2e-4)",
+  "dataset_name": "CAMUS Dataset (~1,600 samples)",
+  "hyperparameters": {
+    "output_dir": "/content/drive/MyDrive/ATRIA-G3/output_camus",
+    "learning_rate": 0.0002,
+    "num_train_epochs": 8,
+    "per_device_train_batch_size": 2,
+    "gradient_accumulation_steps": 16,
+    "world_size": 1,
+    "effective_batch_size": 32,
+    "lr_scheduler_type": "linear",
+    "warmup_ratio": 0.03,
+    "weight_decay": 0.0,
+    "max_grad_norm": 0.3,
+    "optimizer": "adamw_torch_fused",
+    "bf16": true,
+    "eval_strategy": "steps"
+  },
+  "sample_size_metrics": {
+    "dataset_sample_size": 1504,
+    "total_sample_exposures": 12032,
+    "total_gradient_steps": 376
+  },
+  "key_results": {
+    "final_train_loss": 0.3813,
+    "min_eval_loss": 0.3895,
+    "peak_eval_token_accuracy": 0.8402,
+    "final_eval_token_accuracy": 0.8399
+  }
+}

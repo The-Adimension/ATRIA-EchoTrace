@@ -1,0 +1,58 @@
+# --- secrets -----------------------------------------------------------------
+# Never commit tokens. Use .env.example as the template.
+.env
+*.env
+!.env.example
+
+# --- environments -------------------------------------------------------------
+.venv/
+.venv-*/
+venv/
+env/
+
+# --- python --------------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# --- application outputs --------------------------------------------------------
+# Runtime artefacts. The publishable subset is promoted into evidence/ deliberately;
+# everything else here is regenerable by tools/.
+outputs/
+*.log
+
+# --- model artefacts (large; fetched from Hugging Face) --------------------------
+# Locally-placed weights. The application looks here first, but these are multi-GB
+# gated downloads that must never enter version control — see `atria doctor`.
+# The leading slash matters: an unanchored `adapters/` would also exclude
+# evidence/adapters/, i.e. the released LoRA configurations we deliberately publish.
+/models/
+/adapters/
+/checkpoints/
+*.safetensors
+*.bin
+
+# --- supplied source material ----------------------------------------------------
+# datasets/ ships its structure, its scripts and its documentation. It never ships
+# data: CAMUS and EchoNet-Dynamic are third-party, licence-gated downloads, and
+# everything derived from them is derivative of that data. See datasets/README.md.
+# The .gitkeep and README.md in each directory ARE tracked, so a fresh clone still
+# tells you exactly where to put what you acquire.
+datasets/original_datasets_and_repos/*
+datasets/processed_datasets/*
+datasets/classified_datasets/*
+!datasets/original_datasets_and_repos/.gitkeep
+!datasets/original_datasets_and_repos/README.md
+!datasets/processed_datasets/.gitkeep
+!datasets/processed_datasets/README.md
+!datasets/classified_datasets/.gitkeep
+!datasets/classified_datasets/README.md
+
+# --- os ---------------------------------------------------------------------------
+.DS_Store
+Thumbs.db

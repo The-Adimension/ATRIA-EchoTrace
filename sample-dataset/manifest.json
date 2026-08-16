@@ -1,0 +1,749 @@
+{
+  "schema_version": 1,
+  "created_utc": "2026-07-20T21-01-51",
+  "seed": 42,
+  "smoke": false,
+  "strata_targets": {
+    "camus/4CH": 8,
+    "camus/2CH": 8,
+    "echonet/4CH": 9
+  },
+  "norm_scale": 1000,
+  "source": {
+    "frames_dir": "C:\\Users\\sheha\\Desktop\\DevBase\\Google\\Medgemma-Echo\\unified_processed\\unified_processed\\frames",
+    "tracings_json": "C:\\Users\\sheha\\Desktop\\DevBase\\Google\\Medgemma-Echo\\unified_processed\\unified_processed\\tracings.json",
+    "metadata_csv": "C:\\Users\\sheha\\Desktop\\DevBase\\Google\\Medgemma-Echo\\unified_processed\\unified_processed\\metadata.csv"
+  },
+  "n_frames": 50,
+  "n_cases": 25,
+  "frames": [
+    {
+      "stem": "echonet_0X171FD888481D524D_4CH_ED",
+      "path": "frames/echonet_0X171FD888481D524D_4CH_ED.png",
+      "sha256": "bdedfcc0196f22cb7c582cd22bd534be4d6cb9a4e899bd1468e1891918c4498b",
+      "dataset": "echonet",
+      "view": "4CH",
+      "instant": "ED",
+      "case_id": "echonet_0X171FD888481D524D",
+      "image_h": 224,
+      "image_w": 224
+    },
+    {
+      "stem": "echonet_0X171FD888481D524D_4CH_ES",
+      "path": "frames/echonet_0X171FD888481D524D_4CH_ES.png",
+      "sha256": "59bda9efefb3ebbf8480b018dcc4c1f64ccfac226fd2844a708785b680d5d6d0",
+      "dataset": "echonet",
+      "view": "4CH",
+      "instant": "ES",
+      "case_id": "echonet_0X171FD888481D524D",
+      "image_h": 224,
+      "image_w": 224
+    },
+    {
+      "stem": "echonet_0X23DF57D03E5E2F9B_4CH_ED",
+      "path": "frames/echonet_0X23DF57D03E5E2F9B_4CH_ED.png",
+      "sha256": "9f66daf37c55162834a9997e5dbe27377133076b92b9c12063665b16c08a8b7d",
+      "dataset": "echonet",
+      "view": "4CH",
+      "instant": "ED",
+      "case_id": "echonet_0X23DF57D03E5E2F9B",
+      "image_h": 224,
+      "image_w": 224
+    },
+    {
+      "stem": "echonet_0X23DF57D03E5E2F9B_4CH_ES",
+      "path": "frames/echonet_0X23DF57D03E5E2F9B_4CH_ES.png",
+      "sha256": "14d8208d2ffed7508fb69476e957776781854ad35845d63c9fd20b2792ee1b77",
+      "dataset": "echonet",
+      "view": "4CH",
+      "instant": "ES",
+      "case_id": "echonet_0X23DF57D03E5E2F9B",
+      "image_h": 224,
+      "image_w": 224
+    },
+    {
+      "stem": "echonet_0X36CCD2D8878BA51D_4CH_ED",
+      "path": "frames/echonet_0X36CCD2D8878BA51D_4CH_ED.png",
+      "sha256": "64733998ab30509a662e5d9f2cddd448d0e152901c8fc539ba4f0cd9360e2486",
+      "dataset": "echonet",
+      "view": "4CH",
+      "instant": "ED",
+      "case_id": "echonet_0X36CCD2D8878BA51D",
+      "image_h": 224,
+      "image_w": 224
+    },
+    {
+      "stem": "echonet_0X36CCD2D8878BA51D_4CH_ES",
+      "path": "frames/echonet_0X36CCD2D8878BA51D_4CH_ES.png",
+      "sha256": "fb484eaffb5786e83cad58aa4ff78bd5b0813600f68afe535b30b0ae7c5d86c9",
+      "dataset": "echonet",
+      "view": "4CH",
+      "instant": "ES",
+      "case_id": "echonet_0X36CCD2D8878BA51D",
+      "image_h": 224,
+      "image_w": 224
+    },
+    {
+      "stem": "echonet_0X3A76AD5CC9D50E57_4CH_ED",
+      "path": "frames/echonet_0X3A76AD5CC9D50E57_4CH_ED.png",
+      "sha256": "94f10572ad71d37ace657be813957a66ec129f64f9231d29e5220995ffd5175f",
+      "dataset": "echonet",
+      "view": "4CH",
+      "instant": "ED",
+      "case_id": "echonet_0X3A76AD5CC9D50E57",
+      "image_h": 224,
+      "image_w": 224
+    },
+    {
+      "stem": "echonet_0X3A76AD5CC9D50E57_4CH_ES",
+      "path": "frames/echonet_0X3A76AD5CC9D50E57_4CH_ES.png",
+      "sha256": "826cd2e531ee39e198396083f64aac8ba9cbe9bf0dd0c443d1851d92aaeb925f",
+      "dataset": "echonet",
+      "view": "4CH",
+      "instant": "ES",
+      "case_id": "echonet_0X3A76AD5CC9D50E57",
+      "image_h": 224,
+      "image_w": 224
+    },
+    {
+      "stem": "echonet_0X3EA9C5F8DCDD2DEC_4CH_ED",
+      "path": "frames/echonet_0X3EA9C5F8DCDD2DEC_4CH_ED.png",
+      "sha256": "0fc70b2ac288f1864bc83566402a02cfc216abd0d70708823efb5b634476b39a",
+      "dataset": "echonet",
+      "view": "4CH",
+      "instant": "ED",
+      "case_id": "echonet_0X3EA9C5F8DCDD2DEC",
+      "image_h": 224,
+      "image_w": 224
+    },
+    {
+      "stem": "echonet_0X3EA9C5F8DCDD2DEC_4CH_ES",
+      "path": "frames/echonet_0X3EA9C5F8DCDD2DEC_4CH_ES.png",
+      "sha256": "9d4249b200f9009916b7e7ce81ed2bb4e3e99bdca2eb33a0220dc0f352f2c0f9",
+      "dataset": "echonet",
+      "view": "4CH",
+      "instant": "ES",
+      "case_id": "echonet_0X3EA9C5F8DCDD2DEC",
+      "image_h": 224,
+      "image_w": 224
+    },
+    {
+      "stem": "echonet_0X73D50DE693F798E3_4CH_ED",
+      "path": "frames/echonet_0X73D50DE693F798E3_4CH_ED.png",
+      "sha256": "2610802e2ebd72135c67be9d24a674ee1a3a5496e24dbe91861b285d58dacb58",
+      "dataset": "echonet",
+      "view": "4CH",
+      "instant": "ED",
+      "case_id": "echonet_0X73D50DE693F798E3",
+      "image_h": 224,
+      "image_w": 224
+    },
+    {
+      "stem": "echonet_0X73D50DE693F798E3_4CH_ES",
+      "path": "frames/echonet_0X73D50DE693F798E3_4CH_ES.png",
+      "sha256": "bf66cacff1868489dec4928db12ef3d07719ee9c9e398596da21da92fd29db83",
+      "dataset": "echonet",
+      "view": "4CH",
+      "instant": "ES",
+      "case_id": "echonet_0X73D50DE693F798E3",
+      "image_h": 224,
+      "image_w": 224
+    },
+    {
+      "stem": "echonet_0X7A4ABCBDD9D9F33A_4CH_ED",
+      "path": "frames/echonet_0X7A4ABCBDD9D9F33A_4CH_ED.png",
+      "sha256": "27618baab8ed52649ff7e50756f6f701c4320067647e649122d2a6c2d24bb8cb",
+      "dataset": "echonet",
+      "view": "4CH",
+      "instant": "ED",
+      "case_id": "echonet_0X7A4ABCBDD9D9F33A",
+      "image_h": 224,
+      "image_w": 224
+    },
+    {
+      "stem": "echonet_0X7A4ABCBDD9D9F33A_4CH_ES",
+      "path": "frames/echonet_0X7A4ABCBDD9D9F33A_4CH_ES.png",
+      "sha256": "da3d6bd7ba77f38b6c762c69e5201a9f8698d2a207eb23b0844960bdf005bab1",
+      "dataset": "echonet",
+      "view": "4CH",
+      "instant": "ES",
+      "case_id": "echonet_0X7A4ABCBDD9D9F33A",
+      "image_h": 224,
+      "image_w": 224
+    },
+    {
+      "stem": "echonet_0X7CA10684E319705F_4CH_ED",
+      "path": "frames/echonet_0X7CA10684E319705F_4CH_ED.png",
+      "sha256": "473775f0e84040739c3d50a2d7e4ad7e9178d99f46776ff5c652dcf711b24c80",
+      "dataset": "echonet",
+      "view": "4CH",
+      "instant": "ED",
+      "case_id": "echonet_0X7CA10684E319705F",
+      "image_h": 224,
+      "image_w": 224
+    },
+    {
+      "stem": "echonet_0X7CA10684E319705F_4CH_ES",
+      "path": "frames/echonet_0X7CA10684E319705F_4CH_ES.png",
+      "sha256": "5fa86f885e63d70d33c9b20027a73c70cfaab98ca97fbd5e78ec11901a7572af",
+      "dataset": "echonet",
+      "view": "4CH",
+      "instant": "ES",
+      "case_id": "echonet_0X7CA10684E319705F",
+      "image_h": 224,
+      "image_w": 224
+    },
+    {
+      "stem": "echonet_0XB72CF150368BAB2_4CH_ED",
+      "path": "frames/echonet_0XB72CF150368BAB2_4CH_ED.png",
+      "sha256": "f1484a2913f9ed67054ee3465f6f1f315bc1c79ceebec4a856dc0d0ad5c69858",
+      "dataset": "echonet",
+      "view": "4CH",
+      "instant": "ED",
+      "case_id": "echonet_0XB72CF150368BAB2",
+      "image_h": 224,
+      "image_w": 224
+    },
+    {
+      "stem": "echonet_0XB72CF150368BAB2_4CH_ES",
+      "path": "frames/echonet_0XB72CF150368BAB2_4CH_ES.png",
+      "sha256": "e9cf3acfc6fdf22213aae81907c6989bc1ae164c98ee845266e66ac992406a80",
+      "dataset": "echonet",
+      "view": "4CH",
+      "instant": "ES",
+      "case_id": "echonet_0XB72CF150368BAB2",
+      "image_h": 224,
+      "image_w": 224
+    },
+    {
+      "stem": "patient0047_2CH_ED",
+      "path": "frames/patient0047_2CH_ED.png",
+      "sha256": "64a3d03320f8a0e13088e348395777a30b2190478840d9d2c38428a6bc5d40bb",
+      "dataset": "camus",
+      "view": "2CH",
+      "instant": "ED",
+      "case_id": "patient0047",
+      "image_h": 389,
+      "image_w": 499
+    },
+    {
+      "stem": "patient0047_2CH_ES",
+      "path": "frames/patient0047_2CH_ES.png",
+      "sha256": "3ac1e03bb8c19f14eb27fe2e90104d5e763f8b0edaa597c7a50b92881910e77f",
+      "dataset": "camus",
+      "view": "2CH",
+      "instant": "ES",
+      "case_id": "patient0047",
+      "image_h": 389,
+      "image_w": 499
+    },
+    {
+      "stem": "patient0047_4CH_ED",
+      "path": "frames/patient0047_4CH_ED.png",
+      "sha256": "b84a5d5e401194a5a3fad28c3f4204f3698c7fe4e4848190eb0a716d7512e372",
+      "dataset": "camus",
+      "view": "4CH",
+      "instant": "ED",
+      "case_id": "patient0047",
+      "image_h": 422,
+      "image_w": 541
+    },
+    {
+      "stem": "patient0047_4CH_ES",
+      "path": "frames/patient0047_4CH_ES.png",
+      "sha256": "349576bf85719e28815c29fea96e8da2a3ea07829294d841ad1af3f042cd96fc",
+      "dataset": "camus",
+      "view": "4CH",
+      "instant": "ES",
+      "case_id": "patient0047",
+      "image_h": 422,
+      "image_w": 541
+    },
+    {
+      "stem": "patient0051_2CH_ED",
+      "path": "frames/patient0051_2CH_ED.png",
+      "sha256": "24289db34458835b24f26fb8aa9bbcdf52efca0979cc049746feca091340e51a",
+      "dataset": "camus",
+      "view": "2CH",
+      "instant": "ED",
+      "case_id": "patient0051",
+      "image_h": 487,
+      "image_w": 591
+    },
+    {
+      "stem": "patient0051_2CH_ES",
+      "path": "frames/patient0051_2CH_ES.png",
+      "sha256": "0b8ec96e860db5a3e3f239d3873bc74b12b4dcf3e86fb718ddcd50c72a71be04",
+      "dataset": "camus",
+      "view": "2CH",
+      "instant": "ES",
+      "case_id": "patient0051",
+      "image_h": 487,
+      "image_w": 591
+    },
+    {
+      "stem": "patient0189_2CH_ED",
+      "path": "frames/patient0189_2CH_ED.png",
+      "sha256": "c57ff38ee20b24510b61a3dcdd11290b74467085f76e3a36b1f94c41ba2355d5",
+      "dataset": "camus",
+      "view": "2CH",
+      "instant": "ED",
+      "case_id": "patient0189",
+      "image_h": 422,
+      "image_w": 512
+    },
+    {
+      "stem": "patient0189_2CH_ES",
+      "path": "frames/patient0189_2CH_ES.png",
+      "sha256": "9d86057fd0caf7a8f73f1d4dfdc7fc19c675046f3414dfd70cc06e11baececad",
+      "dataset": "camus",
+      "view": "2CH",
+      "instant": "ES",
+      "case_id": "patient0189",
+      "image_h": 422,
+      "image_w": 512
+    },
+    {
+      "stem": "patient0191_4CH_ED",
+      "path": "frames/patient0191_4CH_ED.png",
+      "sha256": "a59c1d4184d0935a5f3fbc6378ecab39628d3ffc6b9b3fbec67d73fc9802b0df",
+      "dataset": "camus",
+      "view": "4CH",
+      "instant": "ED",
+      "case_id": "patient0191",
+      "image_h": 422,
+      "image_w": 512
+    },
+    {
+      "stem": "patient0191_4CH_ES",
+      "path": "frames/patient0191_4CH_ES.png",
+      "sha256": "1f79ac30802e1f3c30795f173e8e71f3ed868ed6ffdd58fe39297fc206b5ff1f",
+      "dataset": "camus",
+      "view": "4CH",
+      "instant": "ES",
+      "case_id": "patient0191",
+      "image_h": 422,
+      "image_w": 512
+    },
+    {
+      "stem": "patient0194_4CH_ED",
+      "path": "frames/patient0194_4CH_ED.png",
+      "sha256": "50b762276fdbcfc2c979786bff02f4e019056ec593ec5d3f00a0c3eafafa0c92",
+      "dataset": "camus",
+      "view": "4CH",
+      "instant": "ED",
+      "case_id": "patient0194",
+      "image_h": 454,
+      "image_w": 551
+    },
+    {
+      "stem": "patient0194_4CH_ES",
+      "path": "frames/patient0194_4CH_ES.png",
+      "sha256": "e9393742ed0532e0d714cc8bca647eb20aa66e7408c7afc734108d4d4b096da3",
+      "dataset": "camus",
+      "view": "4CH",
+      "instant": "ES",
+      "case_id": "patient0194",
+      "image_h": 454,
+      "image_w": 551
+    },
+    {
+      "stem": "patient0197_4CH_ED",
+      "path": "frames/patient0197_4CH_ED.png",
+      "sha256": "ea624ddf82f60617062c1cdfd68532ade5a15245fbf4a8ed3ebb22c24e530497",
+      "dataset": "camus",
+      "view": "4CH",
+      "instant": "ED",
+      "case_id": "patient0197",
+      "image_h": 454,
+      "image_w": 551
+    },
+    {
+      "stem": "patient0197_4CH_ES",
+      "path": "frames/patient0197_4CH_ES.png",
+      "sha256": "351e82682fe39c09809dd94334624f6acbb1061afb28c05295b3bc198a02504a",
+      "dataset": "camus",
+      "view": "4CH",
+      "instant": "ES",
+      "case_id": "patient0197",
+      "image_h": 454,
+      "image_w": 551
+    },
+    {
+      "stem": "patient0215_4CH_ED",
+      "path": "frames/patient0215_4CH_ED.png",
+      "sha256": "c234bc8af7297636eebd497fed036ba52cb5e0a86ca33fed447f7e17999b3694",
+      "dataset": "camus",
+      "view": "4CH",
+      "instant": "ED",
+      "case_id": "patient0215",
+      "image_h": 357,
+      "image_w": 433
+    },
+    {
+      "stem": "patient0215_4CH_ES",
+      "path": "frames/patient0215_4CH_ES.png",
+      "sha256": "4394498ef414b903033a90b37391d1ad4a7e994d04dbbcdbed92fb683cc43a11",
+      "dataset": "camus",
+      "view": "4CH",
+      "instant": "ES",
+      "case_id": "patient0215",
+      "image_h": 357,
+      "image_w": 433
+    },
+    {
+      "stem": "patient0217_4CH_ED",
+      "path": "frames/patient0217_4CH_ED.png",
+      "sha256": "873accbb99e9bd8c1c20b93a410db874e803cf533ef6c220b8f0d91a49616a4b",
+      "dataset": "camus",
+      "view": "4CH",
+      "instant": "ED",
+      "case_id": "patient0217",
+      "image_h": 552,
+      "image_w": 669
+    },
+    {
+      "stem": "patient0217_4CH_ES",
+      "path": "frames/patient0217_4CH_ES.png",
+      "sha256": "220e9790834038c11475fa65e8ce3b52e8cadfdea72c169868afb861297baccf",
+      "dataset": "camus",
+      "view": "4CH",
+      "instant": "ES",
+      "case_id": "patient0217",
+      "image_h": 552,
+      "image_w": 669
+    },
+    {
+      "stem": "patient0219_4CH_ED",
+      "path": "frames/patient0219_4CH_ED.png",
+      "sha256": "65c6d7029abb5c681adc7cccb3466805154354ec434c0bef48a63f6970290dd7",
+      "dataset": "camus",
+      "view": "4CH",
+      "instant": "ED",
+      "case_id": "patient0219",
+      "image_h": 552,
+      "image_w": 669
+    },
+    {
+      "stem": "patient0219_4CH_ES",
+      "path": "frames/patient0219_4CH_ES.png",
+      "sha256": "8af572927d6053356bd7467dd090d868efb7538cfe699093498d9f0a860b4340",
+      "dataset": "camus",
+      "view": "4CH",
+      "instant": "ES",
+      "case_id": "patient0219",
+      "image_h": 552,
+      "image_w": 669
+    },
+    {
+      "stem": "patient0234_2CH_ED",
+      "path": "frames/patient0234_2CH_ED.png",
+      "sha256": "8864896c8f7f570e6f8fea42abea008b429b876e476b70eeb9e893b32598b47b",
+      "dataset": "camus",
+      "view": "2CH",
+      "instant": "ED",
+      "case_id": "patient0234",
+      "image_h": 616,
+      "image_w": 747
+    },
+    {
+      "stem": "patient0234_2CH_ES",
+      "path": "frames/patient0234_2CH_ES.png",
+      "sha256": "8cf6b5455e2c2da6b5818fc1ed15e27b10401900b26b4a78f92c4422f1f944de",
+      "dataset": "camus",
+      "view": "2CH",
+      "instant": "ES",
+      "case_id": "patient0234",
+      "image_h": 616,
+      "image_w": 747
+    },
+    {
+      "stem": "patient0243_2CH_ED",
+      "path": "frames/patient0243_2CH_ED.png",
+      "sha256": "957321032d820bb2f7efaf9e698c1c9b9f495c6e2b13d532ae843d4f194d596e",
+      "dataset": "camus",
+      "view": "2CH",
+      "instant": "ED",
+      "case_id": "patient0243",
+      "image_h": 519,
+      "image_w": 630
+    },
+    {
+      "stem": "patient0243_2CH_ES",
+      "path": "frames/patient0243_2CH_ES.png",
+      "sha256": "b3118a45af93e58cab66200c9e69b97114f572c7a3b9821fd173711976e5f2df",
+      "dataset": "camus",
+      "view": "2CH",
+      "instant": "ES",
+      "case_id": "patient0243",
+      "image_h": 519,
+      "image_w": 630
+    },
+    {
+      "stem": "patient0251_2CH_ED",
+      "path": "frames/patient0251_2CH_ED.png",
+      "sha256": "6e5858d23d9144f3f1fae10b90e6377cb233bfbac8edbec73ca7150a58792a81",
+      "dataset": "camus",
+      "view": "2CH",
+      "instant": "ED",
+      "case_id": "patient0251",
+      "image_h": 454,
+      "image_w": 551
+    },
+    {
+      "stem": "patient0251_2CH_ES",
+      "path": "frames/patient0251_2CH_ES.png",
+      "sha256": "1c5373956253a5f6de883aabc5320e1b235243d62a88712a61ff8e8308153f76",
+      "dataset": "camus",
+      "view": "2CH",
+      "instant": "ES",
+      "case_id": "patient0251",
+      "image_h": 454,
+      "image_w": 551
+    },
+    {
+      "stem": "patient0258_4CH_ED",
+      "path": "frames/patient0258_4CH_ED.png",
+      "sha256": "0bef40e609cd408bcdd024d751a2b813426be019a00f19f22d0d55936b9bd2c0",
+      "dataset": "camus",
+      "view": "4CH",
+      "instant": "ED",
+      "case_id": "patient0258",
+      "image_h": 552,
+      "image_w": 669
+    },
+    {
+      "stem": "patient0258_4CH_ES",
+      "path": "frames/patient0258_4CH_ES.png",
+      "sha256": "5fc1cb25b9bd1f96e54eef8a097d522228f29fb961746c45176e2d92fc0a3955",
+      "dataset": "camus",
+      "view": "4CH",
+      "instant": "ES",
+      "case_id": "patient0258",
+      "image_h": 552,
+      "image_w": 669
+    },
+    {
+      "stem": "patient0262_2CH_ED",
+      "path": "frames/patient0262_2CH_ED.png",
+      "sha256": "6fe8dcd4eb74411c10aa02be7535e4acf44a6f77af59951b98772048185ba8dc",
+      "dataset": "camus",
+      "view": "2CH",
+      "instant": "ED",
+      "case_id": "patient0262",
+      "image_h": 487,
+      "image_w": 590
+    },
+    {
+      "stem": "patient0262_2CH_ES",
+      "path": "frames/patient0262_2CH_ES.png",
+      "sha256": "1a84a6445cc225604623c1f9e4cb4f36d7c0ce02f7314f61c8e3ac1c76d232a5",
+      "dataset": "camus",
+      "view": "2CH",
+      "instant": "ES",
+      "case_id": "patient0262",
+      "image_h": 487,
+      "image_w": 590
+    },
+    {
+      "stem": "patient0273_2CH_ED",
+      "path": "frames/patient0273_2CH_ED.png",
+      "sha256": "6a6e06bab34c1b60fef3ae8c6558499d965d21c70a4697f2da988a29731a07c5",
+      "dataset": "camus",
+      "view": "2CH",
+      "instant": "ED",
+      "case_id": "patient0273",
+      "image_h": 292,
+      "image_w": 354
+    },
+    {
+      "stem": "patient0273_2CH_ES",
+      "path": "frames/patient0273_2CH_ES.png",
+      "sha256": "161f90e726046352ffd95f967e41c2acab780530f5bf53f17f0ce34865286b22",
+      "dataset": "camus",
+      "view": "2CH",
+      "instant": "ES",
+      "case_id": "patient0273",
+      "image_h": 292,
+      "image_w": 354
+    }
+  ],
+  "cases": [
+    {
+      "case_id": "echonet_0X171FD888481D524D",
+      "dataset": "echonet",
+      "view": "4CH",
+      "ed_stem": "echonet_0X171FD888481D524D_4CH_ED",
+      "es_stem": "echonet_0X171FD888481D524D_4CH_ES"
+    },
+    {
+      "case_id": "echonet_0X23DF57D03E5E2F9B",
+      "dataset": "echonet",
+      "view": "4CH",
+      "ed_stem": "echonet_0X23DF57D03E5E2F9B_4CH_ED",
+      "es_stem": "echonet_0X23DF57D03E5E2F9B_4CH_ES"
+    },
+    {
+      "case_id": "echonet_0X36CCD2D8878BA51D",
+      "dataset": "echonet",
+      "view": "4CH",
+      "ed_stem": "echonet_0X36CCD2D8878BA51D_4CH_ED",
+      "es_stem": "echonet_0X36CCD2D8878BA51D_4CH_ES"
+    },
+    {
+      "case_id": "echonet_0X3A76AD5CC9D50E57",
+      "dataset": "echonet",
+      "view": "4CH",
+      "ed_stem": "echonet_0X3A76AD5CC9D50E57_4CH_ED",
+      "es_stem": "echonet_0X3A76AD5CC9D50E57_4CH_ES"
+    },
+    {
+      "case_id": "echonet_0X3EA9C5F8DCDD2DEC",
+      "dataset": "echonet",
+      "view": "4CH",
+      "ed_stem": "echonet_0X3EA9C5F8DCDD2DEC_4CH_ED",
+      "es_stem": "echonet_0X3EA9C5F8DCDD2DEC_4CH_ES"
+    },
+    {
+      "case_id": "echonet_0X73D50DE693F798E3",
+      "dataset": "echonet",
+      "view": "4CH",
+      "ed_stem": "echonet_0X73D50DE693F798E3_4CH_ED",
+      "es_stem": "echonet_0X73D50DE693F798E3_4CH_ES"
+    },
+    {
+      "case_id": "echonet_0X7A4ABCBDD9D9F33A",
+      "dataset": "echonet",
+      "view": "4CH",
+      "ed_stem": "echonet_0X7A4ABCBDD9D9F33A_4CH_ED",
+      "es_stem": "echonet_0X7A4ABCBDD9D9F33A_4CH_ES"
+    },
+    {
+      "case_id": "echonet_0X7CA10684E319705F",
+      "dataset": "echonet",
+      "view": "4CH",
+      "ed_stem": "echonet_0X7CA10684E319705F_4CH_ED",
+      "es_stem": "echonet_0X7CA10684E319705F_4CH_ES"
+    },
+    {
+      "case_id": "echonet_0XB72CF150368BAB2",
+      "dataset": "echonet",
+      "view": "4CH",
+      "ed_stem": "echonet_0XB72CF150368BAB2_4CH_ED",
+      "es_stem": "echonet_0XB72CF150368BAB2_4CH_ES"
+    },
+    {
+      "case_id": "patient0047",
+      "dataset": "camus",
+      "view": "4CH",
+      "ed_stem": "patient0047_4CH_ED",
+      "es_stem": "patient0047_4CH_ES"
+    },
+    {
+      "case_id": "patient0047",
+      "dataset": "camus",
+      "view": "2CH",
+      "ed_stem": "patient0047_2CH_ED",
+      "es_stem": "patient0047_2CH_ES"
+    },
+    {
+      "case_id": "patient0051",
+      "dataset": "camus",
+      "view": "2CH",
+      "ed_stem": "patient0051_2CH_ED",
+      "es_stem": "patient0051_2CH_ES"
+    },
+    {
+      "case_id": "patient0189",
+      "dataset": "camus",
+      "view": "2CH",
+      "ed_stem": "patient0189_2CH_ED",
+      "es_stem": "patient0189_2CH_ES"
+    },
+    {
+      "case_id": "patient0191",
+      "dataset": "camus",
+      "view": "4CH",
+      "ed_stem": "patient0191_4CH_ED",
+      "es_stem": "patient0191_4CH_ES"
+    },
+    {
+      "case_id": "patient0194",
+      "dataset": "camus",
+      "view": "4CH",
+      "ed_stem": "patient0194_4CH_ED",
+      "es_stem": "patient0194_4CH_ES"
+    },
+    {
+      "case_id": "patient0197",
+      "dataset": "camus",
+      "view": "4CH",
+      "ed_stem": "patient0197_4CH_ED",
+      "es_stem": "patient0197_4CH_ES"
+    },
+    {
+      "case_id": "patient0215",
+      "dataset": "camus",
+      "view": "4CH",
+      "ed_stem": "patient0215_4CH_ED",
+      "es_stem": "patient0215_4CH_ES"
+    },
+    {
+      "case_id": "patient0217",
+      "dataset": "camus",
+      "view": "4CH",
+      "ed_stem": "patient0217_4CH_ED",
+      "es_stem": "patient0217_4CH_ES"
+    },
+    {
+      "case_id": "patient0219",
+      "dataset": "camus",
+      "view": "4CH",
+      "ed_stem": "patient0219_4CH_ED",
+      "es_stem": "patient0219_4CH_ES"
+    },
+    {
+      "case_id": "patient0234",
+      "dataset": "camus",
+      "view": "2CH",
+      "ed_stem": "patient0234_2CH_ED",
+      "es_stem": "patient0234_2CH_ES"
+    },
+    {
+      "case_id": "patient0243",
+      "dataset": "camus",
+      "view": "2CH",
+      "ed_stem": "patient0243_2CH_ED",
+      "es_stem": "patient0243_2CH_ES"
+    },
+    {
+      "case_id": "patient0251",
+      "dataset": "camus",
+      "view": "2CH",
+      "ed_stem": "patient0251_2CH_ED",
+      "es_stem": "patient0251_2CH_ES"
+    },
+    {
+      "case_id": "patient0258",
+      "dataset": "camus",
+      "view": "4CH",
+      "ed_stem": "patient0258_4CH_ED",
+      "es_stem": "patient0258_4CH_ES"
+    },
+    {
+      "case_id": "patient0262",
+      "dataset": "camus",
+      "view": "2CH",
+      "ed_stem": "patient0262_2CH_ED",
+      "es_stem": "patient0262_2CH_ES"
+    },
+    {
+      "case_id": "patient0273",
+      "dataset": "camus",
+      "view": "2CH",
+      "ed_stem": "patient0273_2CH_ED",
+      "es_stem": "patient0273_2CH_ES"
+    }
+  ],
+  "sha256": "68f59cf6f04e7429a34f25ad9f29d0efe4f49e49b950a5a195ae1e9ea187bf22"
+}

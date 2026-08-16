@@ -1,0 +1,7 @@
+run_file,output_dir,learning_rate,num_train_epochs,batch_size,lr_scheduler,total_metric_records,train/loss_last,train/loss_min,eval/loss_last,eval/loss_min,eval/mean_token_accuracy_last,eval/mean_token_accuracy_min
+events.out.tfevents.1770456721.15f3a867024b.5912.0,/content/drive/MyDrive/ATRIA-G3/output,0.0002,3,2,linear,933,0.1854,0.1829,0.1933,0.1932,0.9211,0.8614
+events.out.tfevents.1771930286.938c31f14087.16817.0,/content/drive/MyDrive/ATRIA-G3/output_camus,1e-05,3,2,linear,336,0.7444,0.7444,0.7519,0.7519,0.7898,0.6343
+events.out.tfevents.1771950289.0b5e3829cdda.1883.0,/content/drive/MyDrive/ATRIA-G3/output_camus,0.0002,8,2,linear,830,0.3813,0.3793,0.3895,0.3895,0.8399,0.7593
+events.out.tfevents.1776098432.e18ce739cf4e.13621.0,/content/drive/MyDrive/ATRIA-G3/output_20K,0.0001,3,2,linear,2574,0.205,0.205,0.2178,0.2178,0.9103,0.6328
+events.out.tfevents.1776294211.15e97987a4b5.21254.0,/content/drive/MyDrive/ATRIA-G3/output_20K-blackwell,0.0001,5,4,linear,2859,0.1959,0.1918,0.2052,0.2046,0.9161,0.6503
+events.out.tfevents.1776410801.613f842a7ad8.13245.0,/content/drive/MyDrive/ATRIA-G3/output_CAMUS-32LoRA-blackwell,0.0001,5,4,linear,285,0.2528,0.2496,0.2586,0.2586,0.8948,0.8454

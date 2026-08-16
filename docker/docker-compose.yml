@@ -1,0 +1,96 @@
+# =============================================================================
+#  ATRIA EchoTrace - Docker Compose
+#
+#    docker compose -f docker/docker-compose.yml up review
+#        Review tier only. Small, fast, no model weights. Opens on :8000.
+#
+#    docker compose -f docker/docker-compose.yml --profile ai up ai
+#        Adds local MedGemma 1.5 inference on CPU.
+#
+#    docker compose -f docker/docker-compose.yml --profile ai-gpu up ai-gpu
+#        Same, on an NVIDIA GPU (needs the NVIDIA Container Toolkit).
+#
+#  The gated MedGemma weights are NOT baked into the image. They are read from
+#  the host Hugging Face cache mounted at /hf-cache, so a cache populated by
+#  `hf download google/medgemma-1.5-4b-it` is reused rather than re-downloaded.
+#  Set HF_TOKEN in the environment (or a .env file beside this one) to let the
+#  container fetch gated repositories itself.
+# =============================================================================
+name: atria-echotrace
+
+x-common: &common
+  build:
+    context: ..
+    dockerfile: docker/Dockerfile
+  ports:
+    - "${ATRIA_PORT:-8000}:8000"
+  volumes:
+    # Dataset is mounted read-only: the application never writes to it.
+    - ../sample-dataset:/data/sample-dataset:ro
+    - atria-outputs:/outputs
+  environment:
+    ATRIA_DATASET_DIR: /data/sample-dataset
+    ATRIA_OUTPUT_DIR: /outputs
+    ATRIA_LOG_LEVEL: ${ATRIA_LOG_LEVEL:-INFO}
+  restart: unless-stopped
+
+services:
+  review:
+    <<: *common
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+      target: review
+    container_name: atria-review
+
+  ai:
+    <<: *common
+    profiles: ["ai"]
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+      target: ai
+    container_name: atria-ai
+    volumes:
+      - ../sample-dataset:/data/sample-dataset:ro
+      - atria-outputs:/outputs
+      - ${HF_CACHE_DIR:-~/.cache/huggingface}:/hf-cache
+    environment:
+      ATRIA_DATASET_DIR: /data/sample-dataset
+      ATRIA_OUTPUT_DIR: /outputs
+      ATRIA_LOG_LEVEL: ${ATRIA_LOG_LEVEL:-INFO}
+      HF_HOME: /hf-cache
+      HF_TOKEN: ${HF_TOKEN:-}
+      # CPU inference of a 4-B vision-language model takes minutes per frame.
+      ATRIA_FORCE_CPU: "1"
+
+  ai-gpu:
+    <<: *common
+    profiles: ["ai-gpu"]
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+      target: ai
+      args:
+        TORCH_INDEX: https://download.pytorch.org/whl/cu126
+    container_name: atria-ai-gpu
+    volumes:
+      - ../sample-dataset:/data/sample-dataset:ro
+      - atria-outputs:/outputs
+      - ${HF_CACHE_DIR:-~/.cache/huggingface}:/hf-cache
+    environment:
+      ATRIA_DATASET_DIR: /data/sample-dataset
+      ATRIA_OUTPUT_DIR: /outputs
+      ATRIA_LOG_LEVEL: ${ATRIA_LOG_LEVEL:-INFO}
+      HF_HOME: /hf-cache
+      HF_TOKEN: ${HF_TOKEN:-}
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+
+volumes:
+  atria-outputs:

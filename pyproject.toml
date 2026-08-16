@@ -1,0 +1,81 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "atria-echotrace"
+version = "1.0.0"
+description = "ATRIA EchoTrace — MedGemma-driven echocardiographic contour tracing with human-in-the-loop revision"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "Apache-2.0" }
+authors = [{ name = "S. Anwer", email = "shehab.anwer@gmail.com" }]
+keywords = ["echocardiography", "medgemma", "lora", "contour-tracing", "human-in-the-loop"]
+
+# Review tier: everything except model inference. Installs fast on any machine.
+dependencies = [
+    "fastapi>=0.115",
+    "uvicorn[standard]>=0.30",
+    "pydantic>=2.7",
+    "pydantic-settings>=2.3",
+    "python-multipart>=0.0.9",
+    "pillow>=10.3",
+    "numpy>=1.26",
+    "matplotlib>=3.8",
+    "scikit-image>=0.22",
+    "pandas>=2.2",
+]
+
+[project.optional-dependencies]
+# AI tier: local MedGemma 1.5 4B + LoRA inference, training and evaluation.
+ai = [
+    "torch>=2.4",
+    "transformers>=5.0",
+    "peft>=0.19",
+    "accelerate>=1.0",
+    "bitsandbytes>=0.46.1; platform_system != 'Darwin'",
+    "huggingface-hub>=0.34",
+    "datasets>=3.0",
+    "trl>=0.12",
+]
+# Raw dataset importers. These are the dependencies of the vendored reference
+# preprocessors in data/ingest/reference/ — SimpleITK reads CAMUS NIfTI, OpenCV
+# decodes EchoNet AVI. Kept out of the base install: the application never needs
+# them to serve, only to regenerate a dataset from raw sources.
+ingest = [
+    "SimpleITK>=2.3",
+    "opencv-python-headless>=4.9",
+]
+dev = [
+    "pytest>=8.0",
+    "httpx>=0.27",
+]
+
+[project.scripts]
+atria = "atria_echotrace.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/The-Adimension/ATRIA-EchoTrace"
+Adapters = "https://huggingface.co/The-Adimension"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+atria_echotrace = [
+    "web/*.html",
+    "web/css/*.css",
+    "web/js/*.js",
+    "web/vendor/*.js",
+    "web/fonts/*.woff2",
+    "data/ingest/reference/README.md",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = [
+    "model: exercises real MedGemma weights (slow; needs the [ai] extra and cached weights)",
+    "adapter: additionally needs the LoRA adapters (local checkpoints under adapters/, or a token)",
+    "ingest: needs the [ingest] extra (SimpleITK / OpenCV)",
+]
+filterwarnings = ["ignore::DeprecationWarning"]

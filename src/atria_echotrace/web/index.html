@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="dark" />
+    <title>ATRIA EchoTrace — Contour Tracing Workstation</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230b1220'/%3E%3Cpath d='M16 26C10 21 5 17 5 12.5A5.5 5.5 0 0 1 16 9a5.5 5.5 0 0 1 11 3.5C27 17 22 21 16 26Z' fill='none' stroke='%2322d3ee' stroke-width='2'/%3E%3C/svg%3E" />
+    <link rel="stylesheet" href="/css/atria.css" />
+    <!--
+      Buildless ES-module setup. The import map resolves the bare specifiers used by
+      the vendored Preact runtime, which is committed under /vendor so the application
+      runs with no network access to third-party origins (see RESEARCH.md §4.2).
+    -->
+    <script type="importmap">
+      {
+        "imports": {
+          "preact": "/vendor/preact.module.js",
+          "preact/hooks": "/vendor/hooks.module.js",
+          "htm": "/vendor/htm.module.js"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div id="root">
+      <div class="boot">
+        <div class="boot__mark" aria-hidden="true"></div>
+        <p>Loading ATRIA EchoTrace…</p>
+      </div>
+    </div>
+    <noscript>
+      <div class="boot">
+        <p>
+          ATRIA EchoTrace requires JavaScript. The REST API remains available at
+          <code>/api/docs</code>.
+        </p>
+      </div>
+    </noscript>
+    <script type="module" src="/js/app.js"></script>
+  </body>
+</html>

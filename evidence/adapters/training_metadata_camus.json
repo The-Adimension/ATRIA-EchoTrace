@@ -1,0 +1,40 @@
+{
+  "adapter_path": "/content/drive/MyDrive/ATRIA-G3 (1)/output_CAMUS-32LoRA-blackwell",
+  "folder_name": "output_CAMUS-32LoRA-blackwell",
+  "extracted_at": "2026-07-09T17:37:54.848345",
+  "base_model": "google/medgemma-1.5-4b-it",
+  "r": 32,
+  "lora_alpha": 32,
+  "lora_dropout": 0.05,
+  "target_modules": "{'o_proj', 'q_proj', 'v_proj', 'gate_proj', 'up_proj', 'out_proj', 'fc1', 'down_proj', 'fc2', 'k_proj'}",
+  "peft_type": "PeftType.LORA",
+  "per_device_train_batch_size": 4,
+  "gradient_accumulation_steps": 16,
+  "learning_rate": 0.0001,
+  "num_train_epochs": 5,
+  "tensorboard_metrics": {
+    "train/loss": {
+      "final": 0.25276103615760803,
+      "min": 0.24957141280174255,
+      "max": 1.4939714670181274,
+      "count": 25
+    },
+    "eval/loss": {
+      "final": 0.2586367130279541,
+      "min": 0.2586367130279541,
+      "max": 0.4752195477485657,
+      "count": 13
+    },
+    "train/learning_rate": {
+      "final": 8.264462962870311e-07,
+      "min": 8.264462962870311e-07,
+      "max": 9.999999747378752e-05,
+      "count": 25
+    }
+  },
+  "actual_learning_rate": 8.264462962870311e-07,
+  "adapter_size_mb": 2707.61,
+  "train_sample_size": null,
+  "sample_size_method": null,
+  "sample_size_confidence": "low"
+}

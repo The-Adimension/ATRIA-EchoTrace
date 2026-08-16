@@ -1,0 +1,183 @@
+[
+  {
+    "file": "events.out.tfevents.1770456721.15f3a867024b.5912.0",
+    "scalar_tags": [
+      "train/loss",
+      "train/grad_norm",
+      "train/learning_rate",
+      "train/entropy",
+      "train/num_tokens",
+      "train/mean_token_accuracy",
+      "train/epoch",
+      "eval/loss",
+      "eval/runtime",
+      "eval/samples_per_second",
+      "eval/steps_per_second",
+      "eval/entropy",
+      "eval/num_tokens",
+      "eval/mean_token_accuracy",
+      "train/train_runtime",
+      "train/train_samples_per_second",
+      "train/train_steps_per_second",
+      "train/total_flos",
+      "train/train_loss"
+    ],
+    "tensor_tags": [
+      "args/text_summary",
+      "model_config/text_summary"
+    ],
+    "text_tags": [],
+    "histogram_tags": [],
+    "total_extracted_records": 935
+  },
+  {
+    "file": "events.out.tfevents.1771930286.938c31f14087.16817.0",
+    "scalar_tags": [
+      "train/loss",
+      "train/grad_norm",
+      "train/learning_rate",
+      "train/entropy",
+      "train/num_tokens",
+      "train/mean_token_accuracy",
+      "train/epoch",
+      "eval/loss",
+      "eval/runtime",
+      "eval/samples_per_second",
+      "eval/steps_per_second",
+      "eval/entropy",
+      "eval/num_tokens",
+      "eval/mean_token_accuracy",
+      "train/train_runtime",
+      "train/train_samples_per_second",
+      "train/train_steps_per_second",
+      "train/total_flos",
+      "train/train_loss"
+    ],
+    "tensor_tags": [
+      "args/text_summary",
+      "model_config/text_summary"
+    ],
+    "text_tags": [],
+    "histogram_tags": [],
+    "total_extracted_records": 338
+  },
+  {
+    "file": "events.out.tfevents.1771950289.0b5e3829cdda.1883.0",
+    "scalar_tags": [
+      "train/loss",
+      "train/grad_norm",
+      "train/learning_rate",
+      "train/entropy",
+      "train/num_tokens",
+      "train/mean_token_accuracy",
+      "train/epoch",
+      "eval/loss",
+      "eval/runtime",
+      "eval/samples_per_second",
+      "eval/steps_per_second",
+      "eval/entropy",
+      "eval/num_tokens",
+      "eval/mean_token_accuracy",
+      "train/train_runtime",
+      "train/train_samples_per_second",
+      "train/train_steps_per_second",
+      "train/total_flos",
+      "train/train_loss"
+    ],
+    "tensor_tags": [
+      "args/text_summary",
+      "model_config/text_summary"
+    ],
+    "text_tags": [],
+    "histogram_tags": [],
+    "total_extracted_records": 832
+  },
+  {
+    "file": "events.out.tfevents.1776098432.e18ce739cf4e.13621.0",
+    "scalar_tags": [
+      "train/loss",
+      "train/grad_norm",
+      "train/learning_rate",
+      "train/entropy",
+      "train/num_tokens",
+      "train/mean_token_accuracy",
+      "train/epoch",
+      "eval/loss",
+      "eval/runtime",
+      "eval/samples_per_second",
+      "eval/steps_per_second",
+      "eval/entropy",
+      "eval/num_tokens",
+      "eval/mean_token_accuracy"
+    ],
+    "tensor_tags": [
+      "args/text_summary",
+      "model_config/text_summary"
+    ],
+    "text_tags": [],
+    "histogram_tags": [],
+    "total_extracted_records": 2576
+  },
+  {
+    "file": "events.out.tfevents.1776294211.15e97987a4b5.21254.0",
+    "scalar_tags": [
+      "train/loss",
+      "train/grad_norm",
+      "train/learning_rate",
+      "train/entropy",
+      "train/num_tokens",
+      "train/mean_token_accuracy",
+      "train/epoch",
+      "eval/loss",
+      "eval/runtime",
+      "eval/samples_per_second",
+      "eval/steps_per_second",
+      "eval/entropy",
+      "eval/num_tokens",
+      "eval/mean_token_accuracy",
+      "train/train_runtime",
+      "train/train_samples_per_second",
+      "train/train_steps_per_second",
+      "train/total_flos",
+      "train/train_loss"
+    ],
+    "tensor_tags": [
+      "args/text_summary",
+      "model_config/text_summary"
+    ],
+    "text_tags": [],
+    "histogram_tags": [],
+    "total_extracted_records": 2861
+  },
+  {
+    "file": "events.out.tfevents.1776410801.613f842a7ad8.13245.0",
+    "scalar_tags": [
+      "train/loss",
+      "train/grad_norm",
+      "train/learning_rate",
+      "train/entropy",
+      "train/num_tokens",
+      "train/mean_token_accuracy",
+      "train/epoch",
+      "eval/loss",
+      "eval/runtime",
+      "eval/samples_per_second",
+      "eval/steps_per_second",
+      "eval/entropy",
+      "eval/num_tokens",
+      "eval/mean_token_accuracy",
+      "train/train_runtime",
+      "train/train_samples_per_second",
+      "train/train_steps_per_second",
+      "train/total_flos",
+      "train/train_loss"
+    ],
+    "tensor_tags": [
+      "args/text_summary",
+      "model_config/text_summary"
+    ],
+    "text_tags": [],
+    "histogram_tags": [],
+    "total_extracted_records": 287
+  }
+]

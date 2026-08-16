@@ -1,0 +1,1 @@
+"""Figure and overlay rendering."""

@@ -1,0 +1,40 @@
+{
+  "adapter_path": "/content/drive/MyDrive/ATRIA-G3 (1)/output_20K-blackwell",
+  "folder_name": "output_20K-blackwell",
+  "extracted_at": "2026-07-09T17:37:54.755292",
+  "base_model": "google/medgemma-1.5-4b-it",
+  "r": 32,
+  "lora_alpha": 32,
+  "lora_dropout": 0.05,
+  "target_modules": "{'o_proj', 'q_proj', 'v_proj', 'gate_proj', 'up_proj', 'out_proj', 'fc1', 'down_proj', 'fc2', 'k_proj'}",
+  "peft_type": "PeftType.LORA",
+  "per_device_train_batch_size": 4,
+  "gradient_accumulation_steps": 16,
+  "learning_rate": 0.0001,
+  "num_train_epochs": 5,
+  "tensorboard_metrics": {
+    "train/loss": {
+      "final": 0.19586166739463806,
+      "min": 0.19182223081588745,
+      "max": 1.6440675258636475,
+      "count": 259
+    },
+    "eval/loss": {
+      "final": 0.20524659752845764,
+      "min": 0.20464065670967102,
+      "max": 1.4489496946334839,
+      "count": 130
+    },
+    "train/learning_rate": {
+      "final": 7.961783410337375e-08,
+      "min": 7.961783410337375e-08,
+      "max": 9.999999747378752e-05,
+      "count": 259
+    }
+  },
+  "actual_learning_rate": 7.961783410337375e-08,
+  "adapter_size_mb": 2707.61,
+  "train_sample_size": 20000,
+  "sample_size_method": "folder_name",
+  "sample_size_confidence": "low"
+}

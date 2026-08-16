@@ -1,0 +1,51 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.12"]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+
+      - name: Install (review tier)
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[dev]" || pip install -e . pytest ruff
+
+      - name: Lint
+        run: ruff check src tests tools || true
+
+      - name: Test
+        # The AI tier and the full corpus are unavailable on CI; those tests skip themselves.
+        run: pytest -q -m "not real_data"
+
+      - name: Verify vendored preprocessors are byte-identical
+        run: |
+          python - <<'PY'
+          import hashlib, pathlib, sys
+          src = pathlib.Path("datasets/data_processing_scripts")
+          ven = pathlib.Path("src/atria_echotrace/data/ingest/reference")
+          bad = []
+          for name in ("preprocess_camus.py", "preprocess_echonet.py"):
+              a = hashlib.sha256((src / name).read_bytes()).hexdigest()
+              b = hashlib.sha256((ven / name).read_bytes()).hexdigest()
+              print(f"{name}: source {a[:16]} vendored {b[:16]} {'OK' if a == b else 'MISMATCH'}")
+              if a != b:
+                  bad.append(name)
+          sys.exit(1 if bad else 0)
+          PY

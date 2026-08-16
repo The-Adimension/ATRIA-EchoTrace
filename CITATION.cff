@@ -1,0 +1,75 @@
+cff-version: 1.2.0
+title: ATRIA EchoTrace
+message: >-
+  If you use this software or the released adapters, please cite the software and the
+  DEITY Principles Framework paper below. The underlying datasets carry their own
+  citation requirements — see the references section.
+type: software
+authors:
+  - family-names: Anwer
+    given-names: Shehab
+    name-suffix: MD
+    affiliation: The Adimension
+repository-code: https://github.com/The-Adimension/ATRIA-EchoTrace
+abstract: >-
+  ATRIA EchoTrace fine-tunes MedGemma 1.5 4B with QLoRA to emit the left-ventricular
+  endocardial border as an ordered JSON list of 30 boundary points normalised to a
+  [0, 1000] grid, rather than as a segmentation mask. Because the output is editable
+  structure, a clinician's correction can be captured and fed back as training data.
+  Research use only; not a cleared or approved medical device.
+keywords:
+  - echocardiography
+  - medical-imaging
+  - MedGemma
+  - QLoRA
+  - structured-output
+  - human-in-the-loop
+  - HAI-DEF
+license: Apache-2.0
+
+references:
+  - type: article
+    title: >-
+      The DEITY Principles Framework: Data, Ethics, Informatics, Technology, You
+    authors:
+      - family-names: Anwer
+        given-names: Shehab
+    journal: European Heart Journal — Imaging Methods and Practice
+    year: 2026
+    doi: 10.1093/ehjimp/qyaf038
+
+  - type: software
+    title: EchoTrace-MedGemma-CAMUS (LoRA adapter)
+    authors:
+      - family-names: Anwer
+        given-names: Shehab
+    doi: 10.57967/hf/9541
+    license: Apache-2.0
+
+  - type: software
+    title: EchoTrace-MedGemma-EchoNet (LoRA adapter)
+    authors:
+      - family-names: Anwer
+        given-names: Shehab
+    doi: 10.57967/hf/9540
+    license: Apache-2.0
+
+  - type: article
+    title: >-
+      Deep Learning for Segmentation Using an Open Large-Scale Dataset in
+      2D Echocardiography
+    authors:
+      - family-names: Leclerc
+        given-names: Sarah
+    journal: IEEE Transactions on Medical Imaging
+    year: 2019
+    notes: The CAMUS dataset, used under its own terms.
+
+  - type: article
+    title: Video-based AI for beat-to-beat assessment of cardiac function
+    authors:
+      - family-names: Ouyang
+        given-names: David
+    journal: Nature
+    year: 2020
+    notes: The EchoNet-Dynamic dataset, used under its own terms.
