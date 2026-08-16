@@ -56,3 +56,10 @@ datasets/classified_datasets/*
 # --- os ---------------------------------------------------------------------------
 .DS_Store
 Thumbs.db
+
+# --- internal strategy material -------------------------------------------------
+# showcase/ is published to the public web. The HAI-DEF strategy documents (executive
+# brief, competitive analysis, submission checklist, the draft reply to a named
+# individual) are internal and must never be served from it. Originals are retained
+# outside this repository.
+showcase/docs/
