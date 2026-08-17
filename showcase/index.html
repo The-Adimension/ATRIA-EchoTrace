@@ -137,6 +137,131 @@
   .steps pre{margin:6px 0 0;background:var(--ink);color:#e6edf3;border-radius:7px;
       padding:10px 13px;overflow-x:auto;font-size:12.5px;line-height:1.6}
 
+  /* response inspector */
+  .insp{border:1px solid var(--line);border-radius:10px;overflow:hidden;margin:1.5rem 0;
+      background:var(--bg)}
+  .insp-h{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;padding:10px 14px;
+      background:var(--bg-2);border-bottom:1px solid var(--line);
+      font:600 10.5px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+  .insp-h b{color:var(--ink);letter-spacing:.06em}
+  .insp-h .sp{margin-left:auto;color:var(--faint);font-weight:400}
+  .insp-flow{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0}
+  .insp-col{padding:14px;border-right:1px solid var(--line);min-width:0}
+  .insp-col:last-child{border-right:0}
+  .insp-col h4{margin:0 0 3px;font:700 10px var(--mono);letter-spacing:.16em;
+      text-transform:uppercase;color:var(--accent)}
+  .insp-col .sub{font-size:11.5px;color:var(--faint);margin-bottom:9px;display:block}
+  .insp pre{margin:0;background:var(--ink);color:#dfe7ef;border-radius:7px;padding:11px 12px;
+      font-size:11.5px;line-height:1.62;overflow:auto;max-height:230px;white-space:pre-wrap;
+      word-break:break-word}
+  .insp pre .pro{color:#9fb3c8;font-style:italic}
+  .insp pre .fen{color:#7d8b9c}
+  .insp pre .key{color:#7fd1a6}
+  .insp pre .num{color:#e6c07b}
+  .insp-note{padding:11px 14px;border-top:1px solid var(--line);background:var(--bg-2);
+      font-size:12.5px;color:var(--muted);line-height:1.55}
+  @media (max-width:860px){.insp-flow{grid-template-columns:1fr}
+    .insp-col{border-right:0;border-bottom:1px solid var(--line)}}
+
+  /* adapter config diff */
+  .cfg{border:1px solid var(--line);border-radius:10px;overflow:hidden;margin:1.3rem 0}
+  .cfg table{width:100%;border-collapse:collapse;font-size:13px;margin:0}
+  .cfg th{background:var(--bg-2);border-bottom:1px solid var(--line);padding:9px 12px;
+      text-align:left;font:700 10px var(--mono);letter-spacing:.14em;text-transform:uppercase;
+      color:var(--muted)}
+  .cfg td{padding:7px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+  .cfg td.k{font-family:var(--mono);font-size:12px;color:var(--muted);white-space:nowrap;width:26%}
+  .cfg td.v{font-family:var(--mono);font-size:12px;color:var(--ink);word-break:break-word}
+  .cfg tr.d td{background:#fdf6ec}
+  .cfg tr.o td{background:#f6f9fc}
+  .cfg .ord{display:block;font-family:var(--sans);font-size:11.5px;color:var(--faint);
+      margin-top:3px;font-style:italic}
+  .cfg tr.d td.k{color:var(--warn);font-weight:700}
+  .cfg td.a{color:var(--ref)} .cfg td.b{color:var(--accent)}
+  .cfg .cap{padding:9px 12px;background:var(--bg-2);border-top:1px solid var(--line);
+      font-size:12.5px;color:var(--muted)}
+
+  /* prompt / schema */
+  .pp{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px;margin:1.4rem 0}
+  .pp>div{border:1px solid var(--line);border-radius:9px;overflow:hidden;background:var(--bg);
+      min-width:0}
+  .pp h4{margin:0;padding:9px 13px;background:var(--bg-2);border-bottom:1px solid var(--line);
+      font:700 10.5px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+  .pp h4 b{color:var(--accent)}
+  .pp pre{margin:0;padding:12px 13px;font-size:11.5px;line-height:1.62;white-space:pre-wrap;
+      word-break:break-word;background:var(--bg);color:var(--body);max-height:none}
+  .pp mark{background:#fdf0d5;color:var(--ink);font-weight:600;padding:0 2px;border-radius:2px}
+  .pp .slot{color:var(--accent);font-weight:600}
+  @media (max-width:820px){.pp{grid-template-columns:minmax(0,1fr)}}
+
+  /* two-track handoff */
+  .trk{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;margin:1.4rem 0}
+  /* grid items default to min-width:auto, so an unbreakable <pre> would widen the page */
+  .trk>div{border:1px solid var(--line);border-radius:10px;padding:16px 18px;background:var(--bg);
+      min-width:0}
+  .trk li,.trk ol{min-width:0}
+  .trk .who{font:700 10px var(--mono);letter-spacing:.16em;text-transform:uppercase;
+      color:var(--accent);margin-bottom:6px}
+  .trk h4{margin:0 0 4px;font-size:17px;color:var(--ink)}
+  .trk .sub{font-size:13px;color:var(--muted);margin:0 0 12px}
+  .trk ol{margin:0;padding-left:18px;font-size:14px}
+  .trk li{margin-bottom:8px}
+  .trk pre{margin:6px 0 0;background:var(--ink);color:#e6edf3;border-radius:6px;
+      padding:8px 11px;font-size:12px;overflow-x:auto}
+  .trk .badge{display:inline-block;margin-top:10px}
+  @media (max-width:820px){.trk{grid-template-columns:minmax(0,1fr)}}
+
+  /* built in the open */
+  .open-list{border-top:1px solid var(--line);margin:1.3rem 0}
+  .open-list div{display:grid;grid-template-columns:210px 1fr;gap:18px;padding:13px 0;
+      border-bottom:1px solid var(--line);align-items:baseline}
+  .open-list b{font-size:14.5px;color:var(--ink)}
+  .open-list span{font-size:14px;color:var(--muted)}
+  .open-list .n{font:700 15px var(--mono);color:var(--pred)}
+  @media (max-width:640px){.open-list div{grid-template-columns:1fr;gap:4px}}
+  .stage{border:2px solid var(--accent);border-radius:12px;padding:22px 24px;margin:1.6rem 0;
+      background:linear-gradient(180deg,#f4f8fd,var(--bg))}
+  .stage p{margin:0;font-size:17px;line-height:1.6;color:var(--ink-2)}
+  .stage strong{color:var(--ink)}
+  .stage .sig{display:block;margin-top:12px;font:600 11px var(--mono);letter-spacing:.16em;
+      text-transform:uppercase;color:var(--accent)}
+
+  /* tiered assets */
+  .tier{font:700 10.5px var(--mono);letter-spacing:.18em;text-transform:uppercase;
+      color:var(--faint);margin:1.6rem 0 .7rem;padding-bottom:6px;border-bottom:1px solid var(--line)}
+  .explore{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px;margin:0 0 1.2rem}
+  .explore a{border:1.5px solid var(--accent);border-radius:10px;padding:16px 18px;background:#f4f8fd;
+      display:block;transition:background .15s}
+  .explore a:hover{background:#e8f1fb;text-decoration:none}
+  .explore b{display:block;font-size:16px;color:var(--ink);margin-bottom:4px}
+  .explore span{font-size:13.5px;color:var(--muted);display:block;line-height:1.5}
+  .refs{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:6px 20px;margin:0}
+  .refs a{display:block;padding:7px 0;font-size:14px;border-bottom:1px solid var(--line)}
+  .refs a span{display:block;font-size:12px;color:var(--faint)}
+
+  /* references */
+  /* references — plain flow, NOT grid: a grid container would put every child span
+     in its own cell, which stacks journal names and DOIs one word per line. */
+  .bib{margin:1.1rem 0 1.8rem;counter-reset:b}
+  .bib h3{margin:1.7rem 0 .4rem;font-size:15px;color:var(--ink)}
+  .bib ol{margin:0;padding:0;list-style:none}
+  .bib li{counter-increment:b;position:relative;padding:11px 0 11px 40px;
+      border-bottom:1px solid var(--line);font-size:14.5px;line-height:1.62}
+  .bib li::before{content:"[" counter(b) "]";position:absolute;left:0;top:11px;
+      font:600 12px var(--mono);color:var(--faint)}
+  .bib .t{color:var(--ink)}
+  .bib .v{color:var(--muted);font-style:italic}
+  .bib .d{font-family:var(--mono);font-size:12.5px;overflow-wrap:anywhere}
+  .bib .req{display:inline-block;font:700 9px var(--mono);letter-spacing:.1em;
+      text-transform:uppercase;color:#fff;background:var(--pred);border-radius:3px;
+      padding:2px 6px;margin-left:6px;vertical-align:2px;white-space:nowrap}
+  .bib .an{display:block;margin-top:5px;color:var(--muted);font-size:13.5px;font-style:normal}
+  .cite-box{border:1px solid var(--line);border-radius:9px;background:var(--bg-2);
+      padding:14px 16px;margin:1.1rem 0}
+  .cite-box pre{margin:8px 0 0;background:var(--ink);color:#e6edf3;border-radius:7px;
+      padding:11px 13px;font-size:12px;line-height:1.6;overflow-x:auto}
+  .contact{display:inline-block;font-family:var(--mono);font-size:13.5px}
+
   /* brand mark */
   .logo{width:1em;height:1em;display:inline-block;vertical-align:-.14em;flex:none}
   .brandline{display:flex;align-items:center;gap:12px;margin:0 0 18px;
@@ -395,7 +520,7 @@
     <h1>Teaching MedGemma to trace the heart</h1>
     <p class="lede">
       <strong>ATRIA EchoTrace</strong> — QLoRA fine-tuning of <strong>MedGemma 1.5 4B</strong> to emit the left-ventricular
-      endocardial border as an <strong>editable 30-point JSON polygon</strong> rather than an
+      endocardial border as an <strong>editable JSON polygon</strong> rather than an
       opaque segmentation mask — so a cardiologist can correct the model's proposal, and that
       correction becomes the next generation's training label.
     </p>
@@ -413,7 +538,8 @@
       <span class="pill">Research use only</span>
     </div>
     <p class="hero-meta"><strong>The Adimension</strong> · Shehab Anwer, MD ·
-       Implementing the DEITY Principles Framework</p>
+       Implementing the DEITY Principles Framework ·
+       <a href="mailto:atrium@theadimension.com" style="color:#9fc4ea">atrium@theadimension.com</a></p>
 
     <figure class="hero-vid">
       <video controls preload="none" playsinline poster="media/poster-explain.webp"
@@ -446,11 +572,14 @@
     <a href="https://colab.research.google.com/drive/1qofahQ8LztTrB_Us9j1Iyz2aYeS2_2rH?usp=sharing">Colab notebook</a>
     <a href="https://huggingface.co/collections/The-Adimension/atria-echotrace-6a5884b6c17ec3aab49d0875">Hugging Face adapters</a>
     <a href="#try">Try the editor</a>
+    <a href="#prompt">The prompt</a>
     <a href="gallery/index.html">200-frame gallery</a>
     <a href="#runs">Training record</a>
+    <a href="evidence/index.html">Evidence &amp; runs</a>
     <a href="#eval">Evaluation</a>
     <a href="#adapt">Make your own adapter</a>
     <a href="https://doi.org/10.1093/ehjimp/qyaf038">DEITY paper</a>
+    <a href="#open">Built in the open</a>
     <a href="#assets">All assets &darr;</a>
   </nav>
 
@@ -491,7 +620,7 @@
     </p>
   </section>
 
-  <h2 id="problem">1 · Why coordinates instead of a mask</h2>
+  <h2 id="problem">1 &middot; Why coordinates instead of a mask</h2>
   <p>
     Tracing the endocardial border is the most repeated manual act in echocardiography. Every
     ejection fraction and every volume measurement begins with a clinician drawing a line around
@@ -504,7 +633,7 @@
     they can only repaint it. And the disagreement is discarded, because there is no compact
     structure recording <em>"the model said here, the human said there."</em>
   </p>
-  <p>Reframing the output as an ordered list of 30 boundary points changes what the system can do:</p>
+  <p>Reframing the output as an ordered list of boundary coordinates changes what the system can do:</p>
 <pre><code>[{"polygon_2d": [[184, 496], [205, 490], [225, 486], ...],
   "label": "left_ventricle_endocardium"}]</code></pre>
   <p>
@@ -526,7 +655,83 @@
     both — and being open-weight, it can be adapted where the data already lives.
   </div>
 
-  <h2 id="try">2 · Try it — the correction loop, live</h2>
+
+  <h3>What one response actually looks like</h3>
+  <p>
+    That claim is easy to make and easy to check, so here is a verbatim generation: the corpus-median frame, nothing cleaned up.
+  </p>
+
+  <div class="insp">
+    <div class="insp-h"><b>patient0220_4CH_ED</b> &middot; 4CH &middot;
+      ED
+      <span class="sp">513 tokens in &middot; 355 out
+        &middot; 101s</span></div>
+    <div class="insp-flow">
+      <div class="insp-col">
+        <h4>1 &middot; The model writes</h4>
+        <span class="sub">raw, unedited output</span>
+        <pre><span class="pro">The left ventricle endocardial border traces the inner wall of the heart chamber.
+
+Final Answer:</span>
+
+<span class="fen">```json</span>
+[{&quot;polygon_2d&quot;: [[651, 481], [625, 458], [591, 441], [548, 431], [500, 425], [452, 421], [405, 417], [358, 411], [311, 408], [262, 406], [215, 411], [180, 425], [163, 454], [166, 491], [180, 523], [202, 550], [226, 575], [255, 596&hellip;
+<span class="fen">```</span></pre>
+      </div>
+      <div class="insp-col">
+        <h4>2 &middot; The parser reads</h4>
+        <span class="sub">fenced JSON extracted, schema checked</span>
+        <pre>label   <span class="key">left_ventricle_endocardium</span>
+points  <span class="num">31</span>
+bounds  <span class="num">all within [0, 1000]</span>
+closed  <span class="num">yes</span>
+self-intersects  <span class="num">no</span>
+
+first   [651, 481]
+last    [651, 481]</pre>
+      </div>
+      <div class="insp-col">
+        <h4>3 &middot; The clinician gets</h4>
+        <span class="sub">an editable contour, not pixels</span>
+        <pre>[[651, 481], [625, 458],
+ [591, 441], [548, 431],
+ [500, 425], &hellip;]
+
+median point-to-curve  <span class="num">4.98 mm</span>
+Dice vs training polygon  <span class="num">0.836</span></pre>
+      </div>
+    </div>
+    <div class="insp-note">
+      <strong>Note the prose.</strong> The model narrates before it answers, and wraps the payload
+      in a fenced block with a <code>label</code> field. Nothing downstream assumes otherwise: the
+      parser extracts the fence, validates the schema, checks bounds and tests for
+      self-intersection, and <em>fails loudly</em> rather than silently repairing a
+      malformed generation. Across the 200 held-out frames this succeeded
+      <strong>200 times out of 200</strong>.
+      All 200 raw responses ship in <a href="data/">the benchmark data</a>.
+    </div>
+  </div>
+
+  <h3>What the adapter actually does</h3>
+  <p>
+    On 200 held-out frames from 50 patients it had never seen, the fine-tuned model returned a
+    <strong>valid, in-bounds, editable polygon every single time</strong>. Not 199 of 200. Every
+    frame parsed, every coordinate landed inside the image, and 178 of the 200 contours came back
+    within one point of the target density. A 4-billion-parameter open-weight model, adapted in
+    128 minutes on one GPU, writing geometry a cardiologist can pick up and edit.
+  </p>
+  <p>
+    <strong>A note on how to read the accuracy numbers.</strong> Later sections report Dice
+    alongside our primary metric, because the segmentation literature reports Dice and comparison
+    is useful. But this is not a segmentation network, and reading 0.744 against a purpose-built
+    U-Net is a category error. A U-Net emits pixels; it has no mechanism for emitting a structure a
+    human can edit, and no way to record a correction. The question here was whether a
+    general-purpose vision-language model could produce clinically usable geometry <em>as
+    text</em>, reliably enough to put in front of a clinician. That question now has an answer,
+    with the error quantified frame by frame rather than asserted.
+  </p>
+
+  <h2 id="try">2 &middot; Try it — the correction loop, live</h2>
   <p>
     The argument above is that a coordinate output is <em>correctable</em>. Rather than assert it,
     here is a real held-out frame with the model's actual prediction on it. <strong>Drag any red
@@ -717,7 +922,87 @@
   })();
   </script>
 
-  <h2 id="pipeline">3 · End-to-end pipeline</h2>
+  <h2 id="prompt">3 &middot; The prompt is the schema</h2>
+  <p class="lede">
+    The page keeps saying &ldquo;the coordinate contract&rdquo;. It is worth being precise about
+    where that contract actually lives: <strong>it is the prompt</strong>. The output format, the
+    normalisation range, the fence, the key names: all of it is specified in natural
+    language, not in code.
+  </p>
+
+  <div class="pp">
+    <div>
+      <h4>Training &amp; evaluation &mdash; <b>conditioned</b></h4>
+      <pre>Instructions:
+The following user query will require outputting polygon
+coordinates for <span class="slot">{structure_name}</span> tracing. The format of
+polygon coordinates is [[y0, x0], [y1, x1], ...] where each
+point is [y, x] representing the boundary. Always normalize
+the x and y coordinates to the range [0, 1000], meaning that
+a point at 15% of the image width would be associated with an
+x coordinate of 150. You MUST output a single parseable json
+list of objects enclosed into ```json...``` brackets, for
+instance ```json[{"polygon_2d": [[100, 200], [150, 250]],
+"label": "<span class="slot">{structure_label}</span>"}]``` is a valid output.
+Now answer to the user query.
+
+Query:
+This is an apical <mark>{view_name}</mark> echocardiogram view
+<mark>at {instant_name}</mark>. Trace the <span class="slot">{structure_name}</span>.
+Output the final answer in the format "Final Answer: X"
+where X is a JSON list of objects with "polygon_2d" and
+"label" keys. Answer:</pre>
+    </div>
+    <div>
+      <h4>Generic &mdash; <b>unconditioned</b></h4>
+      <pre>Instructions:
+The following user query will require outputting polygon
+coordinates for <span class="slot">{structure_name}</span> tracing. The format of
+polygon coordinates is [[y0, x0], [y1, x1], ...] where each
+point is [y, x] representing the boundary. Always normalize
+the x and y coordinates to the range [0, 1000], meaning that
+a point at 15% of the image width would be associated with an
+x coordinate of 150. You MUST output a single parseable json
+list of objects enclosed into ```json...``` brackets, for
+instance ```json[{"polygon_2d": [[100, 200], [150, 250]],
+"label": "<span class="slot">{structure_label}</span>"}]``` is a valid output.
+Now answer to the user query.
+
+Query:
+This is an apical echocardiogram view. Trace the
+<span class="slot">{structure_name}</span>.
+Output the final answer in the format "Final Answer: X"
+where X is a JSON list of objects with "polygon_2d" and
+"label" keys. Answer:</pre>
+    </div>
+  </div>
+
+  <p>
+    The two templates are <strong>identical but for one clause</strong>. The training variant tells
+    the model <em>which acquisition window and which point in the cardiac cycle it is looking at</em>;
+    the generic variant does not. Every number published here was measured with the
+    <strong>training-matched</strong> prompt: the same string the fine-tuning saw. Serving a
+    fine-tuned adapter a prompt it was not trained on is a silent distribution shift, and it is the
+    easiest way to make a working adapter look broken.
+  </p>
+
+  <div class="note">
+    <strong>What the contract does <em>not</em> specify: how many points.</strong> There is no
+    &ldquo;30&rdquo; anywhere in the prompt, and no count constraint of any kind. Thirty is a
+    property of the <em>training targets</em>: the reference preprocessors resample each
+    expert contour to 30 index-uniform points. The model is free to emit any number, and does:
+    across the 200 held-out frames it produced <strong>29 to 53 points</strong>, exactly 30 on
+    80&nbsp;frames and 30&nbsp;or&nbsp;31 on 178. Nothing downstream assumes a count, a winding
+    direction, or an explicitly closed ring, because CAMUS and EchoNet disagree on all
+    three.
+  </div>
+
+  <p class="sup">
+    Both templates ship verbatim in
+    <code>src/atria_echotrace/ml/prompts.py</code>, transcribed from the notebook cells that
+    produced the adapters, with the source line numbers recorded in the module docstring.
+  </p>
+  <h2 id="pipeline">4 &middot; End-to-end pipeline</h2>
 <figure class="dfig">
   <svg viewBox="0 0 1000 430" role="img" aria-labelledby="pipeTitle pipeDesc" class="dia">
 <title id="pipeTitle">ATRIA EchoTrace end-to-end pipeline</title>
@@ -827,12 +1112,11 @@ closing the loop to retraining.</desc>
       <span>Executes without gated weights, so you can trace the whole flow before requesting
       adapter access.</span></div>
     <div><div class="n">Operate it</div><b>The CLI</b>
-      <span>Every stage independently enterable &mdash;
-      <code>ingest</code>, <code>classify</code>, <code>train</code>, <code>evaluate</code>,
+      <span>Every stage independently enterable: <code>ingest</code>, <code>classify</code>, <code>train</code>, <code>evaluate</code>,
       <code>export-corpus</code>, <code>publish-adapter</code>.</span></div>
   </div>
 
-  <h2 id="qlora">4 · The QLoRA configuration</h2>
+  <h2 id="qlora">5 &middot; The QLoRA configuration</h2>
   <p class="sup">
     Read directly from <code>adapter_config.json</code> and <code>training_args.bin</code>
     (a <code>trl.SFTConfig</code>, 134 fields) in the released checkpoints — not from notebook defaults.
@@ -864,7 +1148,7 @@ fc1  fc2  out_proj                  &lt;- SigLIP VISION-tower MLP + attention ou
     <code>fc1</code>, <code>fc2</code> and <code>out_proj</code> are vision-encoder modules.
     <strong>Adapting the visual tower — not just the language head — is what lets the model learn
     what an endocardial border looks like</strong> rather than only how to format an answer. It is
-    also precisely what the failure in §7 silently switched off.
+    also precisely what the failure in §8 silently switched off.
   </p>
 
   <h3>Training arguments</h3>
@@ -970,12 +1254,12 @@ fc1  fc2  out_proj                  &lt;- SigLIP VISION-tower MLP + attention ou
     keep bf16 even where it is emulated.
   </div>
 
-  <h2 id="runs">5 &middot; The training record &mdash; six runs, two datasets</h2>
+  <h2 id="runs">6 &middot; The training record: six runs, two datasets</h2>
   <p>
     The adapters are the output; this is the evidence that produced them. <strong>Six fine-tuning
     runs</strong> across <strong>two open datasets</strong> were logged to TensorBoard, and every
     event file, per-step CSV and generated plot ships in <code>ft_runs/</code>. The table and both
-    figures below are generated from those files &mdash; nothing is transcribed by hand.
+    figures below are generated from those files: nothing is transcribed by hand.
   </p>
 
   <div class="tbl-scroll">
@@ -1029,13 +1313,17 @@ fc1  fc2  out_proj                  &lt;- SigLIP VISION-tower MLP + attention ou
       rather than a restored best checkpoint.</figcaption>
   </figure>
 
-  <h3>5.1 The recipe was found, not guessed</h3>
+  <p class="sup">Every run's generated plots: loss, token accuracy, learning-rate
+    schedule, gradient norm, throughput: are browsable side by side in the
+    <a href="evidence/index.html">run explorer</a>.</p>
+
+  <h3>6.1 The recipe was found, not guessed</h3>
   <p>
     Three runs share the identical CAMUS training split, so they isolate one variable. Learning
-    rate <strong>1e-5</strong> never leaves the plateau &mdash; the model is still underfitting when
+    rate <strong>1e-5</strong> never leaves the plateau: the model is still underfitting when
     the schedule ends. <strong>2e-4</strong> over eight epochs learns, but stalls at
     <strong>0.390</strong>. <strong>1e-4</strong> over five epochs reaches
-    <strong>0.259</strong> &mdash; a better result in <strong>125 steps</strong> than eight epochs
+    <strong>0.259</strong>: a better result in <strong>125 steps</strong> than eight epochs
     achieved in 376, and in well under half the elapsed time.
   </p>
 
@@ -1071,15 +1359,39 @@ fc1  fc2  out_proj                  &lt;- SigLIP VISION-tower MLP + attention ou
       rather than a default.</figcaption>
   </figure>
 
-  <h3>5.2 The recipe transferred without retuning</h3>
+  <h3>6.2 The recipe transferred without retuning</h3>
   <p>
     Run&nbsp;6 and Run&nbsp;5 differ only in the data they were shown. Of the 134 fields in the
-    serialised <code>SFTConfig</code>, <strong>exactly two differ</strong> &mdash; the output and
+    serialised <code>SFTConfig</code>, <strong>exactly two differ</strong>: the output and
     logging directories. One is a <strong>1,600-frame</strong> corpus finishing in
     <strong>125 optimizer steps</strong>; the other is <strong>16,576 frames</strong> over
     <strong>1,295 steps</strong>, an order of magnitude larger. Both converge, and both finish at
     their minimum eval loss.
   </p>
+
+  <div class="cfg">
+    <table>
+      <thead><tr><th>adapter_config.json</th><th>CAMUS</th><th>EchoNet</th></tr></thead>
+      <tbody>
+                <tr><td class="k">r</td><td class="v" colspan="2">32</td></tr>
+        <tr><td class="k">lora_alpha</td><td class="v" colspan="2">32</td></tr>
+        <tr><td class="k">lora_dropout</td><td class="v" colspan="2">0.05</td></tr>
+        <tr class="o"><td class="k">target_modules</td><td class="v" colspan="2">down_proj fc1 fc2 gate_proj k_proj o_proj out_proj q_proj up_proj v_proj<span class="ord">same ten modules; PEFT serialises this from a set, so the order differs between files</span></td></tr>
+        <tr><td class="k">modules_to_save</td><td class="v" colspan="2">lm_head embed_tokens</td></tr>
+        <tr><td class="k">peft_type</td><td class="v" colspan="2">LORA</td></tr>
+        <tr><td class="k">task_type</td><td class="v" colspan="2">CAUSAL_LM</td></tr>
+        <tr><td class="k">bias</td><td class="v" colspan="2">none</td></tr>
+        <tr><td class="k">use_rslora</td><td class="v" colspan="2">false</td></tr>
+        <tr><td class="k">use_dora</td><td class="v" colspan="2">false</td></tr>
+        <tr><td class="k">base_model_name_or_path</td><td class="v" colspan="2">google/medgemma-1.5-4b-it</td></tr>
+        <tr class="d"><td class="k">peft_version</td><td class="v a">0.19.1</td><td class="v b">0.19.0</td></tr>
+      </tbody>
+    </table>
+    <div class="cap"><strong>37 of 38 fields identical.</strong>
+      The one that differs is highlighted: a version stamp, not a hyperparameter.
+      The full <code>SFTConfig</code> tells the same story: 132 of 134 fields match, and the two
+      that do not are the output and logging paths.</div>
+  </div>
   <div class="note">
     <strong>This is the transferability claim, and it is falsifiable.</strong> If the recipe only
     worked on the corpus it was tuned against, the larger run would have needed its own learning
@@ -1087,22 +1399,22 @@ fc1  fc2  out_proj                  &lt;- SigLIP VISION-tower MLP + attention ou
     archive, that is the difference between adopting a pipeline and restarting a search.
   </div>
 
-  <h3>5.3 What it actually costs</h3>
+  <h3>6.3 What it actually costs</h3>
   <p>
     The shipped CAMUS adapter took <strong>128 minutes</strong> of training on a
     single GPU. The larger EchoNet adapter took <strong>21.3 hours</strong>.
     Throughput roughly <strong>doubled</strong> between the early runs and the final two
-    &mdash; 0.66 to ~1.06 samples/second &mdash; when the per-device batch went from 2 to 4.
+    &mdash; 0.66 to ~1.06 samples/second: when the per-device batch went from 2 to 4.
   </p>
   <p>
     That matters more than it looks. A centre wanting to fit this to their own labelling
     conventions is not committing to a cluster or a multi-week programme; on a CAMUS-sized corpus
     they are committing to <strong>an afternoon</strong>. The five runs that logged a runtime total
-    <strong>36 hours</strong> between them &mdash; the entire search, dead ends included, on one
+    <strong>36 hours</strong> between them: the entire search, dead ends included, on one
     GPU.
   </p>
 
-  <h2 id="eval">6 · Evaluation — the gallery is the primary evidence</h2>
+  <h2 id="eval">7 &middot; Evaluation — the gallery is the primary evidence</h2>
   <p>
     <strong>Test set:</strong> the official CAMUS <code>subgroup_testing</code> split —
     <strong>50 patients, 200 frames</strong>, selected by the dataset authors' own split file and
@@ -1110,7 +1422,7 @@ fc1  fc2  out_proj                  &lt;- SigLIP VISION-tower MLP + attention ou
     double-quant, bf16 compute, training-matched prompt.
   </p>
 
-  <h3>6.1 Every prediction was rendered and reviewed</h3>
+  <h3>7.1 Every prediction was rendered and reviewed</h3>
   <p>
     All 200 predictions were drawn at native resolution and inspected — expert reference in green,
     model prediction in red, predicted vertices marked. The full filterable gallery ships with the
@@ -1207,7 +1519,7 @@ to 18.59 mm. Median 4.98 mm, interquartile range 3.37 to 7.52 mm.</desc>
 
   <p class="sup">
     <strong>The tail is the point.</strong> At rank 200 the model draws a well-formed ventricle in
-    the wrong place &mdash; correct point count, no self-intersection, confidently wrong. A scalar
+    the wrong place: correct point count, no self-intersection, confidently wrong. A scalar
     score hides that completely; this does not.
   </p>
 
@@ -1345,7 +1657,7 @@ to 18.59 mm. Median 4.98 mm, interquartile range 3.37 to 7.52 mm.</desc>
     raw model responses ship in the repository.
   </p>
 
-  <h3>6.2 Primary metric — point-to-curve distance</h3>
+  <h3>7.2 Primary metric — point-to-curve distance</h3>
   <p>
     The primary question for a coordinate-generating model is <em>"do the predicted points land on
     the expert tracing?"</em> That is point-to-curve distance: the shortest Euclidean distance from
@@ -1377,7 +1689,7 @@ to 18.59 mm. Median 4.98 mm, interquartile range 3.37 to 7.52 mm.</desc>
     stronger evidence of a sane model than any single headline number.
   </p>
 
-  <h3>6.3 Standard segmentation metrics (n = 200)</h3>
+  <h3>7.3 Standard segmentation metrics (n = 200)</h3>
   <p>
     For comparability with the segmentation literature, the predicted polygons were also rasterised
     and scored with the conventional battery. Two reference standards are reported separately and
@@ -1405,7 +1717,7 @@ to 18.59 mm. Median 4.98 mm, interquartile range 3.37 to 7.52 mm.</desc>
     than smoothing it.
   </p>
 
-  <h3>6.4 The representation is not the bottleneck</h3>
+  <h3>7.4 The representation is not the bottleneck</h3>
   <p>
     Before attributing error to the model we measured the <strong>discretisation ceiling</strong> —
     how much accuracy is lost purely by representing an expert mask as 30 index-uniform points. This
@@ -1433,9 +1745,76 @@ to 18.59 mm. Median 4.98 mm, interquartile range 3.37 to 7.52 mm.</desc>
     inserts a rasterisation step the model never performed.
   </div>
 
-  <h2 id="defect">7 · A silent failure mode worth your attention</h2>
-  <div class="note danger">
-    <strong>This is the part most likely to save another HAI-DEF developer a week.</strong>
+
+  <h3>7.5 View, image quality, and a confound worth naming</h3>
+  <p>
+    The 200 frames split evenly by view &mdash; 100 four-chamber, 100 two-chamber, and CAMUS
+    grades image quality <strong>per acquisition window, not per patient</strong>. In this test set
+    <strong>16 of 50 patients (32%)</strong> carry a different grade for their 2CH and 4CH studies,
+    so the two axes can be crossed honestly.
+  </p>
+
+  <div class="tbl-scroll">
+  <table>
+    <thead><tr><th>Median point-to-curve</th><th class="num">Good</th><th class="num">Medium</th>
+      <th class="num">Poor</th><th class="num">all</th></tr></thead>
+    <tbody>
+      <tr><td><b>4-chamber</b></td>
+        <td class="num"><b>4.53</b> <span style="color:var(--faint)">n=56</span></td>
+        <td class="num">6.27 <span style="color:var(--faint)">n=34</span></td>
+        <td class="num">6.60 <span style="color:var(--faint)">n=10</span></td>
+        <td class="num">4.76 <span style="color:var(--faint)">n=100</span></td></tr>
+      <tr><td><b>2-chamber</b></td>
+        <td class="num"><b>4.81</b> <span style="color:var(--faint)">n=38</span></td>
+        <td class="num">6.46 <span style="color:var(--faint)">n=42</span></td>
+        <td class="num">7.00 <span style="color:var(--faint)">n=20</span></td>
+        <td class="num">5.45 <span style="color:var(--faint)">n=100</span></td></tr>
+      <tr><td>all</td><td class="num">4.61 <span style="color:var(--faint)">n=94</span></td>
+        <td class="num">6.40 <span style="color:var(--faint)">n=76</span></td>
+        <td class="num">6.79 <span style="color:var(--faint)">n=30</span></td>
+        <td class="num">4.98 <span style="color:var(--faint)">n=200</span></td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p>
+    <strong>Acquisition quality costs the same in both windows.</strong> Good&nbsp;&rarr;&nbsp;Poor
+    is <strong>+2.07&nbsp;mm in 4CH</strong> and <strong>+2.19&nbsp;mm in 2CH</strong> &mdash;
+    <strong>+45.6% in each</strong>. View difficulty and image quality act independently; there is
+    no interaction between them. That is a statement about the <em>imaging</em>, not the model, and
+    it is actionable: a lab that improves its acquisition recovers roughly a third of the error,
+    whichever window it is working in.
+  </p>
+
+  <div class="note warn">
+    <strong>And a correction to our own earlier claim.</strong> We have reported that
+    &ldquo;two-chamber views are weaker&rdquo; &mdash; 5.45 against 4.76&nbsp;mm. The cross-tab
+    shows most of that is a <em>quality-mix confound</em>: 2CH carries <strong>twice</strong> the
+    Poor frames (20 vs 10) and far fewer Good (38 vs 56). Standardising both views onto the pooled
+    quality mix:
+    <br><br>
+    crude gap <b>+0.70&nbsp;mm</b> &nbsp;&rarr;&nbsp; quality-adjusted gap <b>+0.26&nbsp;mm</b>.
+    <br><br>
+    <strong>62% of the apparent view gap is the imaging, not the view.</strong> The genuine view
+    effect is small and consistent within every stratum (+0.28 / +0.19 / +0.40&nbsp;mm). The model
+    is more view-robust than our own headline number suggested, and the thing worth targeting
+    with further training is <strong>Poor-quality frames in both views</strong>, not two-chamber
+    imaging.
+  </div>
+
+  <p class="sup">
+    Computed from <code>data/pointwise.csv</code> joined to the per-view
+    <code>ImageQuality</code> field of each patient's CAMUS <code>Info_*.cfg</code>. Poor is
+    n&nbsp;=&nbsp;30 across both views, enough to state a direction and not a coefficient.
+  </p>
+
+  <h2 id="defect">8 &middot; A PEFT failure mode that never raises</h2>
+  <div class="note">
+    <strong>This was found, repaired, and is guarded by a regression test. Every number on this
+    page comes from the repaired adapter.</strong> It is written up because the failure is generic:
+    it belongs to how PEFT resolves module paths across a library upgrade, not to MedGemma, to
+    Gemma&nbsp;3, or to this project. If you have fine-tuned a vision tower and upgraded
+    <code>transformers</code> since, it is worth ten seconds of your time.
   </div>
   <p>
     The published adapters were trained when Gemma 3 nested the vision encoder as
@@ -1463,77 +1842,7 @@ assert status["fully_loaded"], status
     home — and never filter warnings out of a fine-tuning log.
   </p>
 
-  <h2 id="reuse">8 · What you can reuse tomorrow</h2>
-  <div class="reuse">
-    <h3>Components</h3>
-    <div class="tbl-scroll">
-    <table>
-      <thead><tr><th>Reusable</th><th>Where</th></tr></thead>
-      <tbody>
-        <tr><td><b>Normalised polygon contract</b> — <code>[y, x]</code> in <code>[0, 1000]</code>, resolution-independent</td><td><code>domain/geometry.py</code></td></tr>
-        <tr><td><b>Structured-output parsing that fails loudly</b> — fenced JSON, schema check, in-bounds and self-intersection validation</td><td><code>domain/geometry.py</code></td></tr>
-        <tr><td><b>Point-to-curve implementation</b> — validated against 5 known-answer geometric cases first</td><td><code>rescore_pointwise.py</code></td></tr>
-        <tr><td><b>Adapter-completeness check</b> — catches the §7 failure</td><td><code>ml/engine.py</code> + regression test</td></tr>
-        <tr><td><b>Resumable benchmark harness</b> — flush-per-frame JSONL; an interrupt costs one frame</td><td><code>run200.py</code></td></tr>
-        <tr><td><b>Overlay gallery generator</b> — CPU-only visual QA from persisted predictions, no GPU replay</td><td><code>make_overlays.py</code></td></tr>
-        <tr><td><b>Correction → corpus loop</b> — revisions re-emitted in the training contract</td><td><code>export/package.py</code></td></tr>
-        <tr><td><b>Device policy</b> — bf16 enforcement + CPU-only-wheel diagnosis</td><td><code>ml/runtime.py</code></td></tr>
-      </tbody>
-    </table>
-    </div>
-    <h3>Three transferable lessons, independent of cardiology</h3>
-    <ol>
-      <li><strong>Match the metric to the output.</strong> We first scored a coordinate generator with
-          Dice and ejection fraction. Both measured downstream constructions. Re-scoring with
-          point-to-curve changed the interpretation, not the model.</li>
-      <li><strong>Render your predictions.</strong> The 12.5 % self-intersection rate and the
-          confidently-misplaced worst case were both found by looking, not by aggregating.</li>
-      <li><strong>A partially-loaded adapter is indistinguishable from a working one</strong> at the
-          output level. Assert completeness.</li>
-    </ol>
-  </div>
-
-  <h2 id="adapt">9 &middot; Make your own adapter</h2>
-  <p>
-    Everything above is reproducible on your own data. The pipeline does not assume CAMUS or
-    EchoNet &mdash; it assumes the <strong>three-artifact contract</strong>: frames, a tracings
-    JSON, and a metadata CSV. Conform to that and every downstream stage works unchanged.
-  </p>
-  <ol class="steps">
-    <li><div><b>Bring your frames into the corpus contract</b>
-      <p>Point the ingest stage at your source. The vendored preprocessors are the reference
-      implementation &mdash; they reproduce the published corpus byte-identically, so they are a
-      working template for a new source rather than pseudocode.</p>
-      <pre>atria --dataset-dir /path/to/your/data ingest</pre></div></li>
-    <li><div><b>Check what you have before you train</b>
-      <p>Derive classification sets and inspect the split. This is where labelling problems surface
-      &mdash; it is the stage that exposed the per-view quality grading in CAMUS and the
-      transposed end-diastole/end-systole labels in EchoNet.</p>
-      <pre>atria --dataset-dir /path/to/your/data classify</pre></div></li>
-    <li><div><b>Fine-tune</b>
-      <p>The published recipe is the default: QLoRA rank 32, 4-bit NF4, bf16, effective batch 64,
-      5 epochs, linear 1e-4 with 3% warmup. On a 1,600-frame corpus this is the
-      <strong>128-minute</strong> run in the table above.</p>
-      <pre>atria --dataset-dir /path/to/your/data train --output-dir ./my-adapter</pre></div></li>
-    <li><div><b>Benchmark it against your own held-out split</b>
-      <p>The harness writes per-frame JSONL as it goes, so an interrupt costs one frame, and it
-      renders every prediction for visual review. Report point-to-curve distance, not only Dice
-      &mdash; the metric has to match the representation.</p>
-      <pre>atria --dataset-dir /path/to/your/data evaluate --adapter ./my-adapter</pre></div></li>
-    <li><div><b>Close the loop</b>
-      <p>Serve the adapter in the workstation, let a clinician correct vertices, and export the
-      revisions back into the same corpus format. Their corrections become the next training set
-      &mdash; which is the entire point of emitting coordinates instead of a mask.</p>
-      <pre>atria --dataset-dir /path/to/your/data export-corpus</pre></div></li>
-  </ol>
-  <div class="note warn">
-    <strong>One honest caveat on reproduction.</strong> <code>atria train</code> ports the notebook
-    recipe; it is not a byte-exact replay of the Colab runs that produced the published adapters,
-    and we do not claim it reproduces those weights. It reproduces the <em>method</em>. If you need
-    the exact published artifacts, take them from Hugging Face.
-  </div>
-
-  <h2 id="limits">10 · Honest limitations</h2>
+  <h2 id="limits">9 &middot; What it does and does not do</h2>
   <ul>
     <li><strong>Scope:</strong> left ventricle only. The published adapters were tuned on LV; the left
         atrium is out of distribution.</li>
@@ -1556,7 +1865,177 @@ assert status["fully_loaded"], status
         which differs from the published adapters' configuration in §3.</li>
   </ul>
 
-  <h2 id="deity">11 · Built on the DEITY Principles</h2>
+  <h2 id="reuse">10 &middot; What you can reuse tomorrow</h2>
+  <div class="reuse">
+    <h3>Components</h3>
+    <div class="tbl-scroll">
+    <table>
+      <thead><tr><th>Reusable</th><th>Where</th></tr></thead>
+      <tbody>
+        <tr><td><b>Normalised polygon contract</b> — <code>[y, x]</code> in <code>[0, 1000]</code>, resolution-independent</td><td><code>domain/geometry.py</code></td></tr>
+        <tr><td><b>Structured-output parsing that fails loudly</b> — fenced JSON, schema check, in-bounds and self-intersection validation</td><td><code>domain/geometry.py</code></td></tr>
+        <tr><td><b>Point-to-curve implementation</b> — validated against 5 known-answer geometric cases first</td><td><code>rescore_pointwise.py</code></td></tr>
+        <tr><td><b>Adapter-completeness check</b> — catches the §8 failure</td><td><code>ml/engine.py</code> + regression test</td></tr>
+        <tr><td><b>Resumable benchmark harness</b> — flush-per-frame JSONL; an interrupt costs one frame</td><td><code>run200.py</code></td></tr>
+        <tr><td><b>Overlay gallery generator</b> — CPU-only visual QA from persisted predictions, no GPU replay</td><td><code>make_overlays.py</code></td></tr>
+        <tr><td><b>Correction → corpus loop</b> — revisions re-emitted in the training contract</td><td><code>export/package.py</code></td></tr>
+        <tr><td><b>Device policy</b> — bf16 enforcement + CPU-only-wheel diagnosis</td><td><code>ml/runtime.py</code></td></tr>
+      </tbody>
+    </table>
+    </div>
+    <h3>Three transferable lessons, independent of cardiology</h3>
+    <ol>
+      <li><strong>Match the metric to the output.</strong> We first scored a coordinate generator with
+          Dice and ejection fraction. Both measured downstream constructions. Re-scoring with
+          point-to-curve changed the interpretation, not the model.</li>
+      <li><strong>Render your predictions.</strong> The 12.5 % self-intersection rate and the
+          confidently-misplaced worst case were both found by looking, not by aggregating.</li>
+      <li><strong>A partially-loaded adapter is indistinguishable from a working one</strong> at the
+          output level. Assert completeness.</li>
+    </ol>
+  </div>
+
+  <h2 id="adapt">11 &middot; Make your own adapter</h2>
+  <p class="lede">
+    There are two ways to take this further, for two different people. They are not two doors to
+    the same room.
+  </p>
+
+  <div class="trk">
+    <div>
+      <div class="who">Track A &middot; understand and modify</div>
+      <h4>The research notebook</h4>
+      <p class="sub">For someone who wants to change the <em>method</em>: the prompt, the
+        target representation, the LoRA placement.</p>
+      <ol>
+        <li><b>Read it on GitHub.</b> 38 cells, 30 of them code, with stored outputs, so you can
+          follow what happened without executing anything.</li>
+        <li><b>Open it in Colab.</b> It runs without gated weights, so you can trace the full flow
+          before requesting adapter access.</li>
+        <li><b>Change one thing.</b> The prompt template, the 30-point resampling, the target
+          modules: each is a single cell.</li>
+        <li><b>Re-run.</b> On CAMUS, a full fine-tune is ~2 hours on one GPU.</li>
+      </ol>
+      <p class="badge"><a class="gbtn" href="https://colab.research.google.com/github/The-Adimension/ATRIA-EchoTrace/blob/main/ATRIA-EchoTrace_GoogleColab-CompleteNotebook_20260715.ipynb">Open in Colab &rarr;</a>
+        &nbsp; <a href="https://github.com/The-Adimension/ATRIA-EchoTrace/blob/main/ATRIA-EchoTrace_GoogleColab-CompleteNotebook_20260715.ipynb">View on GitHub</a></p>
+    </div>
+    <div>
+      <div class="who">Track B &middot; run it on your data</div>
+      <h4>The CLI and the workstation</h4>
+      <p class="sub">For someone who wants an adapter for <em>their</em> archive, with their
+        labelling conventions, behind their own firewall.</p>
+      <ol>
+        <li><b>Bring your frames into the contract.</b>
+          <pre>atria --dataset-dir &lt;dir&gt; ingest</pre></li>
+        <li><b>Inspect before you train.</b>
+          <pre>atria --dataset-dir &lt;dir&gt; classify</pre></li>
+        <li><b>Fine-tune.</b>
+          <pre>atria --dataset-dir &lt;dir&gt; train --output-dir ./my-adapter</pre></li>
+        <li><b>Benchmark, then close the loop.</b>
+          <pre>atria --dataset-dir &lt;dir&gt; evaluate --adapter ./my-adapter
+atria --dataset-dir &lt;dir&gt; serve
+atria --dataset-dir &lt;dir&gt; export-corpus</pre></li>
+      </ol>
+    </div>
+  </div>
+
+  <p class="sup">
+    Both tracks consume the same three-artifact contract and produce the same kind of adapter. The
+    notebook is the origin of the recipe; the CLI is that recipe made operable. Neither requires
+    the other.
+  </p>
+
+  <p>
+    Everything above is reproducible on your own data. The pipeline does not assume CAMUS or
+    EchoNet: it assumes the <strong>three-artifact contract</strong>: frames, a tracings
+    JSON, and a metadata CSV. Conform to that and every downstream stage works unchanged.
+  </p>
+  <ol class="steps">
+    <li><div><b>Bring your frames into the corpus contract</b>
+      <p>Point the ingest stage at your source. The vendored preprocessors are the reference
+      implementation: they reproduce the published corpus byte-identically, so they are a
+      working template for a new source rather than pseudocode.</p>
+      <pre>atria --dataset-dir /path/to/your/data ingest</pre></div></li>
+    <li><div><b>Check what you have before you train</b>
+      <p>Derive classification sets and inspect the split. This is where labelling problems surface: it is the stage that exposed the per-view quality grading in CAMUS and the
+      transposed end-diastole/end-systole labels in EchoNet.</p>
+      <pre>atria --dataset-dir /path/to/your/data classify</pre></div></li>
+    <li><div><b>Fine-tune</b>
+      <p>The published recipe is the default: QLoRA rank 32, 4-bit NF4, bf16, effective batch 64,
+      5 epochs, linear 1e-4 with 3% warmup. On a 1,600-frame corpus this is the
+      <strong>128-minute</strong> run in the table above.</p>
+      <pre>atria --dataset-dir /path/to/your/data train --output-dir ./my-adapter</pre></div></li>
+    <li><div><b>Benchmark it against your own held-out split</b>
+      <p>The harness writes per-frame JSONL as it goes, so an interrupt costs one frame, and it
+      renders every prediction for visual review. Report point-to-curve distance, not only Dice: the metric has to match the representation.</p>
+      <pre>atria --dataset-dir /path/to/your/data evaluate --adapter ./my-adapter</pre></div></li>
+    <li><div><b>Close the loop</b>
+      <p>Serve the adapter in the workstation, let a clinician correct vertices, and export the
+      revisions back into the same corpus format. Their corrections become the next training set, which is the entire point of emitting coordinates instead of a mask.</p>
+      <pre>atria --dataset-dir /path/to/your/data export-corpus</pre></div></li>
+  </ol>
+  <div class="note warn">
+    <strong>One honest caveat on reproduction.</strong> <code>atria train</code> ports the notebook
+    recipe; it is not a byte-exact replay of the Colab runs that produced the published adapters,
+    and we do not claim it reproduces those weights. It reproduces the <em>method</em>. If you need
+    the exact published artifacts, take them from Hugging Face.
+  </div>
+
+  <h2 id="open">12 &middot; Built in the open</h2>
+  <p class="lede">
+    Everything here is built on open datasets and open model weights, and released the same way.
+    Alongside the parts that worked, the record below includes the runs that did not, a defect
+    we introduced ourselves, and the numbers we decided not to headline.
+  </p>
+
+  <div class="open-list">
+    <div><b>The runs that did not work</b><span>Run&nbsp;2 (lr&nbsp;1e-5, never left the
+      plateau) and Run&nbsp;3 (lr&nbsp;2e-4 over eight epochs, stalled at 0.390) ship with their
+      full logs and plots, so the search is visible and not only its result.</span></div>
+    <div><b>A defect that invalidated our own work</b><span>324 of 802 adapter tensors were
+      loading into nothing. We found it ourselves, published it, and turned it into a regression
+      test rather than quietly re-running.</span></div>
+    <div><span class="n">12.5%</span><span>of generated polygons self-intersect. Nobody asked.
+      It appears in the limitations, the ladder and the per-frame CSV.</span></div>
+    <div><span class="n">n = 1</span><span>A Dice of 0.8924 exists in our own test output. It is a
+      single four-chamber frame, so we refuse to headline it, and say so explicitly rather
+      than letting it circulate.</span></div>
+    <div><b>The metric we got wrong first</b><span>We scored a coordinate model with Dice and
+      ejection fraction before realising both measure a downstream construction. The wrong turn is
+      documented, not erased.</span></div>
+    <div><b>Every raw model response</b><span>All 200 verbatim generations, prose preambles
+      included, in <a href="data/">the benchmark data</a>, so anyone can check the parser
+      against the actual text.</span></div>
+  </div>
+
+  <h3>Why this is a platform and not a demo</h3>
+  <p>
+    The adapters were trained on <strong>open datasets</strong> &mdash; CAMUS and EchoNet-Dynamic,
+    each acquired under its own licence: on top of <strong>open weights</strong>, MedGemma
+    1.5&nbsp;4B. The preprocessing scripts that built the corpus are
+    <a href="https://github.com/The-Adimension/ATRIA-EchoTrace/tree/main/datasets/data_processing_scripts">in
+    the repository</a>, vendored byte-identically so they reproduce that corpus rather than
+    approximate it. The checkpoints, including the optimiser state, go to Hugging Face.
+  </p>
+  <p>
+    Which means the work is <strong>resumable, not just readable</strong>. Neither shipped run is
+    converged: both were stopped while training and evaluation loss were still falling, to
+    fix a reference point rather than to chase a number. Anyone can pick up the same recipe and
+    keep going: on the same open corpora, or on their own archive, behind their own firewall,
+    against their own labelling conventions &mdash; a specific view, a specific chamber, a specific
+    population.
+  </p>
+
+  <div class="stage">
+    <p>
+      Open datasets, open weights, open preprocessing, open benchmark. The substrate is published
+      rather than the product, so that clinicians who know where the contours are wrong and
+      developers who can build a better adapter both have something to work from.
+      <strong>The stage is yours.</strong>
+      <span class="sig">The Adimension &middot; bridging human ingenuity and machine intelligence</span>
+    </p>
+  </div>
+  <h2 id="deity">13 &middot; Built on the DEITY Principles</h2>
   <p>
     ATRIA EchoTrace is the reference implementation of the DEITY Principles Framework
     (Anwer, <em>Eur Heart J Imaging Methods Pract</em>). Each principle forced a decision you can
@@ -1579,23 +2058,35 @@ assert status["fully_loaded"], status
     review is architectural, not advisory — the interface exists to be corrected.
   </div>
 
-  <h2 id="assets">12 · Assets</h2>
+  <h2 id="assets">14 &middot; Assets</h2>
   <p class="namefoot">
     <b>ATRIA</b> — Artifact Transformation &amp; Resource Interoperability in Artificial
     Intelligence · <b>EchoTrace</b> — tracing the echocardiographic frame.
   </p>
-  <div class="links">
-    <a class="lk lk-hi" href="gallery/index.html"><b>200-frame evaluation gallery</b><span>Every held-out prediction, filterable — hosted with this page</span></a>
-    <a class="lk lk-hi" href="ft_runs/"><b>Fine-tuning logs — 6 runs</b><span>TensorBoard events, per-step CSVs, generated report plots</span></a>
-    <a class="lk" href="data/"><b>Per-frame benchmark data</b><span>pointwise.csv · per_frame.csv · scores.json · adapter configs</span></a>
-    <a class="lk" href="https://github.com/The-Adimension/ATRIA-EchoTrace"><b>GitHub — ATRIA-EchoTrace</b><span>Platform, benchmark harness, provenance scripts</span></a>
-    <a class="lk" href="https://colab.research.google.com/drive/1qofahQ8LztTrB_Us9j1Iyz2aYeS2_2rH?usp=sharing"><b>Colab notebook</b><span>Run the pipeline without gated weights</span></a>
-    <a class="lk" href="https://huggingface.co/collections/The-Adimension/atria-echotrace-6a5884b6c17ec3aab49d0875"><b>Hugging Face collection</b><span>ATRIA-EchoTrace adapters</span></a>
-    <a class="lk" href="https://huggingface.co/The-Adimension/EchoTrace-MedGemma-CAMUS"><b>CAMUS adapter</b><span>DOI 10.57967/hf/9541 · Apache-2.0 · gated</span></a>
-    <a class="lk" href="https://huggingface.co/The-Adimension/EchoTrace-MedGemma-EchoNet"><b>EchoNet adapter</b><span>DOI 10.57967/hf/9540 · Apache-2.0 · gated</span></a>
-    <a class="lk" href="https://huggingface.co/google/medgemma-1.5-4b-it"><b>Base model</b><span>google/medgemma-1.5-4b-it</span></a>
-    <a class="lk" href="https://discuss.ai.google.dev/t/atria-echotrace-fine-tuning-medgemma-1-5-for-polygon-based-heart-structure-contouring/172907"><b>HAI-DEF forum thread</b><span>Original technical discussion</span></a>
-    <a class="lk" href="https://doi.org/10.1093/ehjimp/qyaf038"><b>DEITY Principles paper</b><span>Eur Heart J Imaging Methods Pract</span></a>
+  <p class="tier">Explore: the three places the work actually lives</p>
+  <div class="explore">
+    <a href="index.html#try"><b>The correction loop, live</b>
+      <span>Drag the vertices of a real held-out prediction and watch the metric move. No model
+        runs; the arithmetic is the benchmark's.</span></a>
+    <a href="gallery/index.html"><b>All 200 predictions</b>
+      <span>Every held-out frame rendered and filterable by view, instant and acquisition quality: best to worst, nothing curated.</span></a>
+    <a href="evidence/index.html"><b>The evidence room</b>
+      <span>Six training runs with every plot, metric agreement across all 200 frames, and the
+        control that isolates what the coordinate contract costs. Check the claims yourself.</span></a>
+  </div>
+
+  <p class="tier">Reference</p>
+  <div class="refs">
+    <a href="ft_runs/">Fine-tuning logs &mdash; 6 runs<span>TensorBoard events, per-step CSVs, plots</span></a>
+    <a href="data/">Per-frame benchmark data<span>pointwise · per_frame · scores · raw responses</span></a>
+    <a href="https://github.com/The-Adimension/ATRIA-EchoTrace">GitHub &mdash; ATRIA-EchoTrace<span>Platform, harness, provenance scripts</span></a>
+    <a href="https://colab.research.google.com/github/The-Adimension/ATRIA-EchoTrace/blob/main/ATRIA-EchoTrace_GoogleColab-CompleteNotebook_20260715.ipynb">Colab notebook<span>Runs without gated weights</span></a>
+    <a href="https://huggingface.co/collections/The-Adimension/atria-echotrace-6a5884b6c17ec3aab49d0875">Hugging Face collection<span>ATRIA-EchoTrace adapters</span></a>
+    <a href="https://huggingface.co/The-Adimension/EchoTrace-MedGemma-CAMUS">CAMUS adapter<span>DOI 10.57967/hf/9541 · gated</span></a>
+    <a href="https://huggingface.co/The-Adimension/EchoTrace-MedGemma-EchoNet">EchoNet adapter<span>DOI 10.57967/hf/9540 · gated</span></a>
+    <a href="https://huggingface.co/google/medgemma-1.5-4b-it">Base model<span>google/medgemma-1.5-4b-it</span></a>
+    <a href="https://discuss.ai.google.dev/t/atria-echotrace-fine-tuning-medgemma-1-5-for-polygon-based-heart-structure-contouring/172907">HAI-DEF forum thread<span>Original technical discussion</span></a>
+    <a href="https://doi.org/10.1093/ehjimp/qyaf038">DEITY Principles paper<span>Eur Heart J Imaging Methods Pract</span></a>
   </div>
   <p class="sup">
     Adapters are <strong>gated</strong> to keep research artifacts traceable and ensure users
@@ -1605,13 +2096,145 @@ assert status["fully_loaded"], status
     (Ouyang et al., <em>Nature</em> 2020), used under their respective terms.
   </p>
 
+
+  <h2 id="refs">15 &middot; References, citations and further reading</h2>
+  <p class="lede">
+    Everything this work stands on, and what it asks in return. Where a dataset licence
+    <em>requires</em> a specific citation, that citation is reproduced verbatim and marked.
+  </p>
+
+  <div class="cite-box">
+    <strong>Citing ATRIA EchoTrace.</strong> The software and the two released adapters are
+    separately citable. Machine-readable metadata is in
+    <a href="https://github.com/The-Adimension/ATRIA-EchoTrace/blob/main/CITATION.cff"><code>CITATION.cff</code></a>.
+<pre>@software{anwer_atria_echotrace,
+  author  = {Anwer, Shehab},
+  title   = {{ATRIA EchoTrace}: structured-coordinate echocardiographic
+             contouring with MedGemma},
+  year    = {2026},
+  url     = {https://github.com/The-Adimension/ATRIA-EchoTrace},
+  note    = {Adapters: DOI 10.57967/hf/9541 (CAMUS),
+             DOI 10.57967/hf/9540 (EchoNet)}
+}</pre>
+  </div>
+
+  <div class="bib">
+    <h3>Datasets &mdash; cite these if you use the corpora</h3>
+    <ol>
+      <li><span class="t">S. Leclerc, E. Smistad, J. Pedrosa, A. &Oslash;stvik, et al.
+        &ldquo;Deep Learning for Segmentation using an Open Large-Scale Dataset in 2D
+        Echocardiography&rdquo;</span> <span class="v">IEEE Transactions on Medical Imaging</span>,
+        vol.&nbsp;38, no.&nbsp;9, pp.&nbsp;2198&ndash;2210, Sept.&nbsp;2019.
+        <a class="d" href="https://doi.org/10.1109/TMI.2019.2900516">doi:10.1109/TMI.2019.2900516</a>
+        <span class="req">required by CAMUS</span><span class="an">The CAMUS database. This wording is reproduced from the
+        <code>MANDATORY_CITATION.md</code> shipped with the data, which states it must be cited for
+        any use of the database.</span></li>
+      <li><span class="t">D. Ouyang, B. He, A. Ghorbani, et al. &ldquo;Video-based AI for
+        beat-to-beat assessment of cardiac function&rdquo;</span>
+        <span class="v">Nature</span>, vol.&nbsp;580, pp.&nbsp;252&ndash;256, 2020.
+        <a class="d" href="https://doi.org/10.1038/s41586-020-2145-8">doi:10.1038/s41586-020-2145-8</a><span class="an">EchoNet-Dynamic. Used under the Stanford AIMI research use agreement.</span></li>
+    </ol>
+
+    <h3>Foundation model</h3>
+    <ol>
+      <li><span class="t">MedGemma 1.5 4B (instruction-tuned)</span> &mdash; Google.
+        <a class="d" href="https://huggingface.co/google/medgemma-1.5-4b-it">huggingface.co/google/medgemma-1.5-4b-it</a><span class="an">The open-weight vision-language model adapted here. See also the
+        <a href="https://developers.google.com/health-ai-developer-foundations">Health AI Developer
+        Foundations</a> documentation for intended use and limitations.</span></li>
+    </ol>
+
+    <h3>Adaptation method</h3>
+    <ol>
+      <li><span class="t">E. J. Hu, Y. Shen, P. Wallis, et al. &ldquo;LoRA: Low-Rank Adaptation of
+        Large Language Models&rdquo;</span> <span class="v">ICLR</span>, 2022.
+        <a class="d" href="https://arxiv.org/abs/2106.09685">arXiv:2106.09685</a></li>
+      <li><span class="t">T. Dettmers, A. Pagnoni, A. Holtzman, L. Zettlemoyer.
+        &ldquo;QLoRA: Efficient Finetuning of Quantized LLMs&rdquo;</span>
+        <span class="v">NeurIPS</span>, 2023.
+        <a class="d" href="https://arxiv.org/abs/2305.14314">arXiv:2305.14314</a><span class="an">4-bit NF4 with double quantisation, as used for both adapters.</span></li>
+    </ol>
+
+    <h3>Metrics and statistics</h3>
+    <ol>
+      <li><span class="t">L. R. Dice. &ldquo;Measures of the amount of ecologic association
+        between species&rdquo;</span> <span class="v">Ecology</span>, vol.&nbsp;26, no.&nbsp;3,
+        pp.&nbsp;297&ndash;302, 1945.
+        <a class="d" href="https://doi.org/10.2307/1932409">doi:10.2307/1932409</a><span class="an">The overlap coefficient reported alongside our primary metric.</span></li>
+      <li><span class="t">J. M. Bland, D. G. Altman. &ldquo;Statistical methods for assessing
+        agreement between two methods of clinical measurement&rdquo;</span>
+        <span class="v">The Lancet</span>, vol.&nbsp;327, no.&nbsp;8476, pp.&nbsp;307&ndash;310, 1986.
+        <a class="d" href="https://doi.org/10.1016/S0140-6736(86)90837-8">doi:10.1016/S0140-6736(86)90837-8</a><span class="an">The agreement analysis used in the
+        <a href="evidence/index.html#ef">evidence room</a>.</span></li>
+      <li><span class="t">R. M. Lang, L. P. Badano, V. Mor-Avi, et al. &ldquo;Recommendations for
+        cardiac chamber quantification by echocardiography in adults: an update from the American
+        Society of Echocardiography and the European Association of Cardiovascular
+        Imaging&rdquo;</span> <span class="v">Journal of the American Society of
+        Echocardiography</span>, vol.&nbsp;28, no.&nbsp;1, pp.&nbsp;1&ndash;39.e14, 2015.
+        <a class="d" href="https://doi.org/10.1016/j.echo.2014.10.003">doi:10.1016/j.echo.2014.10.003</a><span class="an">The clinical basis for biplane Simpson volumes. Our implementation is the
+        one vendored from the CAMUS reference code, not a reimplementation.</span></li>
+    </ol>
+
+    <h3>Framework and context</h3>
+    <ol>
+      <li><span class="t">S. Anwer. &ldquo;The Adimension: bridging human ingenuity and machine
+        intelligence through the DEITY principles framework&rdquo;</span>
+        <span class="v">European Heart Journal &mdash; Imaging Methods and Practice</span>,
+        vol.&nbsp;4, no.&nbsp;1, article&nbsp;qyaf038, 2025.
+        <a class="d" href="https://doi.org/10.1093/ehjimp/qyaf038">doi:10.1093/ehjimp/qyaf038</a><span class="an">The framework this platform is the reference implementation of &mdash; Data,
+        Ethics, Informatics, Technology, You.</span></li>
+      <li><span class="t">ATRIA-EchoTrace: fine-tuning MedGemma 1.5 for polygon-based heart
+        structure contouring</span> &mdash; HAI-DEF developer forum thread.
+        <a class="d" href="https://discuss.ai.google.dev/t/atria-echotrace-fine-tuning-medgemma-1-5-for-polygon-based-heart-structure-contouring/172907">discuss.ai.google.dev</a><span class="an">The original technical discussion, including the state of the work before
+        formal benchmarks existed.</span></li>
+    </ol>
+
+    <h3>Software</h3>
+    <p class="sup" style="margin:.4rem 0 .8rem">
+      Linked to canonical project pages rather than given as formal citations, since versions move.
+      Exact pinned versions are in
+      <a href="https://github.com/The-Adimension/ATRIA-EchoTrace/blob/main/pyproject.toml"><code>pyproject.toml</code></a>.
+    </p>
+    <div class="refs">
+      <a href="https://github.com/huggingface/transformers">transformers<span>Model loading and generation</span></a>
+      <a href="https://github.com/huggingface/peft">PEFT<span>LoRA adapters &mdash; and the source of the §8 key-remap defect</span></a>
+      <a href="https://github.com/huggingface/trl">TRL<span>SFTTrainer; SFTConfig is what training_args.bin holds</span></a>
+      <a href="https://github.com/bitsandbytes-foundation/bitsandbytes">bitsandbytes<span>4-bit NF4 quantisation</span></a>
+      <a href="https://simpleitk.org/">SimpleITK<span>CAMUS NIfTI reading</span></a>
+      <a href="https://scikit-image.org/">scikit-image<span>Contour extraction and rasterisation</span></a>
+      <a href="https://scipy.org/">SciPy<span>Spatial queries for boundary distances</span></a>
+      <a href="https://fastapi.tiangolo.com/">FastAPI<span>The API and workstation server</span></a>
+      <a href="https://pytorch.org/">PyTorch<span>bfloat16 compute; see §8 on precision</span></a>
+      <a href="https://opencv.org/">OpenCV<span>EchoNet AVI decoding</span></a>
+    </div>
+
+    <h3>Further reading from this project</h3>
+    <div class="refs">
+      <a href="evidence/index.html">The evidence room<span>Six runs, metric agreement, the coordinate-contract control</span></a>
+      <a href="gallery/index.html">All 200 predictions<span>Rendered and filterable</span></a>
+      <a href="https://github.com/The-Adimension/ATRIA-EchoTrace/tree/main/docs">Documentation<span>Architecture, data workflow, training, evaluation, limitations</span></a>
+      <a href="https://github.com/The-Adimension/ATRIA-EchoTrace/blob/main/docs/limitations.md">Limitations in full<span>What this does not do, and what we never claimed</span></a>
+      <a href="https://github.com/The-Adimension/ATRIA-EchoTrace/tree/main/docs/audits">Audit trail<span>Code inventory, revision audit, artifact reports</span></a>
+      <a href="data/">Raw benchmark data<span>Every number on this page, at source</span></a>
+    </div>
+  </div>
+
+  <div class="note">
+    <strong>A note on what we cite and why.</strong> The CAMUS citation above is mandatory under the
+    dataset's own terms and is reproduced word for word. The EchoNet-Dynamic agreement likewise
+    governs use of that data. Neither dataset is redistributed here &mdash; the repository ships the
+    <em>preprocessing scripts and the directory contract</em>, and you acquire the data yourself.
+    Both adapters are released Apache-2.0 and gated, so access requests stay traceable and users
+    acknowledge the research-only intended use.
+  </div>
+
   <footer>
     <p class="footmark"><svg class="logo" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1024 1024"><path fill="currentColor" opacity="1.000000" stroke="none" d=" M512.859375,209.160416 C529.632812,209.727448 539.789062,219.549484 547.678894,232.456696 C559.146973,251.217575 570.396362,270.112152 581.729309,288.955566 C615.642822,345.343872 649.559875,401.730042 683.456787,458.128326 C692.637634,473.403534 701.762268,488.712616 710.879211,504.026062 C711.696594,505.399017 713.019165,506.656494 712.509155,508.561798 C711.057251,509.767090 709.327332,509.325653 707.727295,509.327850 C682.399902,509.362915 657.072144,509.296265 631.745361,509.429688 C628.151855,509.448608 625.990234,508.299744 624.135681,505.177917 C589.170532,446.320740 554.111084,387.519531 519.057983,328.714630 C516.111633,323.771729 513.070496,318.885254 509.580414,313.164612 C503.436432,323.459930 497.810425,332.856812 492.213470,342.270966 C452.801636,408.561981 413.396240,474.856750 373.987915,541.149780 C360.114929,564.487000 346.212860,587.807068 332.402100,611.181091 C330.840790,613.823547 329.195526,615.451050 325.803741,615.436279 C300.643433,615.326721 275.482391,615.387695 250.321564,615.376343 C249.530319,615.375977 248.739151,615.172668 248.085602,615.082825 C247.268921,613.327454 248.305496,612.285095 248.968399,611.182617 C297.725159,530.090942 346.487030,449.002380 395.258972,367.919891 C422.820038,322.100067 450.359283,276.267029 477.995270,230.492447 C485.788757,217.583786 496.740173,209.463943 512.859375,209.160416 z"/><path fill="currentColor" opacity="1.000000" stroke="none" d=" M783.456909,624.602051 C810.674744,669.971558 837.711426,715.024780 864.692139,759.984619 C862.466370,761.959167 860.552124,761.353699 858.805542,761.357178 C832.980957,761.409485 807.155945,761.353516 781.331970,761.490112 C778.125366,761.507080 776.202881,760.634216 774.517761,757.785706 C751.791687,719.368774 728.943604,681.024048 706.126038,642.661316 C702.040955,635.793091 697.716125,629.052551 693.961548,622.008118 C691.654480,617.679443 688.863586,615.938721 683.784668,615.957336 C629.636841,616.155945 575.488098,616.095459 521.339600,616.103577 C519.840393,616.103821 518.341248,616.074646 516.842041,616.061401 C514.336731,616.039185 513.388733,614.818420 513.404724,612.287903 C513.521301,593.795837 513.609009,575.302795 513.531006,556.810852 C513.515991,553.253296 515.006042,552.067932 518.275818,552.135925 C527.100098,552.319580 535.925903,552.543884 544.751160,552.549683 C603.731384,552.588318 662.711609,552.583923 721.691833,552.556580 C725.851562,552.554626 730.027100,552.431091 734.166382,552.049988 C738.363220,551.663574 740.827087,553.374390 742.962769,556.982666 C756.282349,579.486938 769.814270,601.865540 783.456909,624.602051 z"/><path fill="currentColor" opacity="1.000000" stroke="none" d=" M299.961182,665.856934 C281.702789,696.500183 263.601044,726.805725 245.639999,757.194397 C243.810791,760.289246 241.789597,761.521362 238.122910,761.494934 C214.305511,761.322876 190.486267,761.417175 166.667725,761.373596 C164.575668,761.369812 162.353531,761.893555 160.448959,760.582397 C159.821136,758.804016 160.953217,757.637939 161.699997,756.393433 C180.545868,724.987610 199.450439,693.616699 218.194260,662.150146 C220.076553,658.990173 222.492157,658.555786 225.669159,658.564636 C247.322250,658.625122 268.975952,658.523682 290.628571,658.635986 C294.666687,658.656921 298.842133,657.000549 302.836060,659.075806 C303.062531,661.861694 301.020966,663.456238 299.961182,665.856934 z"/></svg><b>The Adimension</b></p>
     <p>
       <strong>The Adimension</strong> — Shehab Anwer, MD, Founder.<br>
       We welcome collaboration with echocardiography laboratories willing to contribute corrected
       tracings, and with HAI-DEF developers working on structured-output adaptation of MedGemma.
-      The platform, the benchmark harness and the provenance scripts are open.
+      The platform, the benchmark harness and the provenance scripts are open.<br>
+      <a class="contact" href="mailto:atrium@theadimension.com">atrium@theadimension.com</a>
     </p>
 
     <nav class="fassets" aria-label="Assets">

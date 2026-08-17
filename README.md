@@ -154,8 +154,10 @@ See [CITATION.cff](CITATION.cff). The adapters carry DOIs
 [10.57967/hf/9541](https://doi.org/10.57967/hf/9541) (CAMUS) and
 [10.57967/hf/9540](https://doi.org/10.57967/hf/9540) (EchoNet), both Apache-2.0 and gated.
 
-Built on the **DEITY Principles Framework** (Anwer, *EHJ Imaging Methods & Practice* 2026) —
-Data, Ethics, Informatics, Technology, You.
+Built on the **DEITY Principles Framework** — Data, Ethics, Informatics, Technology, You. See
+Anwer S, *"The Adimension: bridging human ingenuity and machine intelligence through the DEITY
+principles framework"*, **European Heart Journal — Imaging Methods and Practice** 2025;4(1):qyaf038.
+[doi:10.1093/ehjimp/qyaf038](https://doi.org/10.1093/ehjimp/qyaf038)
 
 **Datasets:** CAMUS (Leclerc et al., *IEEE TMI* 2019) · EchoNet-Dynamic (Ouyang et al., *Nature*
 2020), used under their respective terms.

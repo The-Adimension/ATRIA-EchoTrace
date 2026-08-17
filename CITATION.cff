@@ -30,13 +30,17 @@ license: Apache-2.0
 references:
   - type: article
     title: >-
-      The DEITY Principles Framework: Data, Ethics, Informatics, Technology, You
+      The Adimension: bridging human ingenuity and machine intelligence through
+      the DEITY principles framework
     authors:
       - family-names: Anwer
         given-names: Shehab
     journal: European Heart Journal — Imaging Methods and Practice
-    year: 2026
+    volume: 4
+    issue: 1
+    year: 2025
     doi: 10.1093/ehjimp/qyaf038
+    notes: Article number qyaf038.
 
   - type: software
     title: EchoTrace-MedGemma-CAMUS (LoRA adapter)

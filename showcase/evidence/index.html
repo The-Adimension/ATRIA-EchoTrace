@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Evidence — ATRIA EchoTrace</title>
+<meta name="description" content="The apparatus behind the ATRIA EchoTrace claims: six fine-tuning runs, metric agreement across 200 held-out frames, and downstream ejection-fraction agreement.">
+<style>
+:root{
+  --ink:#11161d; --ink-2:#1d2530; --body:#2c3542; --muted:#5b6675; --faint:#8a94a3;
+  --line:#e3e7ec; --line-2:#cfd6de; --bg:#ffffff; --bg-2:#f7f9fb; --bg-3:#eef2f6;
+  --ref:#1a7f45; --pred:#c02b2b; --accent:#0b6bcb; --warn:#9a6400;
+  --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --wrap:1080px;
+}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--body);
+  font:16px/1.68 var(--sans);-webkit-text-size-adjust:100%}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 24px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{font-family:var(--mono);font-size:.86em;background:var(--bg-3);padding:.08em .34em;border-radius:3px}
+
+header{background:var(--ink);color:#fff;padding:26px 0 30px;margin-bottom:8px}
+header a.back{color:rgba(255,255,255,.72);font:600 11px var(--mono);letter-spacing:.18em;
+  text-transform:uppercase}
+header a.back:hover{color:#fff;text-decoration:none}
+h1{font-size:clamp(26px,4vw,36px);margin:14px 0 8px;letter-spacing:-.015em;color:#fff}
+header p{margin:0;color:rgba(255,255,255,.68);max-width:72ch;font-size:16.5px}
+
+h2{font-size:clamp(20px,2.6vw,26px);color:var(--ink);letter-spacing:-.01em;
+  margin:0 0 6px}
+section{padding:52px 0 8px;border-top:1px solid var(--line)}
+section:first-of-type{border-top:0}
+.lede{color:var(--muted);max-width:74ch;margin:0 0 22px}
+.sup{font-size:13.5px;color:var(--faint);max-width:76ch}
+.note{border-left:3px solid var(--accent);background:var(--bg-2);padding:14px 18px;
+  margin:20px 0;font-size:14.5px;border-radius:0 8px 8px 0}
+.note.warn{border-left-color:var(--warn);background:#fdf8ee}
+.note b{color:var(--ink)}
+
+/* ── run explorer ── */
+.runbar{display:grid;grid-template-columns:repeat(auto-fit,minmax(158px,1fr));gap:10px;margin:0 0 18px}
+.runcard{border:1px solid var(--line);border-radius:9px;padding:11px 12px;background:var(--bg);
+  cursor:pointer;text-align:left;font:inherit;transition:border-color .15s,background .15s}
+.runcard:hover{border-color:var(--accent)}
+.runcard[aria-pressed=true]{border-color:var(--accent);background:#f4f8fd;
+  box-shadow:inset 0 0 0 1px var(--accent)}
+.runcard b{display:block;font-size:14.5px;color:var(--ink)}
+.runcard .ds{font:600 10px var(--mono);letter-spacing:.12em;text-transform:uppercase;
+  color:var(--muted);margin:2px 0 6px}
+.runcard .kv{font-family:var(--mono);font-size:11.5px;color:var(--muted);line-height:1.5}
+.runcard .ship{display:inline-block;margin-top:6px;font:700 9px var(--mono);letter-spacing:.1em;
+  text-transform:uppercase;color:var(--ref);background:#eaf5ee;border-radius:3px;padding:2px 5px}
+.tabs{display:flex;gap:0;flex-wrap:wrap;border-bottom:1px solid var(--line);margin-bottom:0}
+.tabs button{border:0;background:none;font:600 12.5px var(--sans);color:var(--muted);
+  padding:9px 14px;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px}
+.tabs button:hover{color:var(--ink)}
+.tabs button[aria-selected=true]{color:var(--accent);border-bottom-color:var(--accent)}
+.plotwrap{border:1px solid var(--line);border-top:0;border-radius:0 0 9px 9px;padding:14px;
+  background:var(--bg-2)}
+.plotwrap img{display:block;width:100%;height:auto;background:#fff;border:1px solid var(--line);
+  border-radius:6px}
+.plotgrid{display:grid;gap:14px}
+.plotgrid.two{grid-template-columns:1fr 1fr}
+.plotgrid figcaption{font:600 11px var(--mono);letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:6px}
+.cmpbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding:10px 0 14px;
+  font-size:13.5px;color:var(--muted)}
+.cmpbar select{font:inherit;font-size:13px;padding:5px 8px;border:1px solid var(--line-2);
+  border-radius:6px;background:var(--bg);color:var(--ink)}
+.cmpbar label{font:600 10.5px var(--mono);letter-spacing:.12em;text-transform:uppercase}
+@media (max-width:760px){.plotgrid.two{grid-template-columns:1fr}}
+
+/* ── charts ── */
+figure{margin:22px 0}
+svg.chart{display:block;width:100%;height:auto;overflow:visible}
+figcaption{font-size:13.5px;color:var(--muted);border-top:1px solid var(--line);
+  padding-top:10px;margin-top:10px;max-width:78ch}
+figcaption b{color:var(--ink)}
+.legend{display:flex;gap:18px;flex-wrap:wrap;font-size:13px;color:var(--muted);margin:8px 0 0}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px}
+.tip{position:fixed;pointer-events:none;background:var(--ink);color:#fff;font:12px var(--mono);
+  padding:6px 9px;border-radius:6px;opacity:0;transition:opacity .12s;z-index:20;white-space:nowrap}
+
+table{width:100%;border-collapse:collapse;font-size:14.5px;margin:18px 0}
+th,td{text-align:left;padding:8px 12px 8px 0;border-bottom:1px solid var(--line)}
+th{font:700 10.5px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+td.num{font-family:var(--mono);font-size:13.5px}
+
+footer{margin-top:56px;border-top:1px solid var(--line);background:var(--bg-2);
+  padding:28px 0 60px;font-size:13.5px;color:var(--muted)}
+footer a{font-weight:600}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="back" href="../index.html">&larr; ATRIA EchoTrace</a>
+    <h1>Evidence</h1>
+    <p>The main page makes the claims. This one holds the apparatus &mdash; the six training runs,
+      the agreement between metrics across all 200 held-out frames, and what falls out downstream.
+      Every figure is drawn from files in this bundle.</p>
+  </div>
+</header>
+
+<main class="wrap">
+
+<section id="runs">
+  <h2>1 &middot; The six fine-tuning runs</h2>
+  <p class="lede">Two open datasets, one recipe search. Pick a run; the six generated plots load
+    below. Runs&nbsp;5 and&nbsp;6 produced the released adapters.</p>
+
+  <div class="runbar" id="runbar" role="group" aria-label="Select a run"></div>
+
+  <div class="cmpbar">
+    <label for="cmp">Compare with</label>
+    <select id="cmp"><option value="">— single run —</option></select>
+    <span id="cmphint">Put the same plot side by side across two runs.</span>
+  </div>
+
+  <div class="tabs" id="tabs" role="tablist"></div>
+  <div class="plotwrap"><div class="plotgrid" id="plots"></div></div>
+
+  <p class="sup" style="margin-top:12px">Plots are generated by
+    <code>tools/training/generate_run_reports.py</code> from the TensorBoard event files, which
+    ship alongside them in <a href="../ft_runs/">ft_runs/</a>.</p>
+</section>
+
+<section id="agreement">
+  <h2>2 &middot; Do the two metrics agree?</h2>
+  <p class="lede">The main page argues that point-to-curve distance is the right metric for a
+    coordinate model. It would be convenient if Dice also disagreed with it &mdash; that would make
+    the re-scoring look decisive. It does not, and the honest version is more useful.</p>
+
+  <figure>
+    <svg class="chart" id="scatter" viewBox="0 0 1000 470" role="img"
+         aria-label="Scatter of median point-to-curve distance against Dice for all 200 held-out frames"></svg>
+    <div class="legend">
+      <span><i style="background:#1a7f45"></i>Good</span>
+      <span><i style="background:#c9a227"></i>Medium</span>
+      <span><i style="background:#c02b2b"></i>Poor</span>
+      <span style="color:var(--faint)">ringed = self-intersecting &middot; hover a point for the frame</span>
+    </div>
+    <figcaption><b>Figure 1 &mdash; every held-out frame, scored both ways.</b>
+      Each dot is one of the 200 frames: median point-to-curve distance on the x-axis, Dice against
+      the expert mask on the y-axis. The dashed lines are the two medians.
+      <span id="corrtext"></span></figcaption>
+  </figure>
+
+  <div class="note">
+    <b>They mostly agree, and that is worth saying plainly.</b> <span id="quadtext"></span>
+    So re-scoring with point-to-curve did not overturn the ranking &mdash; a frame Dice calls bad
+    is usually a frame the distance metric calls bad too.
+    <br><br>
+    <b>The case for point-to-curve was never that Dice disagrees.</b> It is that Dice measures a
+    <em>rasterisation the model never performed</em>: the adapter emits coordinates, and converting
+    them to a filled region inserts a step that is ours, not the model's. Point-to-curve asks the
+    question the output can actually answer &mdash; <em>did the points land on the tracing?</em>
+    Changing it changed the interpretation, not the model. The agreement above is evidence that
+    both were measuring something real; the choice between them is about which object is being
+    measured.
+  </div>
+</section>
+
+<section id="ef">
+  <h2>3 &middot; What the coordinate contract costs downstream</h2>
+  <p class="lede">The adapter emits parseable coordinates. It does not emit volumes or ejection
+    fraction, and it was never trained to. But coordinates are the substrate those quantities are
+    built from, so it is fair to ask whether the representation itself loses anything on the way up
+    the clinical stack. It does not, and the control below is how we know.</p>
+
+  <div class="note">
+    <b>The control.</b> Take the <em>expert</em> 30-point polygons &mdash; not the model's &mdash;
+    push them through the identical biplane Simpson implementation CAMUS ships, and compare against
+    the clinically reported EF in each patient's <code>Info_4CH.cfg</code>. That isolates what the
+    <em>representation and the derivation</em> cost, with the model removed from the picture.
+  </div>
+
+  <figure>
+    <svg class="chart" id="decomp" viewBox="0 0 1000 250" role="img"
+         aria-label="Bias and limits of agreement for ground-truth-derived and model-derived ejection fraction"></svg>
+    <figcaption><b>Figure 2 &mdash; the decomposition.</b> Bias and 95% limits of agreement against
+      the clinical EF, n&nbsp;=&nbsp;50 patients, four contours each.
+      <span id="decomptext"></span></figcaption>
+  </figure>
+
+  <div class="note">
+    <b>The 30-point representation is essentially lossless through the clinical chain.</b>
+    Expert polygons reproduce the reported EF with a bias of <b>&minus;0.10</b> points and a median
+    absolute error of <b>0.0</b> &mdash; limits of agreement &minus;1.8 to +1.6. Resampling an
+    expert tracing to thirty coordinates and rebuilding a ventricular volume from it costs
+    <em>nothing measurable</em>. That is a result about the contract this whole platform is built
+    on, and it is the strongest one on this page.
+  </div>
+
+  <figure>
+    <svg class="chart" id="bland" viewBox="0 0 1000 430" role="img"
+         aria-label="Bland-Altman plot of model-derived ejection fraction against the clinical reference"></svg>
+    <figcaption><b>Figure 3 &mdash; the current checkpoint, same derivation.</b> Model-derived EF against
+      the clinical reference. Solid line is the bias, dashed the 95% limits of agreement.
+      <span id="eftext"></span></figcaption>
+  </figure>
+
+  <h3>Where the gap actually is &mdash; and why the primary metric cannot see it</h3>
+  <p>With the derivation cleared, the remaining error is the contours. It is not spread evenly:</p>
+
+  <div class="tbl-scroll">
+  <table>
+    <thead><tr><th>Model vs expert, same derivation</th><th class="num">End-diastole</th>
+      <th class="num">End-systole</th></tr></thead>
+    <tbody>
+      <tr><td>Enclosed area, relative error</td><td class="num">+7.9%</td>
+          <td class="num"><b>+28.0%</b></td></tr>
+      <tr><td>Volume, relative error</td><td class="num">EDV +14.0%</td>
+          <td class="num"><b>ESV +49.9%</b></td></tr>
+      <tr><td>Median point-to-curve</td><td class="num">4.74 mm</td>
+          <td class="num">5.49 mm</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p>The model <b>over-encloses</b> &mdash; by +17.9% on average, and far more at end-systole, when
+    the chamber is smallest. Since EF = (EDV&minus;ESV)/EDV, inflating ESV by 35.9 percentage points
+    more than EDV drives EF down; that is the whole bias.</p>
+
+  <div class="note warn">
+    <b>Point-to-curve is a localisation metric, and it is blind to this.</b> End-systole is only
+    <b>16% worse</b> in millimetres (5.49 vs 4.74) but <b>3.5&times; worse</b> in enclosed area
+    (+28.0% vs +7.9%). A contour sitting uniformly outside the true border scores well on distance
+    while systematically inflating area &mdash; and the same absolute offset costs proportionally
+    far more on a small chamber. <b>No single metric is sufficient</b>; distance and area measure
+    different failures of the same contour.
+  </div>
+
+  <div class="note">
+    <b>Read this as a roadmap item, not a verdict.</b> Neither shipped adapter is converged &mdash;
+    both were stopped while training <em>and</em> evaluation loss were still falling, to fix a
+    reference point rather than chase a number. What this analysis provides is a
+    <b>specific, quantified target</b> for the training that continues: end-systolic over-enclosure,
+    measured in area rather than millimetres. That is more useful than a better headline figure.
+  </div>
+</section>
+
+<section id="raw">
+  <h2>4 &middot; The raw files</h2>
+  <p class="lede">Nothing above is computed at read time; it is all recorded output.</p>
+  <table>
+    <thead><tr><th>What</th><th>Where</th></tr></thead>
+    <tbody>
+      <tr><td>Per-frame benchmark data &mdash; point-to-curve, Dice/IoU/MAD/HD95/NSD, raw model responses</td>
+          <td><a href="../data/">data/</a></td></tr>
+      <tr><td>Fine-tuning logs &mdash; TensorBoard events, per-step CSVs, generated plots</td>
+          <td><a href="../ft_runs/">ft_runs/</a></td></tr>
+      <tr><td>All 200 rendered predictions, filterable</td>
+          <td><a href="../gallery/index.html">gallery/</a></td></tr>
+    </tbody>
+  </table>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p><a href="../index.html">&larr; Back to ATRIA EchoTrace</a></p>
+    <p style="margin:0">Research use only &mdash; not a cleared or approved medical device.
+      &copy; The Adimension &middot; Shehab Anwer, MD</p>
+  </div>
+</footer>
+
+<div class="tip" id="tip"></div>
+
+<script>
+(function(){
+"use strict";
+var D = {"runs":[{"id":"Run 1","dir":"../ft_runs/run_reports/Run_1_Baseline_Output_4512samples","ds":"mixed baseline","frames":4512,"lr":"2e-4","ep":3,"bs":2,"ship":null,"hours":5.7,"eval":0.193,"acc":0.921},{"id":"Run 2","dir":"../ft_runs/run_reports/Run_2_CAMUS_LR1e5_1600samples","ds":"CAMUS","frames":1600,"lr":"1e-5","ep":3,"bs":2,"ship":null,"hours":2.0,"eval":0.752,"acc":0.79},{"id":"Run 3","dir":"../ft_runs/run_reports/Run_3_CAMUS_LR2e4_8epochs_1504samples","ds":"CAMUS","frames":1504,"lr":"2e-4","ep":8,"bs":2,"ship":null,"hours":5.1,"eval":0.39,"acc":0.84},{"id":"Run 4","dir":"../ft_runs/run_reports/Run_4_20K_Dataset_16541samples","ds":"EchoNet","frames":16541,"lr":"1e-4","ep":3,"bs":2,"ship":null,"hours":null,"eval":0.218,"acc":0.91},{"id":"Run 5","dir":"../ft_runs/run_reports/Run_5_20K_Blackwell_16576samples","ds":"EchoNet","frames":16576,"lr":"1e-4","ep":5,"bs":4,"ship":"EchoNet adapter","hours":21.3,"eval":0.205,"acc":0.916},{"id":"Run 6","dir":"../ft_runs/run_reports/Run_6_CAMUS_32LoRA_Blackwell_1600samples","ds":"CAMUS","frames":1600,"lr":"1e-4","ep":5,"bs":4,"ship":"CAMUS adapter","hours":2.1,"eval":0.259,"acc":0.895}],"plots":[["01_loss_curves.png","Loss"],["02_token_accuracy.png","Token accuracy"],["03_learning_rate_schedule.png","LR schedule"],["04_grad_norm_and_entropy.png","Grad norm / entropy"],["05_throughput_performance.png","Throughput"],["06_run_dashboard_summary.png","Dashboard"]],"pts":[{"s":"patient0027_2CH_ED","mm":3.959,"d":0.8629,"q":"Good","v":"2CH","x":false},{"s":"patient0027_2CH_ES","mm":10.201,"d":0.6304,"q":"Good","v":"2CH","x":false},{"s":"patient0027_4CH_ED","mm":6.153,"d":0.7509,"q":"Good","v":"4CH","x":false},{"s":"patient0027_4CH_ES","mm":7.269,"d":0.6735,"q":"Good","v":"4CH","x":false},{"s":"patient0047_2CH_ED","mm":10.474,"d":0.5706,"q":"Good","v":"2CH","x":false},{"s":"patient0047_2CH_ES","mm":11.161,"d":0.4322,"q":"Good","v":"2CH","x":true},{"s":"patient0047_4CH_ED","mm":3.707,"d":0.8019,"q":"Good","v":"4CH","x":false},{"s":"patient0047_4CH_ES","mm":1.93,"d":0.8016,"q":"Good","v":"4CH","x":false},{"s":"patient0051_2CH_ED","mm":3.476,"d":0.8628,"q":"Good","v":"2CH","x":false},{"s":"patient0051_2CH_ES","mm":2.355,"d":0.8587,"q":"Good","v":"2CH","x":false},{"s":"patient0051_4CH_ED","mm":2.429,"d":0.87,"q":"Good","v":"4CH","x":false},{"s":"patient0051_4CH_ES","mm":4.789,"d":0.7577,"q":"Good","v":"4CH","x":false},{"s":"patient0052_2CH_ED","mm":7.377,"d":0.7317,"q":"Good","v":"2CH","x":false},{"s":"patient0052_2CH_ES","mm":4.117,"d":0.7266,"q":"Good","v":"2CH","x":true},{"s":"patient0052_4CH_ED","mm":3.997,"d":0.8553,"q":"Good","v":"4CH","x":false},{"s":"patient0052_4CH_ES","mm":6.102,"d":0.7482,"q":"Good","v":"4CH","x":false},{"s":"patient0187_2CH_ED","mm":3.97,"d":0.7913,"q":"Good","v":"2CH","x":false},{"s":"patient0187_2CH_ES","mm":2.631,"d":0.8794,"q":"Good","v":"2CH","x":false},{"s":"patient0187_4CH_ED","mm":1.522,"d":0.9395,"q":"Good","v":"4CH","x":true},{"s":"patient0187_4CH_ES","mm":3.42,"d":0.8643,"q":"Good","v":"4CH","x":false},{"s":"patient0189_2CH_ED","mm":4.118,"d":0.7807,"q":"Good","v":"2CH","x":false},{"s":"patient0189_2CH_ES","mm":8.537,"d":0.5704,"q":"Good","v":"2CH","x":false},{"s":"patient0189_4CH_ED","mm":4.638,"d":0.7727,"q":"Good","v":"4CH","x":false},{"s":"patient0189_4CH_ES","mm":6.446,"d":0.6793,"q":"Good","v":"4CH","x":false},{"s":"patient0191_2CH_ED","mm":8.662,"d":0.6821,"q":"Good","v":"2CH","x":false},{"s":"patient0191_2CH_ES","mm":9.994,"d":0.5317,"q":"Good","v":"2CH","x":false},{"s":"patient0191_4CH_ED","mm":2.258,"d":0.8949,"q":"Good","v":"4CH","x":false},{"s":"patient0191_4CH_ES","mm":4.527,"d":0.7878,"q":"Good","v":"4CH","x":false},{"s":"patient0194_2CH_ED","mm":1.518,"d":0.8549,"q":"Good","v":"2CH","x":false},{"s":"patient0194_2CH_ES","mm":2.755,"d":0.6778,"q":"Good","v":"2CH","x":false},{"s":"patient0194_4CH_ED","mm":5.188,"d":0.8079,"q":"Good","v":"4CH","x":false},{"s":"patient0194_4CH_ES","mm":8.473,"d":0.6314,"q":"Good","v":"4CH","x":false},{"s":"patient0197_2CH_ED","mm":4.525,"d":0.8247,"q":"Good","v":"2CH","x":false},{"s":"patient0197_2CH_ES","mm":2.317,"d":0.9027,"q":"Good","v":"2CH","x":false},{"s":"patient0197_4CH_ED","mm":3.456,"d":0.884,"q":"Good","v":"4CH","x":false},{"s":"patient0197_4CH_ES","mm":3.366,"d":0.8554,"q":"Good","v":"4CH","x":true},{"s":"patient0199_2CH_ED","mm":5.014,"d":0.7953,"q":"Good","v":"2CH","x":false},{"s":"patient0199_2CH_ES","mm":4.785,"d":0.7983,"q":"Good","v":"2CH","x":false},{"s":"patient0199_4CH_ED","mm":4.869,"d":0.8186,"q":"Good","v":"4CH","x":false},{"s":"patient0199_4CH_ES","mm":5.159,"d":0.7357,"q":"Good","v":"4CH","x":false},{"s":"patient0201_2CH_ED","mm":3.137,"d":0.8554,"q":"Good","v":"2CH","x":false},{"s":"patient0201_2CH_ES","mm":5.714,"d":0.7432,"q":"Good","v":"2CH","x":false},{"s":"patient0201_4CH_ED","mm":5.543,"d":0.769,"q":"Good","v":"4CH","x":false},{"s":"patient0201_4CH_ES","mm":5.628,"d":0.7855,"q":"Good","v":"4CH","x":false},{"s":"patient0208_2CH_ED","mm":5.594,"d":0.7403,"q":"Good","v":"2CH","x":true},{"s":"patient0208_2CH_ES","mm":3.48,"d":0.767,"q":"Good","v":"2CH","x":false},{"s":"patient0208_4CH_ED","mm":4.577,"d":0.8416,"q":"Good","v":"4CH","x":false},{"s":"patient0208_4CH_ES","mm":4.038,"d":0.8205,"q":"Good","v":"4CH","x":false},{"s":"patient0213_2CH_ED","mm":4.716,"d":0.8604,"q":"Good","v":"2CH","x":true},{"s":"patient0213_2CH_ES","mm":2.22,"d":0.8505,"q":"Good","v":"2CH","x":false},{"s":"patient0213_4CH_ED","mm":3.733,"d":0.7973,"q":"Medium","v":"4CH","x":false},{"s":"patient0213_4CH_ES","mm":6.716,"d":0.6886,"q":"Medium","v":"4CH","x":false},{"s":"patient0214_2CH_ED","mm":1.842,"d":0.892,"q":"Good","v":"2CH","x":false},{"s":"patient0214_2CH_ES","mm":5.051,"d":0.7856,"q":"Good","v":"2CH","x":false},{"s":"patient0214_4CH_ED","mm":6.399,"d":0.8063,"q":"Good","v":"4CH","x":false},{"s":"patient0214_4CH_ES","mm":4.992,"d":0.8192,"q":"Good","v":"4CH","x":false},{"s":"patient0215_2CH_ED","mm":13.324,"d":0.2859,"q":"Medium","v":"2CH","x":false},{"s":"patient0215_2CH_ES","mm":12.859,"d":0.2698,"q":"Medium","v":"2CH","x":false},{"s":"patient0215_4CH_ED","mm":3.229,"d":0.8111,"q":"Medium","v":"4CH","x":false},{"s":"patient0215_4CH_ES","mm":4.396,"d":0.7288,"q":"Medium","v":"4CH","x":false},{"s":"patient0217_2CH_ED","mm":7.265,"d":0.7205,"q":"Medium","v":"2CH","x":false},{"s":"patient0217_2CH_ES","mm":6.05,"d":0.6647,"q":"Medium","v":"2CH","x":false},{"s":"patient0217_4CH_ED","mm":3.36,"d":0.8698,"q":"Good","v":"4CH","x":false},{"s":"patient0217_4CH_ES","mm":6.954,"d":0.7011,"q":"Good","v":"4CH","x":true},{"s":"patient0218_2CH_ED","mm":7.524,"d":0.6894,"q":"Medium","v":"2CH","x":false},{"s":"patient0218_2CH_ES","mm":10.493,"d":0.5947,"q":"Medium","v":"2CH","x":false},{"s":"patient0218_4CH_ED","mm":4.842,"d":0.8526,"q":"Good","v":"4CH","x":false},{"s":"patient0218_4CH_ES","mm":5.817,"d":0.6855,"q":"Good","v":"4CH","x":false},{"s":"patient0219_2CH_ED","mm":2.236,"d":0.8992,"q":"Medium","v":"2CH","x":false},{"s":"patient0219_2CH_ES","mm":2.849,"d":0.8461,"q":"Medium","v":"2CH","x":false},{"s":"patient0219_4CH_ED","mm":1.203,"d":0.9156,"q":"Good","v":"4CH","x":false},{"s":"patient0219_4CH_ES","mm":4.54,"d":0.7875,"q":"Good","v":"4CH","x":false},{"s":"patient0220_2CH_ED","mm":5.252,"d":0.8106,"q":"Good","v":"2CH","x":false},{"s":"patient0220_2CH_ES","mm":5.313,"d":0.782,"q":"Good","v":"2CH","x":false},{"s":"patient0220_4CH_ED","mm":4.977,"d":0.8372,"q":"Good","v":"4CH","x":false},{"s":"patient0220_4CH_ES","mm":3.813,"d":0.8413,"q":"Good","v":"4CH","x":false},{"s":"patient0221_2CH_ED","mm":4.311,"d":0.7841,"q":"Medium","v":"2CH","x":false},{"s":"patient0221_2CH_ES","mm":4.388,"d":0.8215,"q":"Medium","v":"2CH","x":false},{"s":"patient0221_4CH_ED","mm":2.624,"d":0.8737,"q":"Medium","v":"4CH","x":false},{"s":"patient0221_4CH_ES","mm":7.86,"d":0.698,"q":"Medium","v":"4CH","x":false},{"s":"patient0223_2CH_ED","mm":1.886,"d":0.88,"q":"Good","v":"2CH","x":false},{"s":"patient0223_2CH_ES","mm":6.15,"d":0.6674,"q":"Good","v":"2CH","x":false},{"s":"patient0223_4CH_ED","mm":2.404,"d":0.8892,"q":"Good","v":"4CH","x":false},{"s":"patient0223_4CH_ES","mm":1.575,"d":0.9182,"q":"Good","v":"4CH","x":false},{"s":"patient0224_2CH_ED","mm":3.044,"d":0.8776,"q":"Medium","v":"2CH","x":false},{"s":"patient0224_2CH_ES","mm":4.133,"d":0.8186,"q":"Medium","v":"2CH","x":false},{"s":"patient0224_4CH_ED","mm":2.886,"d":0.8902,"q":"Medium","v":"4CH","x":false},{"s":"patient0224_4CH_ES","mm":3.091,"d":0.8561,"q":"Medium","v":"4CH","x":false},{"s":"patient0225_2CH_ED","mm":6.749,"d":0.7022,"q":"Medium","v":"2CH","x":false},{"s":"patient0225_2CH_ES","mm":3.159,"d":0.8483,"q":"Medium","v":"2CH","x":false},{"s":"patient0225_4CH_ED","mm":7.352,"d":0.6438,"q":"Medium","v":"4CH","x":false},{"s":"patient0225_4CH_ES","mm":4.635,"d":0.7678,"q":"Medium","v":"4CH","x":false},{"s":"patient0226_2CH_ED","mm":4.838,"d":0.8088,"q":"Good","v":"2CH","x":false},{"s":"patient0226_2CH_ES","mm":5.04,"d":0.7733,"q":"Good","v":"2CH","x":false},{"s":"patient0226_4CH_ED","mm":2.465,"d":0.8872,"q":"Good","v":"4CH","x":false},{"s":"patient0226_4CH_ES","mm":4.273,"d":0.7711,"q":"Good","v":"4CH","x":false},{"s":"patient0227_2CH_ED","mm":2.175,"d":0.9239,"q":"Medium","v":"2CH","x":false},{"s":"patient0227_2CH_ES","mm":2.192,"d":0.8651,"q":"Medium","v":"2CH","x":false},{"s":"patient0227_4CH_ED","mm":5.738,"d":0.7739,"q":"Good","v":"4CH","x":false},{"s":"patient0227_4CH_ES","mm":9.599,"d":0.5243,"q":"Good","v":"4CH","x":false},{"s":"patient0228_2CH_ED","mm":6.104,"d":0.7342,"q":"Good","v":"2CH","x":false},{"s":"patient0228_2CH_ES","mm":3.865,"d":0.7789,"q":"Good","v":"2CH","x":false},{"s":"patient0228_4CH_ED","mm":1.796,"d":0.9095,"q":"Good","v":"4CH","x":false},{"s":"patient0228_4CH_ES","mm":3.365,"d":0.8342,"q":"Good","v":"4CH","x":false},{"s":"patient0231_2CH_ED","mm":14.182,"d":0.566,"q":"Poor","v":"2CH","x":false},{"s":"patient0231_2CH_ES","mm":9.04,"d":0.6022,"q":"Poor","v":"2CH","x":false},{"s":"patient0231_4CH_ED","mm":9.687,"d":0.742,"q":"Poor","v":"4CH","x":true},{"s":"patient0231_4CH_ES","mm":12.278,"d":0.636,"q":"Poor","v":"4CH","x":true},{"s":"patient0234_2CH_ED","mm":9.947,"d":0.6645,"q":"Poor","v":"2CH","x":true},{"s":"patient0234_2CH_ES","mm":8.717,"d":0.6225,"q":"Poor","v":"2CH","x":false},{"s":"patient0234_4CH_ED","mm":6.451,"d":0.7855,"q":"Poor","v":"4CH","x":false},{"s":"patient0234_4CH_ES","mm":6.753,"d":0.7609,"q":"Poor","v":"4CH","x":false},{"s":"patient0237_2CH_ED","mm":6.176,"d":0.7945,"q":"Medium","v":"2CH","x":false},{"s":"patient0237_2CH_ES","mm":7.02,"d":0.6783,"q":"Medium","v":"2CH","x":false},{"s":"patient0237_4CH_ED","mm":3.117,"d":0.8848,"q":"Medium","v":"4CH","x":true},{"s":"patient0237_4CH_ES","mm":4.451,"d":0.7822,"q":"Medium","v":"4CH","x":false},{"s":"patient0238_2CH_ED","mm":1.254,"d":0.9327,"q":"Medium","v":"2CH","x":false},{"s":"patient0238_2CH_ES","mm":1.41,"d":0.8982,"q":"Medium","v":"2CH","x":true},{"s":"patient0238_4CH_ED","mm":4.06,"d":0.8366,"q":"Medium","v":"4CH","x":false},{"s":"patient0238_4CH_ES","mm":3.876,"d":0.8426,"q":"Medium","v":"4CH","x":false},{"s":"patient0239_2CH_ED","mm":7.575,"d":0.6556,"q":"Medium","v":"2CH","x":false},{"s":"patient0239_2CH_ES","mm":7.346,"d":0.6246,"q":"Medium","v":"2CH","x":true},{"s":"patient0239_4CH_ED","mm":6.615,"d":0.7616,"q":"Medium","v":"4CH","x":false},{"s":"patient0239_4CH_ES","mm":9.553,"d":0.6143,"q":"Medium","v":"4CH","x":false},{"s":"patient0240_2CH_ED","mm":7.187,"d":0.7773,"q":"Poor","v":"2CH","x":false},{"s":"patient0240_2CH_ES","mm":6.174,"d":0.7863,"q":"Poor","v":"2CH","x":false},{"s":"patient0240_4CH_ED","mm":4.727,"d":0.8662,"q":"Poor","v":"4CH","x":false},{"s":"patient0240_4CH_ES","mm":3.144,"d":0.8365,"q":"Poor","v":"4CH","x":false},{"s":"patient0241_2CH_ED","mm":2.157,"d":0.8653,"q":"Medium","v":"2CH","x":true},{"s":"patient0241_2CH_ES","mm":3.125,"d":0.8228,"q":"Medium","v":"2CH","x":false},{"s":"patient0241_4CH_ED","mm":7.441,"d":0.8369,"q":"Good","v":"4CH","x":true},{"s":"patient0241_4CH_ES","mm":2.613,"d":0.8761,"q":"Good","v":"4CH","x":false},{"s":"patient0242_2CH_ED","mm":14.394,"d":0.2862,"q":"Medium","v":"2CH","x":false},{"s":"patient0242_2CH_ES","mm":14.104,"d":0.263,"q":"Medium","v":"2CH","x":false},{"s":"patient0242_4CH_ED","mm":2.226,"d":0.8184,"q":"Good","v":"4CH","x":false},{"s":"patient0242_4CH_ES","mm":5.822,"d":0.7078,"q":"Good","v":"4CH","x":false},{"s":"patient0243_2CH_ED","mm":7.788,"d":0.7249,"q":"Medium","v":"2CH","x":true},{"s":"patient0243_2CH_ES","mm":10.852,"d":0.4956,"q":"Medium","v":"2CH","x":false},{"s":"patient0243_4CH_ED","mm":4.02,"d":0.8284,"q":"Good","v":"4CH","x":false},{"s":"patient0243_4CH_ES","mm":5.352,"d":0.7326,"q":"Good","v":"4CH","x":true},{"s":"patient0246_2CH_ED","mm":10.987,"d":0.6035,"q":"Medium","v":"2CH","x":true},{"s":"patient0246_2CH_ES","mm":9.039,"d":0.5725,"q":"Medium","v":"2CH","x":false},{"s":"patient0246_4CH_ED","mm":5.602,"d":0.7836,"q":"Medium","v":"4CH","x":false},{"s":"patient0246_4CH_ES","mm":3.033,"d":0.8612,"q":"Medium","v":"4CH","x":false},{"s":"patient0248_2CH_ED","mm":15.964,"d":0.5345,"q":"Medium","v":"2CH","x":false},{"s":"patient0248_2CH_ES","mm":16.074,"d":0.449,"q":"Medium","v":"2CH","x":false},{"s":"patient0248_4CH_ED","mm":6.926,"d":0.7639,"q":"Medium","v":"4CH","x":false},{"s":"patient0248_4CH_ES","mm":12.811,"d":0.5655,"q":"Medium","v":"4CH","x":false},{"s":"patient0251_2CH_ED","mm":12.477,"d":0.6014,"q":"Medium","v":"2CH","x":false},{"s":"patient0251_2CH_ES","mm":9.705,"d":0.6238,"q":"Medium","v":"2CH","x":false},{"s":"patient0251_4CH_ED","mm":14.099,"d":0.5325,"q":"Medium","v":"4CH","x":true},{"s":"patient0251_4CH_ES","mm":9.397,"d":0.598,"q":"Medium","v":"4CH","x":false},{"s":"patient0252_2CH_ED","mm":4.764,"d":0.8184,"q":"Medium","v":"2CH","x":false},{"s":"patient0252_2CH_ES","mm":4.863,"d":0.7341,"q":"Medium","v":"2CH","x":true},{"s":"patient0252_4CH_ED","mm":7.537,"d":0.6722,"q":"Good","v":"4CH","x":false},{"s":"patient0252_4CH_ES","mm":6.984,"d":0.594,"q":"Good","v":"4CH","x":false},{"s":"patient0254_2CH_ED","mm":9.419,"d":0.6699,"q":"Good","v":"2CH","x":true},{"s":"patient0254_2CH_ES","mm":8.58,"d":0.6028,"q":"Good","v":"2CH","x":false},{"s":"patient0254_4CH_ED","mm":16.221,"d":0.4294,"q":"Medium","v":"4CH","x":false},{"s":"patient0254_4CH_ES","mm":14.116,"d":0.3305,"q":"Medium","v":"4CH","x":false},{"s":"patient0258_2CH_ED","mm":1.768,"d":0.9357,"q":"Poor","v":"2CH","x":false},{"s":"patient0258_2CH_ES","mm":2.959,"d":0.8592,"q":"Poor","v":"2CH","x":false},{"s":"patient0258_4CH_ED","mm":2.27,"d":0.889,"q":"Good","v":"4CH","x":false},{"s":"patient0258_4CH_ES","mm":4.915,"d":0.7712,"q":"Good","v":"4CH","x":false},{"s":"patient0260_2CH_ED","mm":4.761,"d":0.7767,"q":"Medium","v":"2CH","x":false},{"s":"patient0260_2CH_ES","mm":4.884,"d":0.7768,"q":"Medium","v":"2CH","x":false},{"s":"patient0260_4CH_ED","mm":1.367,"d":0.8876,"q":"Good","v":"4CH","x":false},{"s":"patient0260_4CH_ES","mm":3.6,"d":0.7599,"q":"Good","v":"4CH","x":true},{"s":"patient0261_2CH_ED","mm":4.58,"d":0.8047,"q":"Medium","v":"2CH","x":false},{"s":"patient0261_2CH_ES","mm":7.008,"d":0.7017,"q":"Medium","v":"2CH","x":false},{"s":"patient0261_4CH_ED","mm":2.949,"d":0.8538,"q":"Medium","v":"4CH","x":false},{"s":"patient0261_4CH_ES","mm":9.362,"d":0.5435,"q":"Medium","v":"4CH","x":false},{"s":"patient0262_2CH_ED","mm":3.049,"d":0.8997,"q":"Poor","v":"2CH","x":false},{"s":"patient0262_2CH_ES","mm":7.808,"d":0.7298,"q":"Poor","v":"2CH","x":false},{"s":"patient0262_4CH_ED","mm":5.923,"d":0.7606,"q":"Medium","v":"4CH","x":false},{"s":"patient0262_4CH_ES","mm":6.856,"d":0.6884,"q":"Medium","v":"4CH","x":false},{"s":"patient0263_2CH_ED","mm":4.271,"d":0.8001,"q":"Medium","v":"2CH","x":false},{"s":"patient0263_2CH_ES","mm":8.27,"d":0.6501,"q":"Medium","v":"2CH","x":true},{"s":"patient0263_4CH_ED","mm":7.496,"d":0.6864,"q":"Medium","v":"4CH","x":true},{"s":"patient0263_4CH_ES","mm":11.192,"d":0.4687,"q":"Medium","v":"4CH","x":false},{"s":"patient0266_2CH_ED","mm":18.586,"d":0.4694,"q":"Poor","v":"2CH","x":false},{"s":"patient0266_2CH_ES","mm":16.969,"d":0.3537,"q":"Poor","v":"2CH","x":false},{"s":"patient0266_4CH_ED","mm":11.016,"d":0.7172,"q":"Poor","v":"4CH","x":false},{"s":"patient0266_4CH_ES","mm":12.78,"d":0.5385,"q":"Poor","v":"4CH","x":false},{"s":"patient0269_2CH_ED","mm":7.371,"d":0.8339,"q":"Poor","v":"2CH","x":false},{"s":"patient0269_2CH_ES","mm":7.763,"d":0.7651,"q":"Poor","v":"2CH","x":false},{"s":"patient0269_4CH_ED","mm":11.509,"d":0.6987,"q":"Medium","v":"4CH","x":false},{"s":"patient0269_4CH_ES","mm":8.655,"d":0.7082,"q":"Medium","v":"4CH","x":false},{"s":"patient0273_2CH_ED","mm":2.999,"d":0.8247,"q":"Poor","v":"2CH","x":false},{"s":"patient0273_2CH_ES","mm":1.928,"d":0.8703,"q":"Poor","v":"2CH","x":false},{"s":"patient0273_4CH_ED","mm":2.069,"d":0.8437,"q":"Poor","v":"4CH","x":false},{"s":"patient0273_4CH_ES","mm":2.521,"d":0.8618,"q":"Poor","v":"4CH","x":false},{"s":"patient0275_2CH_ED","mm":2.42,"d":0.8571,"q":"Poor","v":"2CH","x":true},{"s":"patient0275_2CH_ES","mm":6.26,"d":0.6333,"q":"Poor","v":"2CH","x":false},{"s":"patient0275_4CH_ED","mm":4.308,"d":0.8266,"q":"Good","v":"4CH","x":false},{"s":"patient0275_4CH_ES","mm":3.912,"d":0.7609,"q":"Good","v":"4CH","x":false},{"s":"patient0276_2CH_ED","mm":6.013,"d":0.7289,"q":"Poor","v":"2CH","x":false},{"s":"patient0276_2CH_ES","mm":6.82,"d":0.6711,"q":"Poor","v":"2CH","x":false},{"s":"patient0276_4CH_ED","mm":3.686,"d":0.7368,"q":"Medium","v":"4CH","x":false},{"s":"patient0276_4CH_ES","mm":2.628,"d":0.7129,"q":"Medium","v":"4CH","x":false}],"quad":{"conc":170,"hi_dice_bad_mm":3,"lo_dice_good_mm":0},"decomp":[{"bias":-0.1,"lo":-1.8,"hi":1.6,"label":"Expert polygons","sub":"the contract alone","hero":true},{"bias":-12.88,"lo":-45.4,"hi":19.6,"label":"Model polygons","sub":"current checkpoint","hero":false}],"share":{"bias":1,"mag":3},"corr":{"r":-0.895,"n":200},"ef":[{"m":43.5,"d":7.0,"p":"patient0027","a":47,"b":40.0},{"m":39.0,"d":2.0,"p":"patient0047","a":40,"b":38.0},{"m":28.5,"d":-1.0,"p":"patient0051","a":28,"b":29.0},{"m":22.5,"d":35.0,"p":"patient0052","a":40,"b":5.0},{"m":39.5,"d":3.0,"p":"patient0187","a":41,"b":38.0},{"m":50.5,"d":-37.0,"p":"patient0189","a":32,"b":69.0},{"m":24.0,"d":-4.0,"p":"patient0191","a":22,"b":26.0},{"m":46.0,"d":-36.0,"p":"patient0194","a":28,"b":64.0},{"m":37.5,"d":-41.0,"p":"patient0197","a":17,"b":58.0},{"m":51.0,"d":-18.0,"p":"patient0199","a":42,"b":60.0},{"m":39.5,"d":-5.0,"p":"patient0201","a":37,"b":42.0},{"m":36.0,"d":-18.0,"p":"patient0208","a":27,"b":45.0},{"m":35.0,"d":-8.0,"p":"patient0213","a":31,"b":39.0},{"m":40.5,"d":-7.0,"p":"patient0214","a":37,"b":44.0},{"m":33.5,"d":-37.0,"p":"patient0215","a":15,"b":52.0},{"m":45.0,"d":-10.0,"p":"patient0217","a":40,"b":50.0},{"m":26.5,"d":13.0,"p":"patient0218","a":33,"b":20.0},{"m":46.5,"d":-13.0,"p":"patient0219","a":40,"b":53.0},{"m":51.0,"d":6.0,"p":"patient0220","a":54,"b":48.0},{"m":36.0,"d":-32.0,"p":"patient0221","a":20,"b":52.0},{"m":42.5,"d":-29.0,"p":"patient0223","a":28,"b":57.0},{"m":35.5,"d":-5.0,"p":"patient0224","a":33,"b":38.0},{"m":37.0,"d":-18.0,"p":"patient0225","a":28,"b":46.0},{"m":49.5,"d":-21.0,"p":"patient0226","a":39,"b":60.0},{"m":53.5,"d":3.0,"p":"patient0227","a":55,"b":52.0},{"m":35.0,"d":-8.0,"p":"patient0228","a":31,"b":39.0},{"m":42.0,"d":-6.0,"p":"patient0231","a":39,"b":45.0},{"m":37.5,"d":-13.0,"p":"patient0234","a":31,"b":44.0},{"m":48.0,"d":-14.0,"p":"patient0237","a":41,"b":55.0},{"m":35.5,"d":-1.0,"p":"patient0238","a":35,"b":36.0},{"m":46.0,"d":-14.0,"p":"patient0239","a":39,"b":53.0},{"m":35.5,"d":7.0,"p":"patient0240","a":39,"b":32.0},{"m":27.5,"d":-5.0,"p":"patient0241","a":25,"b":30.0},{"m":39.0,"d":-22.0,"p":"patient0242","a":28,"b":50.0},{"m":43.0,"d":-24.0,"p":"patient0243","a":31,"b":55.0},{"m":39.0,"d":-18.0,"p":"patient0246","a":30,"b":48.0},{"m":38.5,"d":-23.0,"p":"patient0248","a":27,"b":50.0},{"m":30.0,"d":-52.0,"p":"patient0251","a":4,"b":56.0},{"m":39.5,"d":-7.0,"p":"patient0252","a":36,"b":43.0},{"m":41.0,"d":-10.0,"p":"patient0254","a":36,"b":46.0},{"m":43.5,"d":-5.0,"p":"patient0258","a":41,"b":46.0},{"m":38.0,"d":-28.0,"p":"patient0260","a":24,"b":52.0},{"m":44.5,"d":-3.0,"p":"patient0261","a":43,"b":46.0},{"m":26.5,"d":-29.0,"p":"patient0262","a":12,"b":41.0},{"m":45.0,"d":-44.0,"p":"patient0263","a":23,"b":67.0},{"m":34.0,"d":16.0,"p":"patient0266","a":42,"b":26.0},{"m":44.0,"d":-10.0,"p":"patient0269","a":39,"b":49.0},{"m":16.5,"d":-19.0,"p":"patient0273","a":7,"b":26.0},{"m":28.5,"d":-35.0,"p":"patient0275","a":11,"b":46.0},{"m":27.0,"d":-6.0,"p":"patient0276","a":24,"b":30.0}],"efstat":{"bias":-12.88,"sd":16.74,"lo":-45.7,"hi":19.9,"n":50}};
+var tip = document.getElementById('tip');
+function showTip(e, txt){ tip.textContent = txt; tip.style.opacity = 1;
+  tip.style.left = (e.clientX + 14) + 'px'; tip.style.top = (e.clientY - 34) + 'px'; }
+function hideTip(){ tip.style.opacity = 0; }
+
+/* ── 1 · run explorer ─────────────────────────────────────────────── */
+var sel = D.runs.length - 1, tab = 0, cmp = '';
+var bar = document.getElementById('runbar'), tabs = document.getElementById('tabs'),
+    plots = document.getElementById('plots'), cmpSel = document.getElementById('cmp');
+
+D.runs.forEach(function(r, i){
+  var b = document.createElement('button');
+  b.className = 'runcard'; b.type = 'button';
+  b.setAttribute('aria-pressed', i === sel);
+  b.innerHTML = '<b>' + r.id + '</b><span class="ds">' + r.ds + '</span>' +
+    '<span class="kv">lr ' + r.lr + ' &middot; ' + r.ep + ' ep &middot; bs ' + r.bs + '<br>' +
+    r.frames.toLocaleString() + ' frames<br>eval ' + r.eval.toFixed(3) +
+    (r.hours ? ' &middot; ' + r.hours + ' h' : '') + '</span>' +
+    (r.ship ? '<span class="ship">' + r.ship + '</span>' : '');
+  b.addEventListener('click', function(){ sel = i; sync(); });
+  bar.appendChild(b);
+  var o = document.createElement('option');
+  o.value = i; o.textContent = r.id + ' — ' + r.ds + ' (lr ' + r.lr + ', ' + r.ep + ' ep)';
+  cmpSel.appendChild(o);
+});
+D.plots.forEach(function(p, i){
+  var b = document.createElement('button');
+  b.type = 'button'; b.setAttribute('role', 'tab');
+  b.setAttribute('aria-selected', i === tab);
+  b.textContent = p[1];
+  b.addEventListener('click', function(){ tab = i; sync(); });
+  tabs.appendChild(b);
+});
+cmpSel.addEventListener('change', function(){ cmp = cmpSel.value; sync(); });
+
+function fig(r){
+  return '<figure><figcaption>' + r.id + ' &middot; ' + r.ds + '</figcaption>' +
+         '<img loading="lazy" alt="' + D.plots[tab][1] + ' for ' + r.id +
+         '" src="' + r.dir + '/' + D.plots[tab][0] + '"></figure>';
+}
+function sync(){
+  for (var i=0;i<bar.children.length;i++) bar.children[i].setAttribute('aria-pressed', i === sel);
+  for (var j=0;j<tabs.children.length;j++) tabs.children[j].setAttribute('aria-selected', j === tab);
+  var two = cmp !== '' && +cmp !== sel;
+  plots.className = 'plotgrid' + (two ? ' two' : '');
+  plots.innerHTML = fig(D.runs[sel]) + (two ? fig(D.runs[+cmp]) : '');
+}
+sync();
+
+/* ── 2 · metric agreement scatter ─────────────────────────────────── */
+(function(){
+  var W = 1000, H = 470, L = 66, R = 24, T = 18, B = 52;
+  var QC = {Good:'#1a7f45', Medium:'#c9a227', Poor:'#c02b2b'};
+  var P = D.pts, MX = 20, MY0 = 0.2, MY1 = 1.0;
+  function X(v){ return L + Math.min(v, MX)/MX * (W-L-R); }
+  function Y(v){ return T + (H-T-B) - (Math.max(v, MY0)-MY0)/(MY1-MY0) * (H-T-B); }
+  var g = [];
+  // grid + axes
+  for (var t=0;t<=MX;t+=4){
+    g.push('<line x1="'+X(t)+'" y1="'+T+'" x2="'+X(t)+'" y2="'+(H-B)+'" stroke="#eef2f6"/>');
+    g.push('<text x="'+X(t)+'" y="'+(H-B+20)+'" text-anchor="middle" font-size="12" font-family="'+
+           'ui-monospace,monospace" fill="#8a94a3">'+t+'</text>');
+  }
+  for (var d=0.2;d<=1.001;d+=0.2){
+    g.push('<line x1="'+L+'" y1="'+Y(d)+'" x2="'+(W-R)+'" y2="'+Y(d)+'" stroke="#eef2f6"/>');
+    g.push('<text x="'+(L-9)+'" y="'+(Y(d)+4)+'" text-anchor="end" font-size="12" font-family="'+
+           'ui-monospace,monospace" fill="#8a94a3">'+d.toFixed(1)+'</text>');
+  }
+  // medians
+  var mms = P.map(function(p){return p.mm;}).sort(function(a,b){return a-b;});
+  var dcs = P.map(function(p){return p.d;}).sort(function(a,b){return a-b;});
+  var medM = mms[Math.floor(mms.length/2)], medD = dcs[Math.floor(dcs.length/2)];
+  g.push('<line x1="'+X(medM)+'" y1="'+T+'" x2="'+X(medM)+'" y2="'+(H-B)+
+         '" stroke="#5b6675" stroke-width="1.2" stroke-dasharray="4 3"/>');
+  g.push('<line x1="'+L+'" y1="'+Y(medD)+'" x2="'+(W-R)+'" y2="'+Y(medD)+
+         '" stroke="#5b6675" stroke-width="1.2" stroke-dasharray="4 3"/>');
+  g.push('<text x="'+(X(medM)+6)+'" y="'+(T+13)+'" font-size="11.5" font-family="ui-monospace,monospace"'+
+         ' fill="#5b6675">median '+medM.toFixed(2)+' mm</text>');
+  g.push('<text x="'+(W-R)+'" y="'+(Y(medD)-7)+'" text-anchor="end" font-size="11.5"'+
+         ' font-family="ui-monospace,monospace" fill="#5b6675">median Dice '+medD.toFixed(3)+'</text>');
+  // axis titles
+  g.push('<text x="'+((L+W-R)/2)+'" y="'+(H-10)+'" text-anchor="middle" font-size="13"'+
+         ' fill="#5b6675">median point-to-curve distance per frame (mm) &rarr; worse</text>');
+  g.push('<text transform="translate(16,'+((T+H-B)/2)+') rotate(-90)" text-anchor="middle"'+
+         ' font-size="13" fill="#5b6675">Dice vs expert mask &rarr; better</text>');
+  P.forEach(function(p, i){
+    g.push('<circle data-i="'+i+'" cx="'+X(p.mm).toFixed(1)+'" cy="'+Y(p.d).toFixed(1)+
+           '" r="'+(p.x?4.6:3.6)+'" fill="'+QC[p.q]+'" fill-opacity="'+(p.x?.5:.72)+
+           '" stroke="'+QC[p.q]+'" stroke-width="'+(p.x?1.6:.8)+'"/>');
+  });
+  var sc = document.getElementById('scatter');
+  sc.innerHTML = g.join('');
+  document.getElementById('quadtext').innerHTML =
+    D.quad.conc + ' of ' + D.corr.n + ' frames fall on the same side of both medians, and only <b>' +
+    D.quad.hi_dice_bad_mm + ' frames</b> score Dice above 0.80 while sitting worse than 6 mm. ' +
+    'The reverse case — poor Dice but good distance — does not occur at all (' +
+    D.quad.lo_dice_good_mm + ' frames).';
+  document.getElementById('corrtext').innerHTML =
+    'Across all ' + D.corr.n + ' frames the two correlate at <b>r = ' + D.corr.r +
+    '</b> — a strong relationship, as it should be: a contour whose points sit far from the ' +
+    'expert line also overlaps it poorly.';
+  sc.addEventListener('pointermove', function(e){
+    var t = e.target;
+    if (t.tagName === 'circle'){
+      var p = P[+t.getAttribute('data-i')];
+      showTip(e, p.s + '  ·  ' + p.mm.toFixed(2) + ' mm  ·  Dice ' + p.d.toFixed(3) +
+                 '  ·  ' + p.q + (p.x ? '  ·  self-intersects' : ''));
+    } else hideTip();
+  });
+  sc.addEventListener('pointerleave', hideTip);
+})();
+
+
+/* ── 3a · the decomposition bars ──────────────────────────────────── */
+(function(){
+  var W=1000,H=250,L=250,R=150,T0=26,B=44, S=D.decomp;
+  var lim=Math.max.apply(null,S.map(function(r){return Math.max(Math.abs(r.lo),Math.abs(r.hi));}))*1.08;
+  function X(v){ return L+(v+lim)/(2*lim)*(W-L-R); }
+  var g=[];
+  g.push('<line x1="'+X(0)+'" y1="'+T0+'" x2="'+X(0)+'" y2="'+(H-B)+'" stroke="#11161d" stroke-width="1.3"/>');
+  [-40,-30,-20,-10,0,10,20].forEach(function(v){
+    if(Math.abs(v)>lim) return;
+    g.push('<text x="'+X(v)+'" y="'+(H-B+20)+'" text-anchor="middle" font-size="11.5" '+
+           'font-family="ui-monospace,monospace" fill="#8a94a3">'+(v>0?'+':'')+v+'</text>');
+  });
+  g.push('<text x="'+((L+W-R)/2)+'" y="'+(H-8)+'" text-anchor="middle" font-size="12.5" '+
+         'fill="#5b6675">EF points, derived minus clinical reference</text>');
+  S.forEach(function(r,i){
+    var y=T0+22+i*58, col=r.hero?'#1a7f45':'#c02b2b';
+    g.push('<text x="'+(L-14)+'" y="'+(y-3)+'" text-anchor="end" font-size="13.5" '+
+           'font-weight="600" fill="#11161d">'+r.label+'</text>');
+    g.push('<text x="'+(L-14)+'" y="'+(y+13)+'" text-anchor="end" font-size="11.5" '+
+           'font-family="ui-monospace,monospace" fill="#8a94a3">'+r.sub+'</text>');
+    g.push('<line x1="'+X(r.lo)+'" y1="'+y+'" x2="'+X(r.hi)+'" y2="'+y+'" stroke="'+col+
+           '" stroke-width="7" stroke-opacity=".2" stroke-linecap="round"/>');
+    [r.lo,r.hi].forEach(function(v){
+      g.push('<line x1="'+X(v)+'" y1="'+(y-8)+'" x2="'+X(v)+'" y2="'+(y+8)+'" stroke="'+col+
+             '" stroke-width="1.4"/>');});
+    g.push('<circle cx="'+X(r.bias)+'" cy="'+y+'" r="6.5" fill="'+col+'"/>');
+    g.push('<text x="'+(W-R+12)+'" y="'+(y+4)+'" font-size="12.5" '+
+           'font-family="ui-monospace,monospace" fill="'+col+'">'+
+           (r.bias>0?'+':'')+r.bias.toFixed(2)+'  ['+r.lo.toFixed(1)+', '+r.hi.toFixed(1)+']</text>');
+  });
+  document.getElementById('decomp').innerHTML=g.join('');
+  document.getElementById('decomptext').innerHTML =
+    'Expert polygons carry a bias of <b>'+S[0].bias.toFixed(2)+'</b> points; those from the model carry <b>'+
+    S[1].bias.toFixed(2)+'</b>. The derivation accounts for <b>'+D.share.bias+
+    '% of the bias</b> and <b>'+D.share.mag+'% of the magnitude</b> — so essentially all of the gap '+
+    'is the contours, not the arithmetic above them.';
+})();
+
+/* ── 3 · Bland–Altman ─────────────────────────────────────────────── */
+(function(){
+  var W = 1000, H = 430, L = 66, R = 120, T = 20, B = 52;
+  var E = D.ef, S = D.efstat;
+  var xs = E.map(function(e){return e.m;}), ys = E.map(function(e){return e.d;});
+  var x0 = Math.floor(Math.min.apply(null, xs)/5)*5 - 2,
+      x1 = Math.ceil(Math.max.apply(null, xs)/5)*5 + 2;
+  var yr = Math.max(Math.abs(S.lo), Math.abs(S.hi),
+                    Math.max.apply(null, ys.map(Math.abs))) * 1.12;
+  function X(v){ return L + (v-x0)/(x1-x0) * (W-L-R); }
+  function Y(v){ return T + (H-T-B)/2 - v/yr * (H-T-B)/2; }
+  var g = [];
+  for (var t=x0; t<=x1; t+=10){
+    g.push('<line x1="'+X(t)+'" y1="'+T+'" x2="'+X(t)+'" y2="'+(H-B)+'" stroke="#eef2f6"/>');
+    g.push('<text x="'+X(t)+'" y="'+(H-B+20)+'" text-anchor="middle" font-size="12"'+
+           ' font-family="ui-monospace,monospace" fill="#8a94a3">'+t+'</text>');
+  }
+  [-20,-10,0,10,20].forEach(function(v){
+    if (Math.abs(v) > yr) return;
+    g.push('<line x1="'+L+'" y1="'+Y(v)+'" x2="'+(W-R)+'" y2="'+Y(v)+'" stroke="#eef2f6"/>');
+    g.push('<text x="'+(L-9)+'" y="'+(Y(v)+4)+'" text-anchor="end" font-size="12"'+
+           ' font-family="ui-monospace,monospace" fill="#8a94a3">'+(v>0?'+':'')+v+'</text>');
+  });
+  function band(v, col, dash, lab){
+    g.push('<line x1="'+L+'" y1="'+Y(v)+'" x2="'+(W-R)+'" y2="'+Y(v)+'" stroke="'+col+
+           '" stroke-width="1.6"'+(dash?' stroke-dasharray="6 4"':'')+'/>');
+    g.push('<text x="'+(W-R+8)+'" y="'+(Y(v)+4)+'" font-size="12" font-family="ui-monospace,monospace"'+
+           ' fill="'+col+'">'+lab+'</text>');
+  }
+  g.push('<rect x="'+L+'" y="'+Y(S.hi)+'" width="'+(W-L-R)+'" height="'+(Y(S.lo)-Y(S.hi))+
+         '" fill="#0b6bcb" opacity=".05"/>');
+  band(S.hi, '#5b6675', true, '+1.96 SD  ' + S.hi);
+  band(S.bias, '#0b6bcb', false, 'bias  ' + (S.bias>0?'+':'') + S.bias);
+  band(S.lo, '#5b6675', true, '−1.96 SD  ' + S.lo);
+  g.push('<text x="'+((L+W-R)/2)+'" y="'+(H-10)+'" text-anchor="middle" font-size="13"'+
+         ' fill="#5b6675">mean of derived and reference EF (%)</text>');
+  g.push('<text transform="translate(16,'+((T+H-B)/2)+') rotate(-90)" text-anchor="middle"'+
+         ' font-size="13" fill="#5b6675">derived − reference (EF %)</text>');
+  E.forEach(function(e, i){
+    g.push('<circle data-i="'+i+'" cx="'+X(e.m).toFixed(1)+'" cy="'+Y(e.d).toFixed(1)+
+           '" r="4.2" fill="#c02b2b" fill-opacity=".55" stroke="#c02b2b" stroke-width=".9"/>');
+  });
+  var bl = document.getElementById('bland');
+  bl.innerHTML = g.join('');
+  document.getElementById('eftext').innerHTML =
+    'n = ' + S.n + ' patients. Bias <b>' + (S.bias>0?'+':'') + S.bias +
+    ' EF points</b>, limits of agreement <b>' + S.lo + '</b> to <b>+' + S.hi +
+    '</b> — wide, which is what a downstream construction on 50 patients looks like.';
+  bl.addEventListener('pointermove', function(ev){
+    var t = ev.target;
+    if (t.tagName === 'circle'){
+      var e = E[+t.getAttribute('data-i')];
+      showTip(ev, e.p + '  ·  derived ' + e.a + '  ·  reference ' + e.b +
+                  '  ·  Δ ' + (e.d>0?'+':'') + e.d);
+    } else hideTip();
+  });
+  bl.addEventListener('pointerleave', hideTip);
+})();
+})();
+</script>
+</body>
+</html>
